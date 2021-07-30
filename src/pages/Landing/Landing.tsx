@@ -1,3 +1,4 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {
   ImageBackground,
@@ -16,6 +17,18 @@ import AppHeaderLogo from '../../components/AppHeaderLogo/AppHeaderLogo';
 import {COLORS} from '../../constants/Colors';
 
 const Landing: React.FC = () => {
+  const navigation = useNavigation();
+
+  const skipLanding = () => {
+    navigation.navigate('Main');
+  };
+
+  const SkipButton = () => (
+    <TouchableOpacity style={styles.skipButton} onPress={skipLanding}>
+      <Text style={styles.skipButtonText}>Skip</Text>
+    </TouchableOpacity>
+  );
+
   return (
     <>
       <StatusBar barStyle="light-content" />
@@ -23,11 +36,7 @@ const Landing: React.FC = () => {
         source={landingImg}
         style={{width: '100%', height: '100%'}}>
         <SafeAreaView />
-        <View style={styles.headerContainer}>
-          <TouchableOpacity style={styles.skipButton}>
-            <Text style={styles.skipButtonText}>Skip</Text>
-          </TouchableOpacity>
-        </View>
+        <View style={styles.headerContainer}>{SkipButton()}</View>
         <View style={styles.contentContainer}>
           <AppHeaderLogo />
           <Text style={styles.logoText}>Creation starts here</Text>

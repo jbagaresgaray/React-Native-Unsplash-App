@@ -5,6 +5,7 @@ import {
 } from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import Landing from '../pages/Landing/Landing';
+import BottomTabNavigator from './tabs';
 
 const RootStack = createStackNavigator<any>();
 const navigationOptions: StackNavigationOptions = {
@@ -21,6 +22,11 @@ const RootNavigators = () => {
         screenOptions={navigationOptions}
         initialRouteName="Landing">
         <RootStack.Screen name="Landing" component={Landing} />
+        <RootStack.Screen
+          name="Main"
+          component={BottomTabNavigator}
+          options={{headerShown: false}}
+        />
       </RootStack.Navigator>
     </NavigationContainer>
   );

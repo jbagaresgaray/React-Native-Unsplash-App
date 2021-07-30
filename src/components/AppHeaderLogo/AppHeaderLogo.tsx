@@ -1,9 +1,9 @@
 import React from 'react';
 import {Image, StyleSheet} from 'react-native';
-import {SvgXml} from 'react-native-svg';
 
 import LogoImage from '../../assets/svg/Unsplash_Logo_Full.svg';
 import LogoImageWhite from '../../assets/svg/Unsplash_Logo_Full_White.svg';
+import LogoImgPng from '../../assets/img/Unsplash_Logo_Full.png';
 
 interface Props {
   color?: 'dark' | 'white' | undefined;
@@ -21,7 +21,13 @@ const AppHeaderLogo: React.FC<Props> = ({color, height, width}) => {
 
   const renderLogo = () => {
     if (color === 'dark') {
-      return <LogoImage {...getProps()} />;
+      return (
+        <Image
+          resizeMode="contain"
+          source={LogoImgPng}
+          style={styles.splashImage}
+        />
+      );
     } else {
       return <LogoImageWhite {...getProps()} />;
     }
@@ -33,7 +39,7 @@ const AppHeaderLogo: React.FC<Props> = ({color, height, width}) => {
 const styles = StyleSheet.create({
   splashImage: {
     height: 30,
-    width: 130,
+    width: 115,
   },
 });
 
