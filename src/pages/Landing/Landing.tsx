@@ -1,0 +1,111 @@
+import React from 'react';
+import {
+  ImageBackground,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+
+import landingImg from '../../assets/img/landing-unsplash.jpg';
+import AppButton from '../../components/AppButton/AppButton';
+import AppFacebookButton from '../../components/AppFacebookButton/AppFacebookButton';
+import AppHeaderLogo from '../../components/AppHeaderLogo/AppHeaderLogo';
+import {COLORS} from '../../constants/Colors';
+
+const Landing: React.FC = () => {
+  return (
+    <>
+      <StatusBar barStyle="light-content" />
+      <ImageBackground
+        source={landingImg}
+        style={{width: '100%', height: '100%'}}>
+        <SafeAreaView />
+        <View style={styles.headerContainer}>
+          <TouchableOpacity style={styles.skipButton}>
+            <Text style={styles.skipButtonText}>Skip</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.contentContainer}>
+          <AppHeaderLogo />
+          <Text style={styles.logoText}>Creation starts here</Text>
+        </View>
+        <View style={styles.footerContainer}>
+          <View style={styles.buttonViews}>
+            <AppFacebookButton />
+            <AppButton title="Sign up with email" />
+          </View>
+          <View style={styles.haveAccountContainer}>
+            <Text style={styles.haveAccountText}>Already have an account?</Text>
+            <TouchableOpacity>
+              <Text style={styles.loginButtonText}>Login</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ImageBackground>
+    </>
+  );
+};
+
+const styles = StyleSheet.create({
+  safeAreaView: {
+    backgroundColor: COLORS.white,
+    flex: 1,
+  },
+  contentContainer: {
+    flex: 1,
+    paddingTop: 32,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  headerContainer: {
+    height: 44,
+    justifyContent: 'center',
+    paddingStart: 16,
+    paddingEnd: 16,
+  },
+  footerContainer: {
+    height: 200,
+    paddingStart: 16,
+    paddingEnd: 16,
+  },
+  logoText: {
+    marginTop: 14,
+    color: COLORS.white,
+    fontSize: 24,
+    fontWeight: '500',
+  },
+  skipButton: {
+    alignSelf: 'flex-end',
+  },
+  skipButtonText: {
+    fontSize: 14,
+    color: COLORS.white,
+    fontWeight: '500',
+  },
+  landingButton: {
+    paddingTop: 4,
+    paddingBottom: 4,
+  },
+  buttonViews: {paddingBottom: 8},
+  haveAccountContainer: {
+    marginTop: 16,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  haveAccountText: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: COLORS.white,
+  },
+  loginButtonText: {
+    paddingLeft: 6,
+    fontSize: 14,
+    color: COLORS.black,
+    fontWeight: '500',
+  },
+});
+
+export default Landing;
