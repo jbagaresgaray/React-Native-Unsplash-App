@@ -1,6 +1,5 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useLayoutEffect} from 'react';
-import {useState} from 'react';
+import {useNavigation} from '@react-navigation/core';
+import React, {useLayoutEffect, useState} from 'react';
 import {
   FlatList,
   StyleSheet,
@@ -17,7 +16,6 @@ import AppCardItem from '../../components/AppCardItem/AppCardItem';
 import {COLORS} from '../../constants/Colors';
 import CategoriesArr from '../../services/fake/topics.json';
 import PhotosArr from '../../services/fake/photos.json';
-
 
 const TabHome = () => {
   const [activeTab, setActiveTab] = useState(0);

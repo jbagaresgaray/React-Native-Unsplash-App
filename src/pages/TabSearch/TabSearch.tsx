@@ -87,7 +87,14 @@ const TabSearch = () => {
           CollectionsArr={CollectionsArr.results}
         />
       )}
-      {activeTab === 2 && <AppSearchUsers />}
+      {activeTab === 2 && (
+        <AppSearchUsers
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+          onPressImage={onPressImage}
+          UsersArr={UsersArr.results}
+        />
+      )}
     </SafeAreaView>
   );
 };
