@@ -32,7 +32,7 @@ const TabHomeBottomTabOptions: BottomTabNavigationOptions = {
   tabBarIcon: ({focused}) => (
     <Icon
       name="home"
-      size={30}
+      size={28}
       type="ionicon"
       color={focused ? COLORS.black : '#999999'}
     />
@@ -43,7 +43,7 @@ const TabCollectionsBottomTabOptions: BottomTabNavigationOptions = {
   tabBarIcon: ({focused}) => (
     <Icon
       name="file-tray-full"
-      size={30}
+      size={28}
       type="ionicon"
       color={focused ? COLORS.black : '#999999'}
     />
@@ -54,7 +54,7 @@ const TabSearchBottomTabOptions: BottomTabNavigationOptions = {
   tabBarIcon: ({focused}) => (
     <Icon
       name="search"
-      size={30}
+      size={28}
       type="ionicon"
       color={focused ? COLORS.black : '#999999'}
     />
@@ -65,7 +65,7 @@ const TabAccountBottomTabOptions: BottomTabNavigationOptions = {
   tabBarIcon: ({focused}) => (
     <Icon
       name="person"
-      size={30}
+      size={28}
       type="ionicon"
       color={focused ? COLORS.black : '#999999'}
     />
@@ -76,7 +76,7 @@ const TabUploadBottomTabOptions: BottomTabNavigationOptions = {
   tabBarIcon: ({focused}) => (
     <Icon
       name="plus-square"
-      size={30}
+      size={28}
       type="font-awesome"
       color={focused ? COLORS.black : '#999999'}
     />

@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import AppHomeCategories from './AppHomeCategories/AppHomeCategories';
 import AppHomeCategoriesHeader from './AppHomeCategoriesHeader/AppHomeCategoriesHeader';
-import AppHomeSegment from '../../components/AppHomeSegment/AppHomeSegment';
+import AppHomeSegment from './AppHomeSegment/AppHomeSegment';
 import AppCardItem from '../../components/AppCardItem/AppCardItem';
 
 import {COLORS} from '../../constants/Colors';
