@@ -5,7 +5,7 @@ import {
   StyleSheet,
   RefreshControl,
 } from 'react-native';
-import AppCollectionItem from '../../../components/AppCollectionItem/AppCollectionItem';
+import AppCollectionItem from '../AppCollectionItem/AppCollectionItem';
 
 interface Props {
   refreshing: boolean;

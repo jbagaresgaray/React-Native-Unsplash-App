@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
   tagTextStyle: {
     fontSize: 10,
     color: '#767676',
+    textTransform: "capitalize"
   },
   tagBadge: {
     height: 26,

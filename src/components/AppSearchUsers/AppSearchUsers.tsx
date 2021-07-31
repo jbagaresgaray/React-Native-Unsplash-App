@@ -8,8 +8,8 @@ import {
   KeyboardAvoidingView,
   RefreshControl,
 } from 'react-native';
-import AppUserItem from '../../../components/AppUserItem/AppUserItem';
-import {COLORS} from '../../../constants/Colors';
+import AppUserItem from '../AppUserItem/AppUserItem';
+import {COLORS} from '../../constants/Colors';
 
 interface Props {
   refreshing: boolean;
@@ -31,12 +31,17 @@ const AppSearchUsers: React.FC<Props> = ({UsersArr}) => {
     wait(2000).then(() => setRefreshing(false));
   }, []);
 
+  const onUserPress = () => {
+    navigation.navigate('UserProfile');
+  };
+
   const renderItem = ({item}: any) => (
     <AppUserItem
       id={item.id}
       name={item.name}
       username={item.username}
       profile_image={item.profile_image}
+      onPress={onUserPress}
     />
   );
 

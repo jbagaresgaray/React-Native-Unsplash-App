@@ -11,11 +11,17 @@ interface Props {
     medium: string;
     large: string;
   };
+  onPress?: () => void;
 }
 
-const AppUserItem: React.FC<Props> = ({name, username, profile_image}) => {
+const AppUserItem: React.FC<Props> = ({
+  name,
+  username,
+  profile_image,
+  onPress,
+}) => {
   return (
-    <ListItem>
+    <ListItem onPress={onPress}>
       <Avatar rounded size="medium" source={{uri: profile_image?.medium}} />
       <ListItem.Content>
         <ListItem.Title numberOfLines={1} style={styles.name}>

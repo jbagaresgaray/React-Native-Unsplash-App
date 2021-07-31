@@ -1,19 +1,20 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {Button, Icon} from 'react-native-elements';
+import {Button, ButtonProps, Icon} from 'react-native-elements';
 import {COLORS} from '../../constants/Colors';
 
-interface Props {
+interface Props extends ButtonProps {
   title?: string;
 }
 
-const AppButton: React.FC<Props> = ({title}) => {
+const AppButton: React.FC<Props> = props => {
   return (
     <Button
       containerStyle={styles.button}
       buttonStyle={styles.buttonStyle}
       titleStyle={styles.titleStyle}
-      title={title}
+      title={props.title}
+      {...props}
     />
   );
 };

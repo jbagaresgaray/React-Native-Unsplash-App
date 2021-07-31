@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
+import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import {
   default as Icon,
   default as Icons,
@@ -27,13 +28,24 @@ interface Props {
       };
     };
   };
+  onUserPress?: () => void;
+  onMorePress?: () => void;
+  onImagePress?: () => void;
 }
 
-const AppCardItem: React.FC<Props> = ({index, item}) => {
+const AppCardItem: React.FC<Props> = ({
+  index,
+  item,
+  onUserPress,
+  onMorePress,
+  onImagePress,
+}) => {
   return (
     <View style={styles.cardContainer}>
       <View style={styles.postHeader}>
-        <View style={styles.infoWrapper}>
+        <TouchableWithoutFeedback
+          style={styles.infoWrapper}
+          onPress={onUserPress}>
           <FastImage
             style={styles.avatar}
             source={{uri: item?.user?.profile_image.medium}}
@@ -42,14 +54,17 @@ const AppCardItem: React.FC<Props> = ({index, item}) => {
             <Text style={styles.name}>{item?.user?.name}</Text>
             <Text style={styles.username}>{item?.user?.username}</Text>
           </View>
-        </View>
-        <TouchableOpacity>
+        </TouchableWithoutFeedback>
+        <TouchableOpacity onPress={onMorePress}>
           <Icons name="dots-vertical" size={24} />
         </TouchableOpacity>
       </View>
-      <View style={styles.imageContainer}>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onPress={onImagePress}
+        style={styles.imageContainer}>
         <FastImage style={styles.image} source={{uri: item?.urls?.thumb}} />
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };

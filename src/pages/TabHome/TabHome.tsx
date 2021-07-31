@@ -37,7 +37,13 @@ const TabHome = () => {
     });
   }, [navigation]);
 
-  const renderItem = ({item}: any) => <AppCardItem item={item} />;
+  const onUserPress = () => {
+    navigation.navigate('UserProfile');
+  };
+
+  const renderItem = ({item}: any) => (
+    <AppCardItem item={item} onUserPress={onUserPress} />
+  );
 
   const renderEditorial = () => (
     <FlatList

@@ -9,6 +9,7 @@ import TabCollections from '../pages/TabCollections/TabCollections';
 import TabSearch from '../pages/TabSearch/TabSearch';
 import TabAccount from '../pages/TabAccount/TabAccount';
 import AppHeaderLogo from '../components/AppHeaderLogo/AppHeaderLogo';
+import UserProfile from '../pages/UserProfile/UserProfile';
 
 const Stack = createStackNavigator<any>();
 
@@ -26,6 +27,7 @@ export const HomeStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={navigationOptions}>
       <Stack.Screen name="Home" component={TabHome} />
+      <Stack.Screen name="UserProfile" component={UserProfile} />
     </Stack.Navigator>
   );
 };
@@ -42,6 +44,7 @@ export const SearchStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={navigationOptions}>
       <Stack.Screen name="Search" component={TabSearch} />
+      <Stack.Screen name="UserProfile" component={UserProfile} />
     </Stack.Navigator>
   );
 };

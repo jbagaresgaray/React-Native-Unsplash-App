@@ -12,9 +12,9 @@ import {SearchBar} from 'react-native-elements';
 
 import {COLORS} from '../../constants/Colors';
 import AppSearchSegment from './AppSearchSegment/AppSearchSegment';
-import AppSearchPhotos from './AppSearchPhotos/AppSearchPhotos';
-import AppSearchCollections from './AppSearchCollections/AppSearchCollections';
-import AppSearchUsers from './AppSearchUsers/AppSearchUsers';
+import AppSearchPhotos from '../../components/AppSearchPhotos/AppSearchPhotos';
+import AppSearchCollections from '../../components/AppSearchCollections/AppSearchCollections';
+import AppSearchUsers from '../../components/AppSearchUsers/AppSearchUsers';
 
 import CollectionsArr from '../../services/fake/search_collections.json';
 import PhotosArr from '../../services/fake/search_photo.json';
@@ -69,7 +69,6 @@ const TabSearch = () => {
 
   return (
     <SafeAreaView style={styles.SafeAreaView}>
-      <View></View>
       <AppSearchSegment activeIndex={activeTab} onChange={setActiveTab} />
       {activeTab === 0 && (
         <AppSearchPhotos
