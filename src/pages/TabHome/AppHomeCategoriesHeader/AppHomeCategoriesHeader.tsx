@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import {COLORS} from '../../constants/Colors';
+import {COLORS} from '../../../constants/Colors';
 
 const AppHomeCategoriesHeader = () => {
   return (
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   categoryHeaderTitle: {
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: '500',
     color: COLORS.black,
   },

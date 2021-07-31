@@ -35,9 +35,11 @@ const AppHomeSegment: React.FC<Props> = ({activeIndex, onChange}) => {
 const styles = StyleSheet.create({
   SegmentToolbar: {
     paddingTop: 8,
-    paddingBottom: 8,
+    // paddingBottom: 8,
     paddingStart: 32,
     paddingEnd: 32,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
   },
   TabStyle: {
     backgroundColor: COLORS.white,
