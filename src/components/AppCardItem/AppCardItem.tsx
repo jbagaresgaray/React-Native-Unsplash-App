@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {Button} from 'react-native-elements';
 import FastImage from 'react-native-fast-image';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import {
@@ -65,6 +66,29 @@ const AppCardItem: React.FC<Props> = ({
         style={styles.imageContainer}>
         <FastImage style={styles.image} source={{uri: item?.urls?.thumb}} />
       </TouchableOpacity>
+      <View style={styles.reactionsWrapper}>
+        <View style={styles.reactions}>
+          <View style={styles.lReactions}>
+            <Button
+              containerStyle={styles.reactionButton}
+              buttonStyle={styles.reactionButtonStyle}
+              type="clear"
+              icon={<Icons name="heart" size={24} color="#767676" />}></Button>
+            <Button
+              containerStyle={styles.reactionButton}
+              buttonStyle={styles.reactionButtonStyle}
+              type="clear"
+              icon={<Icon name="plus" size={24} color="#767676" />}></Button>
+          </View>
+          <View style={styles.rReactions}>
+            <Button
+              containerStyle={styles.reactionButton}
+              buttonStyle={styles.reactionButtonStyle}
+              type="clear"
+              icon={<Icon name="download" size={24} color="#767676" />}></Button>
+          </View>
+        </View>
+      </View>
     </View>
   );
 };
@@ -119,6 +143,36 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     zIndex: 1,
+  },
+  reactionsWrapper: {
+    padding: 10,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+  reactions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  rReactions: {},
+  lReactions: {
+    flexDirection: 'row',
+    width: 24.3 * 3 + 15,
+    // justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  reactionButton: {
+    padding: 2,
+  },
+  reactionButtonStyle: {
+    backgroundColor: COLORS.white,
+    borderRadius: 8,
+    borderColor: '#d1d1d1',
+    borderWidth: 0.5,
+    paddingStart: 8,
+    paddingEnd: 8,
   },
 });
 
