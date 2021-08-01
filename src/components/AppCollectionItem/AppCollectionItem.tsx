@@ -4,6 +4,7 @@ import PhotoGrid from 'react-native-thumbnail-grid';
 import {COLORS} from '../../constants/Colors';
 import {useEffect} from 'react';
 import {Badge} from 'react-native-elements';
+import AppTag from '../AppTag/AppTag';
 
 interface Props {
   index?: number;
@@ -52,13 +53,7 @@ const AppCollectionItem: React.FC<Props> = ({index, item, onPressImage}) => {
         <View style={styles.tagsWrapper}>
           {item?.tags &&
             item?.tags.map((tag, index) => (
-              <Badge
-                key={index}
-                value={tag.title}
-                textStyle={styles.tagTextStyle}
-                containerStyle={styles.tagBadgeContainer}
-                badgeStyle={styles.tagBadge}
-              />
+              <AppTag title={tag.title} key={index} />
             ))}
         </View>
       </View>
@@ -101,20 +96,6 @@ const styles = StyleSheet.create({
     paddingTop: 8,
     flexDirection: 'row',
     flexWrap: 'wrap',
-  },
-  tagBadgeContainer: {
-    padding: 2,
-  },
-  tagTextStyle: {
-    fontSize: 10,
-    color: '#767676',
-    textTransform: "capitalize"
-  },
-  tagBadge: {
-    height: 26,
-    paddingStart: 8,
-    paddingEnd: 8,
-    backgroundColor: '#ddd',
   },
 });
 

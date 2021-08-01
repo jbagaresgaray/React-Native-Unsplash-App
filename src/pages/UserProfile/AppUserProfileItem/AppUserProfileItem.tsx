@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Avatar, Button, Icon, ListItem} from 'react-native-elements';
 import AppButton from '../../../components/AppButton/AppButton';
+import AppTag from '../../../components/AppTag/AppTag';
 import {COLORS} from '../../../constants/Colors';
 
 interface Props {
@@ -27,6 +28,7 @@ const AppUserProfileItem: React.FC<Props> = ({
   location,
   followers_count,
   following_count,
+  tags,
 }) => {
   return (
     <View>
@@ -39,21 +41,29 @@ const AppUserProfileItem: React.FC<Props> = ({
           }}
         />
         <ListItem.Content>
-          <ListItem.Title>{name}</ListItem.Title>
-          <ListItem.Subtitle>{username}</ListItem.Subtitle>
-          <ListItem.Subtitle>{''}</ListItem.Subtitle>
-          <ListItem.Subtitle>{''}</ListItem.Subtitle>
+          <ListItem.Title numberOfLines={1} style={styles.name}>
+            {name}
+          </ListItem.Title>
+          <ListItem.Subtitle style={styles.username}>
+            {username}
+          </ListItem.Subtitle>
+          <View style={styles.tagsWrapper}>
+            {tags &&
+              tags.map((tag: any, index) => (
+                <AppTag title={tag.title} key={index} />
+              ))}
+          </View>
         </ListItem.Content>
       </ListItem>
       <View style={styles.actionContainer}>
         <View style={styles.followerFollowingWrapper}>
-          <View>
-            <Text>{followers_count}</Text>
-            <Text>Followers</Text>
+          <View style={styles.followerFollowingView}>
+            <Text style={styles.followerFollowingCount}>{followers_count}</Text>
+            <Text style={styles.followerFollowingText}>Followers</Text>
           </View>
-          <View>
-            <Text>{following_count}</Text>
-            <Text>Following</Text>
+          <View style={styles.followerFollowingView}>
+            <Text style={styles.followerFollowingCount}>{following_count}</Text>
+            <Text style={styles.followerFollowingText}>Following</Text>
           </View>
         </View>
         <View style={styles.followMessageContainer}>
@@ -81,6 +91,15 @@ const AppUserProfileItem: React.FC<Props> = ({
 };
 
 const styles = StyleSheet.create({
+  name: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  username: {
+    fontSize: 14,
+    fontWeight: '400',
+    color: '#767676',
+  },
   bioLocationContainer: {
     paddingStart: 16,
     paddingEnd: 16,
@@ -112,6 +131,23 @@ const styles = StyleSheet.create({
   },
   followMessageContainer: {
     flexDirection: 'row',
+  },
+  followerFollowingView: {
+    padding: 4,
+    alignItems: 'center',
+  },
+  followerFollowingCount: {
+    fontSize: 14,
+    fontWeight: '800',
+    color: '#111',
+  },
+  followerFollowingText: {
+    fontSize: 13,
+  },
+  tagsWrapper: {
+    paddingTop: 8,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
 });
 
