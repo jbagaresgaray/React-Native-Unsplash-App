@@ -9,9 +9,9 @@ import AppCollectionItem from '../AppCollectionItem/AppCollectionItem';
 
 interface Props {
   refreshing: boolean;
-  onRefresh: () => void;
+  onRefresh?: () => void;
   onPressImage: () => void;
-  CollectionsArr: any[];
+  CollectionsArr?: any[];
 }
 
 const AppSearchCollections: React.FC<Props> = ({

@@ -6,7 +6,7 @@ import {Button, Icon} from 'react-native-elements';
 import {COLORS} from '../../constants/Colors';
 
 import AppUserProfileSegment from './AppUserProfileSegment/AppUserProfileSegment';
-import AppUserProfileItem from './AppUserProfileItem/AppUserProfileItem';
+import AppUserProfileDetail from './AppUserProfileDetail/AppUserProfileDetail';
 import AppSearchPhotos from '../../components/AppSearchPhotos/AppSearchPhotos';
 import AppSearchCollections from '../../components/AppSearchCollections/AppSearchCollections';
 
@@ -60,7 +60,7 @@ const UserProfile = () => {
 
   return (
     <SafeAreaView style={styles.SafeAreaView}>
-      <AppUserProfileItem {...getProfileProps()} />
+      <AppUserProfileDetail {...getProfileProps()} />
       <AppUserProfileSegment
         total_collections={userProfile.total_collections}
         total_likes={userProfile.total_likes}

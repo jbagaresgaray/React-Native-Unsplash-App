@@ -41,8 +41,16 @@ const TabHome = () => {
     navigation.navigate('UserProfile');
   };
 
+  const onImagePress = () => {
+    navigation.navigate('ImageDetails');
+  };
+
   const renderItem = ({item}: any) => (
-    <AppCardItem item={item} onUserPress={onUserPress} />
+    <AppCardItem
+      item={item}
+      onUserPress={onUserPress}
+      onImagePress={onImagePress}
+    />
   );
 
   const renderEditorial = () => (
