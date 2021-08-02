@@ -10,6 +10,7 @@ import {
   FlatList,
   RefreshControl,
 } from 'react-native';
+import AppCardTopic from '../../components/AppCardTopic/AppCardTopic';
 import {COLORS} from '../../constants/Colors';
 
 import TopicsArr from '../../services/fake/topics.json';
@@ -27,7 +28,16 @@ const Topics = () => {
     wait(2000).then(() => setRefreshing(false));
   }, []);
 
-  const renderItem = ({item}: any) => <></>;
+  const renderItem = ({item}: any) => (
+    <AppCardTopic
+      title={item.title}
+      description={item.description}
+      cover_photo={item.cover_photo}
+      owners={item?.owners[0]}
+      total_photos={item?.total_photos}
+      featured={item?.featured}
+    />
+  );
 
   return (
     <>
