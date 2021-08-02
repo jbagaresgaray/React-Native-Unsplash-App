@@ -11,6 +11,7 @@ import TabAccount from '../pages/TabAccount/TabAccount';
 import AppHeaderLogo from '../components/AppHeaderLogo/AppHeaderLogo';
 import UserProfile from '../pages/UserProfile/UserProfile';
 import ImageDetails from '../pages/ImageDetails/ImageDetails';
+import CollectionDetails from '../pages/CollectionDetails/CollectionDetails';
 
 const Stack = createStackNavigator<any>();
 
@@ -30,6 +31,7 @@ export const HomeStackNavigator = () => {
       <Stack.Screen name="Home" component={TabHome} />
       <Stack.Screen name="UserProfile" component={UserProfile} />
       <Stack.Screen name="ImageDetails" component={ImageDetails} />
+      <Stack.Screen name="CollectionDetails" component={CollectionDetails} />
     </Stack.Navigator>
   );
 };
@@ -38,6 +40,7 @@ export const CollectionStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={navigationOptions}>
       <Stack.Screen name="Collections" component={TabCollections} />
+      <Stack.Screen name="CollectionDetails" component={CollectionDetails} />
     </Stack.Navigator>
   );
 };
@@ -48,6 +51,7 @@ export const SearchStackNavigator = () => {
       <Stack.Screen name="Search" component={TabSearch} />
       <Stack.Screen name="UserProfile" component={UserProfile} />
       <Stack.Screen name="ImageDetails" component={ImageDetails} />
+      <Stack.Screen name="CollectionDetails" component={CollectionDetails} />
     </Stack.Navigator>
   );
 };

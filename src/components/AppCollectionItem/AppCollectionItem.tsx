@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import PhotoGrid from 'react-native-thumbnail-grid';
-import {COLORS} from '../../constants/Colors';
 import {useEffect} from 'react';
-import {Badge} from 'react-native-elements';
 import AppTag from '../AppTag/AppTag';
 
 interface Props {
@@ -24,9 +22,15 @@ interface Props {
     };
   };
   onPressImage: () => void;
+  onPressTitle?: () => void;
 }
 
-const AppCollectionItem: React.FC<Props> = ({index, item, onPressImage}) => {
+const AppCollectionItem: React.FC<Props> = ({
+  index,
+  item,
+  onPressImage,
+  onPressTitle,
+}) => {
   const [photoList, setPhotoList] = useState([]);
 
   useEffect(() => {
@@ -42,13 +46,13 @@ const AppCollectionItem: React.FC<Props> = ({index, item, onPressImage}) => {
     <View style={styles.cardContainer}>
       <View style={styles.postHeader}>
         <View style={styles.infoWrapper}>
-          <View>
+          <TouchableOpacity onPress={onPressTitle}>
             <Text style={styles.name}>{item?.title}</Text>
             <Text style={styles.username}>
               {item?.total_photos} Photos{' '}
               <Text>· Curated by {item?.user?.username}</Text>
             </Text>
-          </View>
+          </TouchableOpacity>
         </View>
         <View style={styles.tagsWrapper}>
           {item?.tags &&

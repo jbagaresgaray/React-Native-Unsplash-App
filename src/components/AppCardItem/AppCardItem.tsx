@@ -64,7 +64,7 @@ const AppCardItem: React.FC<Props> = ({
         activeOpacity={0.8}
         onPress={onImagePress}
         style={styles.imageContainer}>
-        <FastImage style={styles.image} source={{uri: item?.urls?.thumb}} />
+        <FastImage style={styles.image} source={{uri: item?.urls?.full}} />
       </TouchableOpacity>
       <View style={styles.reactionsWrapper}>
         <View style={styles.reactions}>
@@ -73,19 +73,22 @@ const AppCardItem: React.FC<Props> = ({
               containerStyle={styles.reactionButton}
               buttonStyle={styles.reactionButtonStyle}
               type="clear"
-              icon={<Icons name="heart" size={24} color="#767676" />}></Button>
+              icon={<Icons name="heart" size={24} color="#767676" />}
+            />
             <Button
               containerStyle={styles.reactionButton}
               buttonStyle={styles.reactionButtonStyle}
               type="clear"
-              icon={<Icon name="plus" size={24} color="#767676" />}></Button>
+              icon={<Icon name="plus" size={24} color="#767676" />}
+            />
           </View>
           <View style={styles.rReactions}>
             <Button
               containerStyle={styles.reactionButton}
               buttonStyle={styles.reactionButtonStyle}
               type="clear"
-              icon={<Icon name="download" size={24} color="#767676" />}></Button>
+              icon={<Icon name="download" size={24} color="#767676" />}
+            />
           </View>
         </View>
       </View>

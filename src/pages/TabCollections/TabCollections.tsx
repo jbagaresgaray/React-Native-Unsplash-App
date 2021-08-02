@@ -20,7 +20,7 @@ const TabCollections = () => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerLeft: (props: any) => null,
+      headerLeft: () => null,
     });
   }, [navigation]);
 
@@ -33,10 +33,20 @@ const TabCollections = () => {
     wait(2000).then(() => setRefreshing(false));
   }, []);
 
-  const onPressImage = () => {};
+  const onPressImage = () => {
+    navigation.navigate('CollectionDetails');
+  };
+
+  const onPressTitle = () => {
+    navigation.navigate('CollectionDetails');
+  };
 
   const renderItem = ({item}: any) => (
-    <AppCollectionItem item={item} onPressImage={onPressImage} />
+    <AppCollectionItem
+      item={item}
+      onPressImage={onPressImage}
+      onPressTitle={onPressTitle}
+    />
   );
 
   return (
