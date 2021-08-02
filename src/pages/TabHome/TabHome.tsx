@@ -33,7 +33,7 @@ const TabHome = () => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerLeft: (props: any) => null,
+      headerLeft: () => null,
     });
   }, [navigation]);
 

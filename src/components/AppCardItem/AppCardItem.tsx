@@ -10,7 +10,6 @@ import {
 import {COLORS} from '../../constants/Colors';
 
 interface Props {
-  index?: number;
   item?: {
     urls: {
       raw: string;
@@ -35,7 +34,6 @@ interface Props {
 }
 
 const AppCardItem: React.FC<Props> = ({
-  index,
   item,
   onUserPress,
   onMorePress,
