@@ -2,12 +2,16 @@ import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {COLORS} from '../../../constants/Colors';
 
-const AppHomeCategoriesHeader = () => {
+interface Props {
+  onViewAllPress?: () => void;
+}
+
+const AppHomeCategoriesHeader: React.FC<Props> = ({onViewAllPress}) => {
   return (
     <View style={styles.container}>
       <View style={styles.categoryHeader}>
-        <Text style={styles.categoryHeaderTitle}>Categories</Text>
-        <TouchableOpacity>
+        <Text style={styles.categoryHeaderTitle}>Topics</Text>
+        <TouchableOpacity onPress={onViewAllPress}>
           <Text style={styles.viewAll}>View all</Text>
         </TouchableOpacity>
       </View>

@@ -1,7 +1,5 @@
 import React from 'react';
 import {View, ScrollView, StyleSheet} from 'react-native';
-import {SCREEN_WIDTH} from '../../../constants';
-import {COLORS} from '../../../constants/Colors';
 import AppHomeCategoryCard from '../AppHomeCategoryCard/AppHomeCategoryCard';
 
 interface Props {

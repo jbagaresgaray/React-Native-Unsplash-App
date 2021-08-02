@@ -12,6 +12,7 @@ import AppHeaderLogo from '../components/AppHeaderLogo/AppHeaderLogo';
 import UserProfile from '../pages/UserProfile/UserProfile';
 import ImageDetails from '../pages/ImageDetails/ImageDetails';
 import CollectionDetails from '../pages/CollectionDetails/CollectionDetails';
+import Topics from '../pages/Topics/Topics';
 
 const Stack = createStackNavigator<any>();
 
@@ -32,6 +33,7 @@ export const HomeStackNavigator = () => {
       <Stack.Screen name="UserProfile" component={UserProfile} />
       <Stack.Screen name="ImageDetails" component={ImageDetails} />
       <Stack.Screen name="CollectionDetails" component={CollectionDetails} />
+      <Stack.Screen name="Topics" component={Topics} />
     </Stack.Navigator>
   );
 };

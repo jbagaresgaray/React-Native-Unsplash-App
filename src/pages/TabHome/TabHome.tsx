@@ -45,6 +45,10 @@ const TabHome = () => {
     navigation.navigate('ImageDetails');
   };
 
+  const onViewAllPress = () => {
+    navigation.navigate('Topics');
+  };
+
   const renderItem = ({item}: any) => (
     <AppCardItem
       item={item}
@@ -61,7 +65,7 @@ const TabHome = () => {
       }
       ListHeaderComponent={() => (
         <>
-          <AppHomeCategoriesHeader />
+          <AppHomeCategoriesHeader onViewAllPress={onViewAllPress} />
           <AppHomeCategories categories={CategoriesArr} />
         </>
       )}
