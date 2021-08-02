@@ -1,4 +1,4 @@
-import React, {createRef} from 'react';
+import React from 'react';
 import {View} from 'react-native';
 import {
   BottomTabBarOptions,
@@ -18,7 +18,6 @@ import {COLORS} from '../constants/Colors';
 import AppTabBar from '../components/AppTabBar/AppTabBar';
 
 const Tab = createBottomTabNavigator<any>();
-const fabMenusModal: any = createRef();
 
 const tabBarOptions: BottomTabBarOptions = {
   activeTintColor: COLORS.black,

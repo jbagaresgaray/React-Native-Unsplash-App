@@ -64,6 +64,7 @@ const CollectionDetails: React.FC = () => {
                   name={Collection?.user?.name}
                   username={Collection?.user?.username}
                   profile_image={Collection?.user?.profile_image}
+                  onProfilePress={onUserPress}
                 />
               </>
             )}

@@ -12,7 +12,6 @@ import {
 // import MasonryList from '@react-native-seoul/masonry-list';
 import FastImage from 'react-native-fast-image';
 import {FlatGrid} from 'react-native-super-grid';
-import {STATUS_BAR_HEIGHT} from '../../constants';
 
 interface Props {
   refreshing: boolean;
@@ -21,12 +20,17 @@ interface Props {
   PhotosArr?: any[];
 }
 
-const ImageCard: React.FC<{item: any; height: number}> = ({item, height}) => {
+const ImageCard: React.FC<{item: any; height: number; onPressImage: any}> = ({
+  item,
+  height,
+  onPressImage,
+}) => {
   return (
     <TouchableOpacity
       activeOpacity={0.8}
       key={item.id}
-      style={styles.ImageCardContainer}>
+      style={styles.ImageCardContainer}
+      onPress={onPressImage}>
       <FastImage
         source={{uri: item.uri}}
         style={{
@@ -63,7 +67,9 @@ const AppSearchPhotos: React.FC<Props> = ({
   }, []);
 
   const renderItem = ({item}: any) => {
-    return <ImageCard item={item} height={itemHeight} />;
+    return (
+      <ImageCard item={item} height={itemHeight} onPressImage={onPressImage} />
+    );
   };
 
   const onLayout = (e: LayoutChangeEvent) => {

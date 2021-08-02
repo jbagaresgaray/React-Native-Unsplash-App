@@ -41,6 +41,8 @@ export const CollectionStackNavigator = () => {
     <Stack.Navigator screenOptions={navigationOptions}>
       <Stack.Screen name="Collections" component={TabCollections} />
       <Stack.Screen name="CollectionDetails" component={CollectionDetails} />
+      <Stack.Screen name="UserProfile" component={UserProfile} />
+      <Stack.Screen name="ImageDetails" component={ImageDetails} />
     </Stack.Navigator>
   );
 };

@@ -11,6 +11,7 @@ interface Props {
   refreshing: boolean;
   onRefresh?: () => void;
   onPressImage: () => void;
+  onPressTitle: () => void;
   CollectionsArr?: any[];
 }
 
@@ -18,10 +19,15 @@ const AppSearchCollections: React.FC<Props> = ({
   refreshing,
   onRefresh,
   onPressImage,
+  onPressTitle,
   CollectionsArr,
 }) => {
   const renderItem = ({item}: any) => (
-    <AppCollectionItem item={item} onPressImage={onPressImage} />
+    <AppCollectionItem
+      item={item}
+      onPressImage={onPressImage}
+      onPressTitle={onPressTitle}
+    />
   );
 
   return (

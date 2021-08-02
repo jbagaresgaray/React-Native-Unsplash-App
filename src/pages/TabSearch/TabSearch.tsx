@@ -1,4 +1,7 @@
-import {useNavigation} from '@react-navigation/native';
+import {
+  NavigationHelpersContext,
+  useNavigation,
+} from '@react-navigation/native';
 import React, {useLayoutEffect, useState} from 'react';
 import {
   View,
@@ -26,14 +29,6 @@ const TabSearch = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerStyle: {shadowColor: 'transparent', elevation: 0},
-      headerLeft: null,
-      headerTitle: SeachbarHeader,
-    });
-  }, [navigation, searchText]);
-
   const onSearching = (value: string): any => {
     setSearchText(value);
   };
@@ -47,25 +42,41 @@ const TabSearch = () => {
     wait(2000).then(() => setRefreshing(false));
   }, []);
 
-  const onPressImage = () => {};
+  const onPressImage = () => {
+    navigation.navigate('ImageDetails');
+  };
 
-  const SeachbarHeader = () => (
-    <View style={{width: Dimensions.get('window').width}}>
-      <SearchBar
-        platform="ios"
-        style={styles.searchBar}
-        containerStyle={styles.searchBarContainer}
-        inputContainerStyle={styles.searchBarInputContainer}
-        inputStyle={styles.searchBarInput}
-        cancelButtonProps={{
-          buttonTextStyle: styles.searchBarInput,
-        }}
-        placeholder="Search photos"
-        onChangeText={onSearching}
-        value={searchText}
-      />
-    </View>
-  );
+  const onPressCollectionImage = () => {
+    navigation.navigate('CollectionDetails');
+  };
+
+  const onPressCollectionTitle = () => {
+    navigation.navigate('CollectionDetails');
+  };
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerStyle: {shadowColor: 'transparent', elevation: 0},
+      headerLeft: null,
+      headerTitle: () => (
+        <View style={{width: Dimensions.get('window').width}}>
+          <SearchBar
+            platform="ios"
+            style={styles.searchBar}
+            containerStyle={styles.searchBarContainer}
+            inputContainerStyle={styles.searchBarInputContainer}
+            inputStyle={styles.searchBarInput}
+            cancelButtonProps={{
+              buttonTextStyle: styles.searchBarInput,
+            }}
+            placeholder="Search photos"
+            onChangeText={onSearching}
+            value={searchText}
+          />
+        </View>
+      ),
+    });
+  }, [navigation, searchText]);
 
   return (
     <SafeAreaView style={styles.SafeAreaView}>
@@ -82,7 +93,8 @@ const TabSearch = () => {
         <AppSearchCollections
           refreshing={refreshing}
           onRefresh={onRefresh}
-          onPressImage={onPressImage}
+          onPressImage={onPressCollectionImage}
+          onPressTitle={onPressCollectionTitle}
           CollectionsArr={CollectionsArr.results}
         />
       )}
