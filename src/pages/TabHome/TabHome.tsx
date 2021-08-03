@@ -74,7 +74,6 @@ const TabHome = () => {
   };
 
   const onTopicPress = (id_or_slug: string) => {
-    console.log('onTopicPress: ', id_or_slug);
     navigation.navigate('TopicDetail', {
       id_or_slug,
     });

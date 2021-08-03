@@ -40,8 +40,10 @@ const Topics = () => {
     setRefreshing(false);
   }, []);
 
-  const onTopicPress = () => {
-    navigation.navigate('TopicDetail');
+  const onTopicPress = (id_or_slug: string) => {
+    navigation.navigate('TopicDetail', {
+      id_or_slug,
+    });
   };
 
   const onUserPress = () => {
@@ -56,7 +58,7 @@ const Topics = () => {
       owners={item?.owners[0]}
       total_photos={item?.total_photos}
       status={item?.status}
-      onPress={onTopicPress}
+      onPress={() => onTopicPress(item.id)}
       onUserPress={onUserPress}
     />
   );

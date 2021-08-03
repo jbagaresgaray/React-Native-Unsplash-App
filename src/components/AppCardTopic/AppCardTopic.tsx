@@ -9,31 +9,17 @@ import {View, Text} from 'react-native';
 import {Avatar, Icon} from 'react-native-elements';
 import FastImage from 'react-native-fast-image';
 import {COLORS} from '../../constants/Colors';
+import {IPreviewPhotos} from '../../models/generic';
+import {IPhoto} from '../../models/photo';
+import {IUser} from '../../models/user';
 import AppStatus from '../AppStatus/AppStatus';
 
 interface Props {
   title?: string;
   description?: string;
-  cover_photo?: {
-    urls: {
-      raw: string;
-      full: string;
-      regular: string;
-      small: string;
-      thumb: string;
-    };
-  };
-  owners: {
-    username: string;
-    id: string;
-    name: string;
-    profile_image: {
-      small: string;
-      medium: string;
-      large: string;
-    };
-  };
-  preview_photos?: any[];
+  cover_photo?: IPhoto;
+  owners: IUser;
+  preview_photos?: IPreviewPhotos[];
   total_photos?: number;
   status?: string;
   featured?: boolean;
@@ -65,8 +51,7 @@ const AppCardTopic: React.FC<Props> = ({
           )}
           <FastImage
             source={{
-              uri: cover_photo?.urls?.regular,
-              priority: FastImage.priority.high,
+              uri: cover_photo?.urls?.small,
             }}
             style={styles.cardImage}
             resizeMode={FastImage.resizeMode.cover}
@@ -84,7 +69,7 @@ const AppCardTopic: React.FC<Props> = ({
               <Avatar
                 rounded
                 source={{
-                  uri: owners?.profile_image?.medium,
+                  uri: owners?.profile_image?.small,
                 }}
                 size="medium"
                 containerStyle={styles.topicCardHeaderAvatar}

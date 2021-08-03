@@ -8,26 +8,11 @@ import {
   default as Icons,
 } from 'react-native-vector-icons/MaterialCommunityIcons';
 import {COLORS} from '../../constants/Colors';
+import {IProfileImage} from '../../models/generic';
+import {IPhoto} from '../../models/photo';
 
 interface Props {
-  item?: {
-    urls: {
-      raw: string;
-      full: string;
-      regular: string;
-      small: string;
-      thumb: string;
-    };
-    user: {
-      name: string;
-      username: string;
-      profile_image: {
-        small: string;
-        medium: string;
-        larget: string;
-      };
-    };
-  };
+  item?: IPhoto;
   onUserPress?: () => void;
   onMorePress?: () => void;
   onImagePress?: () => void;
@@ -49,7 +34,6 @@ const AppCardItem: React.FC<Props> = ({
             style={styles.avatar}
             source={{
               uri: item?.user?.profile_image.small,
-              priority: FastImage.priority.normal,
             }}
           />
           <View>
@@ -65,7 +49,7 @@ const AppCardItem: React.FC<Props> = ({
         activeOpacity={0.8}
         onPress={onImagePress}
         style={styles.imageContainer}>
-        <FastImage style={styles.image} source={{uri: item?.urls?.full}} />
+        <FastImage style={styles.image} source={{uri: item?.urls?.small}} />
       </TouchableOpacity>
       <View style={styles.reactionsWrapper}>
         <View style={styles.reactions}>
