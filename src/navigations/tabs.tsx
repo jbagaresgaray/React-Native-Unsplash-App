@@ -117,11 +117,6 @@ const BottomTabNavigator = () => {
         component={AccountsStackNavigator}
         name="Account"
         options={TabAccountBottomTabOptions}
-        listeners={{
-          tabPress: e => {
-            e.preventDefault();
-          },
-        }}
       />
     </Tab.Navigator>
   );
