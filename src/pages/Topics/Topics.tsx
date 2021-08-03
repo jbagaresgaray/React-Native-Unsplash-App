@@ -28,6 +28,14 @@ const Topics = () => {
     wait(2000).then(() => setRefreshing(false));
   }, []);
 
+  const onTopicPress = () => {
+    navigation.navigate('TopicDetail');
+  };
+
+  const onUserPress = () => {
+    navigation.navigate('UserProfile');
+  };
+
   const renderItem = ({item}: any) => (
     <AppCardTopic
       title={item.title}
@@ -35,7 +43,9 @@ const Topics = () => {
       cover_photo={item.cover_photo}
       owners={item?.owners[0]}
       total_photos={item?.total_photos}
-      featured={item?.featured}
+      status={item?.status}
+      onPress={onTopicPress}
+      onUserPress={onUserPress}
     />
   );
 

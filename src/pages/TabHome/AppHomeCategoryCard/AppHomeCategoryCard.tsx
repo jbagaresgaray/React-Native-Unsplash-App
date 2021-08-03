@@ -4,7 +4,6 @@ import FastImage from 'react-native-fast-image';
 import {COLORS} from '../../../constants/Colors';
 
 interface Props {
-  index?: number;
   item?: {
     title: string;
     cover_photo: {
@@ -17,13 +16,17 @@ interface Props {
       };
     };
   };
+  onPress?: () => void;
 }
 
-const AppHomeCategoryCard: React.FC<Props> = ({index, item}) => {
+const AppHomeCategoryCard: React.FC<Props> = ({item, onPress}) => {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <TouchableOpacity activeOpacity={0.8} style={styles.imageWrapper}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={styles.imageWrapper}
+          onPress={onPress}>
           <FastImage
             style={styles.image}
             source={{uri: item?.cover_photo?.urls.full}}

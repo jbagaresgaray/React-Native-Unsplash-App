@@ -23,6 +23,14 @@ const Landing: React.FC = () => {
     navigation.navigate('Main');
   };
 
+  const onSignUp = () => {
+    navigation.navigate('Register');
+  };
+
+  const onLogin = () => {
+    navigation.navigate('Login');
+  };
+
   const SkipButton = () => (
     <TouchableOpacity style={styles.skipButton} onPress={skipLanding}>
       <Text style={styles.skipButtonText}>Skip</Text>
@@ -44,11 +52,11 @@ const Landing: React.FC = () => {
         <View style={styles.footerContainer}>
           <View style={styles.buttonViews}>
             <AppFacebookButton />
-            <AppButton title="Sign up with email" />
+            <AppButton title="Sign up with email" onPress={onSignUp} />
           </View>
           <View style={styles.haveAccountContainer}>
             <Text style={styles.haveAccountText}>Already have an account?</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onLogin}>
               <Text style={styles.loginButtonText}>Login</Text>
             </TouchableOpacity>
           </View>

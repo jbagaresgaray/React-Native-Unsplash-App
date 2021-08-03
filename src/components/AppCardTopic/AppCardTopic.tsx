@@ -1,9 +1,15 @@
 import React from 'react';
-import {Dimensions, StyleSheet} from 'react-native';
+import {
+  Dimensions,
+  StyleSheet,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import {View, Text} from 'react-native';
 import {Avatar, Icon} from 'react-native-elements';
 import FastImage from 'react-native-fast-image';
 import {COLORS} from '../../constants/Colors';
+import AppStatus from '../AppStatus/AppStatus';
 
 interface Props {
   title?: string;
@@ -29,10 +35,10 @@ interface Props {
   };
   preview_photos?: any[];
   total_photos?: number;
+  status?: string;
   featured?: boolean;
   onUserPress?: () => void;
-  onMorePress?: () => void;
-  onImagePress?: () => void;
+  onPress?: () => void;
 }
 
 const AppCardTopic: React.FC<Props> = ({
@@ -42,55 +48,63 @@ const AppCardTopic: React.FC<Props> = ({
   owners,
   total_photos,
   featured,
+  status,
+  onUserPress,
+  onPress,
 }) => {
   return (
-    <View style={styles.topicCardContainer}>
-      <View style={styles.cardImageContainer}>
-        {featured && (
-          <View style={styles.featureView}>
-            <View style={styles.featureStatus}></View>
-            <Text>Open</Text>
-          </View>
-        )}
-        <FastImage
-          source={{
-            uri: cover_photo?.urls?.regular,
-            priority: FastImage.priority.high,
-          }}
-          style={styles.cardImage}
-          resizeMode={FastImage.resizeMode.cover}
-        />
-      </View>
-      <View style={styles.topicCardContent}>
-        <View style={styles.topicCardHeader}>
-          <View>
-            <Text style={styles.topicCardHeaderTitle}>{title}</Text>
-            <Text style={styles.topicCardHeaderSubTitle}>
-              by {owners?.name}
-            </Text>
-          </View>
-          <Avatar
-            rounded
+    <TouchableWithoutFeedback
+      style={styles.topicCardContainer}
+      onPress={onPress}>
+      <View>
+        <View style={styles.cardImageContainer}>
+          {status && status === 'open' && (
+            <View style={styles.featureView}>
+              <AppStatus />
+            </View>
+          )}
+          <FastImage
             source={{
-              uri: owners?.profile_image?.medium,
+              uri: cover_photo?.urls?.regular,
+              priority: FastImage.priority.high,
             }}
-            size="medium"
-            containerStyle={styles.topicCardHeaderAvatar}
+            style={styles.cardImage}
+            resizeMode={FastImage.resizeMode.cover}
           />
         </View>
-        <View style={styles.topicDescriptionView}>
-          <Text style={styles.topicDescriptionText} numberOfLines={2}>
-            {description}
-          </Text>
-        </View>
-        <View style={styles.topicContribution}>
-          <Icon name="image" size={18} color="#767676" />
-          <Text style={styles.topicContributionText} numberOfLines={2}>
-            {total_photos} contributions
-          </Text>
+        <View style={styles.topicCardContent}>
+          <View style={styles.topicCardHeader}>
+            <View>
+              <Text style={styles.topicCardHeaderTitle}>{title}</Text>
+              <Text style={styles.topicCardHeaderSubTitle}>
+                by {owners?.name}
+              </Text>
+            </View>
+            <TouchableOpacity activeOpacity={0.8} onPress={onUserPress}>
+              <Avatar
+                rounded
+                source={{
+                  uri: owners?.profile_image?.medium,
+                }}
+                size="medium"
+                containerStyle={styles.topicCardHeaderAvatar}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.topicDescriptionView}>
+            <Text style={styles.topicDescriptionText} numberOfLines={2}>
+              {description}
+            </Text>
+          </View>
+          <View style={styles.topicContribution}>
+            <Icon name="image" size={18} color="#767676" />
+            <Text style={styles.topicContributionText} numberOfLines={2}>
+              {total_photos} contributions
+            </Text>
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -107,32 +121,14 @@ const styles = StyleSheet.create({
     paddingRight: 20,
   },
   featureView: {
-    backgroundColor: '#c2ebd3',
-    paddingTop: 1,
-    paddingBottom: 1,
-    paddingLeft: 8,
-    paddingRight: 8,
-    borderRadius: 4,
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: 24,
-    width: 65,
-
     position: 'absolute',
     top: 16,
     left: 16,
     zIndex: 1,
   },
-  featureStatus: {
-    width: 8,
-    height: 8,
-    borderRadius: 999,
-    backgroundColor: '#3cb46e',
-    marginRight: 6,
-  },
   cardImageContainer: {
-    backgroundColor: 'red',
     position: 'relative',
+    backgroundColor: 'transparent',
     height: 110,
   },
   cardImage: {

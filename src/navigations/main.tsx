@@ -13,6 +13,7 @@ import UserProfile from '../pages/UserProfile/UserProfile';
 import ImageDetails from '../pages/ImageDetails/ImageDetails';
 import CollectionDetails from '../pages/CollectionDetails/CollectionDetails';
 import Topics from '../pages/Topics/Topics';
+import TopicDetail from '../pages/TopicDetail/TopicDetail';
 
 const Stack = createStackNavigator<any>();
 
@@ -34,6 +35,7 @@ export const HomeStackNavigator = () => {
       <Stack.Screen name="ImageDetails" component={ImageDetails} />
       <Stack.Screen name="CollectionDetails" component={CollectionDetails} />
       <Stack.Screen name="Topics" component={Topics} />
+      <Stack.Screen name="TopicDetail" component={TopicDetail} />
     </Stack.Navigator>
   );
 };

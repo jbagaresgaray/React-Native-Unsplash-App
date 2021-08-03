@@ -4,9 +4,10 @@ import AppHomeCategoryCard from '../AppHomeCategoryCard/AppHomeCategoryCard';
 
 interface Props {
   categories?: any[];
+  onPress?: () => void;
 }
 
-const AppHomeCategories: React.FC<Props> = ({categories}) => {
+const AppHomeCategories: React.FC<Props> = ({categories, onPress}) => {
   return (
     <View style={styles.container}>
       <ScrollView
@@ -15,7 +16,11 @@ const AppHomeCategories: React.FC<Props> = ({categories}) => {
         bounces={false}>
         {categories &&
           categories.map((category, index) => (
-            <AppHomeCategoryCard index={index} item={category} key={index} />
+            <AppHomeCategoryCard
+              item={category}
+              key={index}
+              onPress={onPress}
+            />
           ))}
       </ScrollView>
     </View>
