@@ -47,7 +47,10 @@ const AppCardItem: React.FC<Props> = ({
           onPress={onUserPress}>
           <FastImage
             style={styles.avatar}
-            source={{uri: item?.user?.profile_image.medium}}
+            source={{
+              uri: item?.user?.profile_image.small,
+              priority: FastImage.priority.normal,
+            }}
           />
           <View>
             <Text style={styles.name}>{item?.user?.name}</Text>

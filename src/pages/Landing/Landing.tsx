@@ -1,5 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
+import {useEffect} from 'react';
 import {
   ImageBackground,
   SafeAreaView,
@@ -9,15 +10,26 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {useSelector} from 'react-redux';
 
 import landingImg from '../../assets/img/landing-unsplash.jpg';
 import AppButton from '../../components/AppButton/AppButton';
 import AppFacebookButton from '../../components/AppFacebookButton/AppFacebookButton';
 import AppHeaderLogo from '../../components/AppHeaderLogo/AppHeaderLogo';
+
+import {MAX_PER_PAGE} from '../../constants';
 import {COLORS} from '../../constants/Colors';
+
+import {useAppDispatch} from '../../stores';
+import {fetchCollections} from '../../stores/slices/collectionsSlice';
+import {fetchListPhotos, PhotosState} from '../../stores/slices/photosSlice';
+import {fetchListTopics, TopicsState} from '../../stores/slices/topicsSlice';
 
 const Landing: React.FC = () => {
   const navigation = useNavigation();
+  const dispatch = useAppDispatch();
+  const topicPage = useSelector((state: TopicsState) => state.page);
+  const photoPage = useSelector((state: PhotosState) => state.page);
 
   const skipLanding = () => {
     navigation.navigate('Main');
@@ -36,6 +48,30 @@ const Landing: React.FC = () => {
       <Text style={styles.skipButtonText}>Skip</Text>
     </TouchableOpacity>
   );
+
+  useEffect(() => {
+    dispatch(
+      fetchListTopics({
+        ids: null,
+        page: topicPage,
+        per_page: MAX_PER_PAGE,
+        order_by: 'position',
+      }),
+    );
+    dispatch(
+      fetchListPhotos({
+        page: photoPage,
+        per_page: MAX_PER_PAGE,
+        order_by: 'latest',
+      }),
+    );
+    dispatch(
+      fetchCollections({
+        page: photoPage,
+        per_page: MAX_PER_PAGE,
+      }),
+    );
+  }, []);
 
   return (
     <>

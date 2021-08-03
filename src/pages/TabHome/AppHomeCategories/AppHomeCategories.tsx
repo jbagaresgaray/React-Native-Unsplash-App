@@ -1,25 +1,26 @@
 import React from 'react';
 import {View, ScrollView, StyleSheet} from 'react-native';
+import {ITopic} from '../../../models/topic';
 import AppHomeCategoryCard from '../AppHomeCategoryCard/AppHomeCategoryCard';
 
 interface Props {
-  categories?: any[];
-  onPress?: () => void;
+  topics?: ITopic[];
+  onPress: (ev: any) => void | any;
 }
 
-const AppHomeCategories: React.FC<Props> = ({categories, onPress}) => {
+const AppHomeCategories: React.FC<Props> = ({topics, onPress}) => {
   return (
     <View style={styles.container}>
       <ScrollView
         showsHorizontalScrollIndicator={false}
         horizontal={true}
         bounces={false}>
-        {categories &&
-          categories.map((category, index) => (
+        {topics &&
+          topics.map((topic: ITopic, index: number) => (
             <AppHomeCategoryCard
-              item={category}
+              topic={topic}
               key={index}
-              onPress={onPress}
+              onPress={() => onPress(topic.id)}
             />
           ))}
       </ScrollView>

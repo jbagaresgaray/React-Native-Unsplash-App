@@ -14,21 +14,45 @@ import AppHomeSegment from './AppHomeSegment/AppHomeSegment';
 import AppCardItem from '../../components/AppCardItem/AppCardItem';
 
 import {COLORS} from '../../constants/Colors';
-import CategoriesArr from '../../services/fake/topics.json';
-import PhotosArr from '../../services/fake/photos.json';
+import {useSelector} from 'react-redux';
+import {useAppDispatch} from '../../stores';
+import {
+  fetchListTopics,
+  topicsSelectors,
+} from '../../stores/slices/topicsSlice';
+import {
+  fetchListPhotos,
+  photosSelectors,
+} from '../../stores/slices/photosSlice';
+import {MAX_PER_PAGE} from '../../constants';
 
 const TabHome = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
+  const TopicsArr = useSelector(topicsSelectors.topics);
+  const PhotosArr = useSelector(photosSelectors.photos);
+
   const navigation: any = useNavigation();
+  const dispatch = useAppDispatch();
 
-  const wait = (timeout: number) => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
-  };
-
-  const onRefresh = React.useCallback(() => {
+  const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
-    wait(2000).then(() => setRefreshing(false));
+    await dispatch(
+      fetchListTopics({
+        ids: null,
+        page: 1,
+        per_page: MAX_PER_PAGE,
+        order_by: 'position',
+      }),
+    );
+    await dispatch(
+      fetchListPhotos({
+        page: 1,
+        per_page: MAX_PER_PAGE,
+        order_by: 'latest',
+      }),
+    );
+    setRefreshing(false);
   }, []);
 
   useLayoutEffect(() => {
@@ -49,8 +73,11 @@ const TabHome = () => {
     navigation.navigate('Topics');
   };
 
-  const onTopicPress = () => {
-    navigation.navigate('TopicDetail');
+  const onTopicPress = (id_or_slug: string) => {
+    console.log('onTopicPress: ', id_or_slug);
+    navigation.navigate('TopicDetail', {
+      id_or_slug,
+    });
   };
 
   const renderItem = ({item}: any) => (
@@ -70,10 +97,7 @@ const TabHome = () => {
       ListHeaderComponent={() => (
         <>
           <AppHomeCategoriesHeader onViewAllPress={onViewAllPress} />
-          <AppHomeCategories
-            categories={CategoriesArr}
-            onPress={onTopicPress}
-          />
+          <AppHomeCategories topics={TopicsArr} onPress={onTopicPress} />
         </>
       )}
       data={PhotosArr}

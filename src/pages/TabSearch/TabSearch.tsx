@@ -2,7 +2,7 @@ import {
   NavigationHelpersContext,
   useNavigation,
 } from '@react-navigation/native';
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -12,6 +12,7 @@ import {
   Dimensions,
 } from 'react-native';
 import {SearchBar} from 'react-native-elements';
+import {useSelector} from 'react-redux';
 
 import {COLORS} from '../../constants/Colors';
 import AppSearchSegment from './AppSearchSegment/AppSearchSegment';
@@ -19,27 +20,39 @@ import AppSearchPhotos from '../../components/AppSearchPhotos/AppSearchPhotos';
 import AppSearchCollections from '../../components/AppSearchCollections/AppSearchCollections';
 import AppSearchUsers from '../../components/AppSearchUsers/AppSearchUsers';
 
+import {
+  fetchListPhotos,
+  photosSelectors,
+} from '../../stores/slices/photosSlice';
+import {useAppDispatch} from '../../stores';
+
 import CollectionsArr from '../../services/fake/search_collections.json';
-import PhotosArr from '../../services/fake/search_photo.json';
 import UsersArr from '../../services/fake/search_users.json';
+import {MAX_PER_PAGE} from '../../constants';
 
 const TabSearch = () => {
   const navigation: any = useNavigation();
+  const dispatch = useAppDispatch();
   const [searchText, setSearchText] = useState('');
   const [activeTab, setActiveTab] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
+
+  const PhotosArr = useSelector(photosSelectors.photos);
 
   const onSearching = (value: string): any => {
     setSearchText(value);
   };
 
-  const wait = (timeout: number) => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
-  };
-
-  const onRefresh = React.useCallback(() => {
+  const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
-    wait(2000).then(() => setRefreshing(false));
+    await dispatch(
+      fetchListPhotos({
+        page: 1,
+        per_page: MAX_PER_PAGE,
+        order_by: 'popular',
+      }),
+    );
+    setRefreshing(false);
   }, []);
 
   const onPressImage = () => {
@@ -53,6 +66,16 @@ const TabSearch = () => {
   const onPressCollectionTitle = () => {
     navigation.navigate('CollectionDetails');
   };
+
+  useEffect(() => {
+    dispatch(
+      fetchListPhotos({
+        page: 1,
+        per_page: MAX_PER_PAGE,
+        order_by: 'popular',
+      }),
+    );
+  }, []);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -86,7 +109,7 @@ const TabSearch = () => {
           refreshing={refreshing}
           onRefresh={onRefresh}
           onPressImage={onPressImage}
-          PhotosArr={PhotosArr.results}
+          PhotosArr={PhotosArr}
         />
       )}
       {activeTab === 1 && (

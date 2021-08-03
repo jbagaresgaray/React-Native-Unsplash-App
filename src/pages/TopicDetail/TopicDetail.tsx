@@ -1,5 +1,5 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import React, {useState, useCallback, useEffect} from 'react';
 import {
   View,
   Text,
@@ -12,25 +12,46 @@ import {
 } from 'react-native';
 import {ListItem, Icon, Avatar} from 'react-native-elements';
 import HTMLView from 'react-native-htmlview';
+import {useSelector} from 'react-redux';
 import AppCardItem from '../../components/AppCardItem/AppCardItem';
 import AppStatus from '../../components/AppStatus/AppStatus';
+import {MAX_PER_PAGE} from '../../constants';
 import {COLORS} from '../../constants/Colors';
 
-import Topic from '../../services/fake/topic.json';
-import TopicPhotos from '../../services/fake/topic_photos.json';
+import {useAppDispatch} from '../../stores';
+import {
+  getTopic,
+  getTopicPhotos,
+  topicsSelectors,
+} from '../../stores/slices/topicsSlice';
 
 const TopicDetail = () => {
   const [refreshing, setRefreshing] = useState(false);
-  const [topic, setTopic] = useState(Topic);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [idSlug, setIdSlug] = useState('');
   const navigation: any = useNavigation();
+  const {params}: any = useRoute();
+  const dispatch = useAppDispatch();
 
-  const wait = (timeout: number) => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
-  };
+  const topic = useSelector(topicsSelectors.topic);
+  const TopicPhotos = useSelector(topicsSelectors.topicPhotos);
+  const isLoading = useSelector(topicsSelectors.isLoading);
 
-  const onRefresh = React.useCallback(() => {
+
+  const onRefresh = useCallback(async () => {
     setRefreshing(true);
-    wait(2000).then(() => setRefreshing(false));
+    await dispatch(getTopic(idSlug));
+    await dispatch(
+      getTopicPhotos({
+        id_or_slug: idSlug,
+        params: {
+          page: currentPage,
+          per_page: MAX_PER_PAGE,
+          order_by: 'latest',
+        },
+      }),
+    );
+    setRefreshing(false);
   }, []);
 
   const onUserPress = () => {
@@ -48,6 +69,24 @@ const TopicDetail = () => {
       onImagePress={onImagePress}
     />
   );
+
+  useEffect(() => {
+    if (params && params.id_or_slug) {
+      setIdSlug(params.id_or_slug);
+
+      dispatch(getTopic(params.id_or_slug));
+      dispatch(
+        getTopicPhotos({
+          id_or_slug: params.id_or_slug,
+          params: {
+            page: currentPage,
+            per_page: MAX_PER_PAGE,
+            order_by: 'latest',
+          },
+        }),
+      );
+    }
+  }, [params]);
 
   return (
     <>

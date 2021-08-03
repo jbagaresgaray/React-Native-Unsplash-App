@@ -6,20 +6,19 @@ import {ScrollView} from 'react-native-gesture-handler';
 import AppRelatedCollections from '../../components/AppRelatedCollections/AppRelatedCollections';
 import AppRelatedPhotos from '../../components/AppRelatedPhotos/AppRelatedPhotos';
 import AppRelatedTags from '../../components/AppRelatedTags/AppRelatedTags';
+import {ICollection} from '../../models/collection';
+import {IProfileImage, ITag} from '../../models/generic';
+import {IPhoto} from '../../models/photo';
 import AppUserProfileItem from '../UserProfile/AppUserProfileItem/AppUserProfileItem';
 
 interface Props {
   actionSheetRef: any;
-  name: string;
-  username: string;
-  profile_image: {
-    small: string;
-    medium: string;
-    large: string;
-  };
-  related_collections?: any[];
-  related_photos?: any[];
-  tags: any[];
+  name?: string;
+  username?: string;
+  profile_image?: IProfileImage;
+  related_collections?: ICollection[];
+  related_photos?: IPhoto[];
+  tags?: ITag[];
 }
 
 const ImageUserModal: React.FC<Props> = ({
@@ -64,18 +63,31 @@ const ImageUserModal: React.FC<Props> = ({
         onProfilePress={onProfileView}
       />
       <ScrollView style={styles.content}>
-        <AppRelatedPhotos
-          onPressImage={onImagePress}
-          PhotosArr={related_photos}
-        />
-        <View style={styles.divider}></View>
-        <AppRelatedCollections
-          onPressImage={onImagePress}
-          CollectionsArr={related_collections}
-        />
-        <View style={styles.divider}></View>
-        <AppRelatedTags tagsArr={tags} />
-        <View style={styles.divider}></View>
+        {related_photos && (
+          <>
+            <AppRelatedPhotos
+              onPressImage={onImagePress}
+              PhotosArr={related_photos}
+            />
+            <View style={styles.divider}></View>
+          </>
+        )}
+        {related_collections && (
+          <>
+            <AppRelatedCollections
+              onPressImage={onImagePress}
+              CollectionsArr={related_collections}
+            />
+            <View style={styles.divider}></View>
+          </>
+        )}
+
+        {tags && (
+          <>
+            <AppRelatedTags tagsArr={tags} />
+            <View style={styles.divider}></View>
+          </>
+        )}
       </ScrollView>
     </ActionSheet>
   );

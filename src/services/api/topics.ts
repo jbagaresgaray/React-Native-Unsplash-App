@@ -2,7 +2,7 @@ import API from '.';
 import {ORIENTATION_TYPES, ORDER_BY_TYPES} from '../../constants';
 
 export interface ListTopicsParams {
-  ids?: string;
+  ids?: string | null;
   page?: number;
   per_page?: number;
   order_by?: ORDER_BY_TYPES;

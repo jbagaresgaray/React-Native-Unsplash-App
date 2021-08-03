@@ -7,16 +7,24 @@ import {
   KeyboardAvoidingView,
   RefreshControl,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
+
 import {COLORS} from '../../constants/Colors';
 import AppCollectionsHeader from './AppCollectionsHeader/AppCollectionsHeader';
 import AppCollectionItem from '../../components/AppCollectionItem/AppCollectionItem';
 
-import CollectionsArr from '../../services/fake/collections.json';
-import {useNavigation} from '@react-navigation/native';
+import {
+  collectionsSelectors,
+  fetchCollections,
+} from '../../stores/slices/collectionsSlice';
+import {MAX_PER_PAGE} from '../../constants';
 
 const TabCollections = () => {
   const [refreshing, setRefreshing] = useState(false);
   const navigation: any = useNavigation();
+  const dispatch = useDispatch();
+  const CollectionsArr = useSelector(collectionsSelectors.collections);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -24,13 +32,15 @@ const TabCollections = () => {
     });
   }, [navigation]);
 
-  const wait = (timeout: number) => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
-  };
-
-  const onRefresh = React.useCallback(() => {
+  const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
-    wait(2000).then(() => setRefreshing(false));
+    await dispatch(
+      fetchCollections({
+        page: 1,
+        per_page: MAX_PER_PAGE,
+      }),
+    );
+    setRefreshing(false);
   }, []);
 
   const onPressImage = () => {

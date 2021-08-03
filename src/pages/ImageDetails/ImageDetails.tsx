@@ -1,19 +1,38 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useState, useLayoutEffect, createRef} from 'react';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import React, {useState, useLayoutEffect, createRef, useCallback} from 'react';
 import {useEffect} from 'react';
 import {View, Text, SafeAreaView, StyleSheet, Dimensions} from 'react-native';
 import FastImage from 'react-native-fast-image';
+import {useSelector} from 'react-redux';
 import {COLORS} from '../../constants/Colors';
 
-import Photo from '../../services/fake/photo.json';
-import PhotosArr from '../../services/fake/user/photos.json';
+import {useAppDispatch} from '../../stores';
+import {getPhoto, photosSelectors} from '../../stores/slices/photosSlice';
 import ImageUserModal from '../ImageUserModal/ImageUserModal';
 import AppUserProfileItem from '../UserProfile/AppUserProfileItem/AppUserProfileItem';
 
 const ImageDetails: React.FC = () => {
   const userDetailModalRef: any = createRef();
+  const [refreshing, setRefreshing] = useState(false);
+  const [photoId, setPhotoId] = useState('');
   const navigation: any = useNavigation();
-  const [image, setImage] = useState(Photo);
+  const {params}: any = useRoute();
+  const dispatch = useAppDispatch();
+
+  const image = useSelector(photosSelectors.photo);
+
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    await dispatch(getPhoto(photoId));
+    setRefreshing(false);
+  }, []);
+
+  useEffect(() => {
+    if (params && params.id) {
+      setPhotoId(params.id);
+      dispatch(getPhoto(params.id));
+    }
+  }, [params]);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -46,7 +65,6 @@ const ImageDetails: React.FC = () => {
         username={image?.user?.username}
         profile_image={image?.user?.profile_image}
         related_collections={image?.related_collections?.results}
-        related_photos={PhotosArr.slice(0, 6)}
         tags={image?.tags}
       />
     </SafeAreaView>

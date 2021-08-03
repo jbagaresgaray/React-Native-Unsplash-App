@@ -11,9 +11,10 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		819FE11C0455745E4CE1DC4F /* libPods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ECC8F46309164DC4B9859025 /* libPods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.a */; };
+		1F9E1384E496D3A5D172DBCD /* libPods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F1410B8F85F0BE88E864E6A6 /* libPods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.a */; };
+		5A75B86026B9621D00AE503B /* BridgingFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A75B85F26B9621D00AE503B /* BridgingFile.swift */; };
+		6A5EB1E82F259738FAD8A866 /* libPods-ReactNativeUnsplashApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 219ED5B2FC55DD61A9EF7422 /* libPods-ReactNativeUnsplashApp.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		E9F65CC833F6A408BE516F8B /* libPods-ReactNativeUnsplashApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61797AFEAB9B9D63900A9672 /* libPods-ReactNativeUnsplashApp.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,12 +38,15 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ReactNativeUnsplashApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ReactNativeUnsplashApp/main.m; sourceTree = "<group>"; };
 		1D64245CF85B4154A75011AF /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		219ED5B2FC55DD61A9EF7422 /* libPods-ReactNativeUnsplashApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactNativeUnsplashApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28A190E5EA6840F890C9F7E1 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		292C1C9528FA8066CEC5832E /* Pods-ReactNativeUnsplashApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeUnsplashApp.release.xcconfig"; path = "Target Support Files/Pods-ReactNativeUnsplashApp/Pods-ReactNativeUnsplashApp.release.xcconfig"; sourceTree = "<group>"; };
 		3278297E28874A52AD85D01D /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
-		4F6CFF711BD58A7E29C31FCE /* Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.debug.xcconfig"; path = "Target Support Files/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		55B35B7C5A6C4F1C948D16C5 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
-		592BB5DB9BC1CC2CCFCD86FF /* Pods-ReactNativeUnsplashApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeUnsplashApp.release.xcconfig"; path = "Target Support Files/Pods-ReactNativeUnsplashApp/Pods-ReactNativeUnsplashApp.release.xcconfig"; sourceTree = "<group>"; };
-		61797AFEAB9B9D63900A9672 /* libPods-ReactNativeUnsplashApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactNativeUnsplashApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		56D3EFEA8F69A87214A6B371 /* Pods-ReactNativeUnsplashApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeUnsplashApp.debug.xcconfig"; path = "Target Support Files/Pods-ReactNativeUnsplashApp/Pods-ReactNativeUnsplashApp.debug.xcconfig"; sourceTree = "<group>"; };
+		58BBCBE344A4A0351D40BDA0 /* Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.debug.xcconfig"; path = "Target Support Files/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5A75B85F26B9621D00AE503B /* BridgingFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BridgingFile.swift; path = ReactNativeUnsplashApp/BridgingFile.swift; sourceTree = "<group>"; };
+		5A75B86226B9629200AE503B /* ReactNativeUnsplashApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ReactNativeUnsplashApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		6FDBE459D2D44E4190757604 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		7173DB1EF81B4B198990B568 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ReactNativeUnsplashApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -52,12 +56,11 @@
 		C34031A25DD147BBB55AD148 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		C42E7858B3474E45B61556F9 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		D3DA37AD6D83433CAB907A2F /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
-		ECC8F46309164DC4B9859025 /* libPods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		ECFC414ECEC397FC376F2992 /* Pods-ReactNativeUnsplashApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeUnsplashApp.debug.xcconfig"; path = "Target Support Files/Pods-ReactNativeUnsplashApp/Pods-ReactNativeUnsplashApp.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F08ABF11C586A59D8A1D7074 /* Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.release.xcconfig"; path = "Target Support Files/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		F1410B8F85F0BE88E864E6A6 /* libPods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F246EE99110645ABAECAD5AC /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		F91E2F9D16EE4B928233B041 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
-		FB475CC9994EFC8B813CB3B1 /* Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.release.xcconfig"; path = "Target Support Files/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		FD4414A9AD9D42CDAD7537AC /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		FE36B226A65F495782F2748A /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -67,7 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				819FE11C0455745E4CE1DC4F /* libPods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.a in Frameworks */,
+				1F9E1384E496D3A5D172DBCD /* libPods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,7 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9F65CC833F6A408BE516F8B /* libPods-ReactNativeUnsplashApp.a in Frameworks */,
+				6A5EB1E82F259738FAD8A866 /* libPods-ReactNativeUnsplashApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,12 +128,14 @@
 		13B07FAE1A68108700A75B9A /* ReactNativeUnsplashApp */ = {
 			isa = PBXGroup;
 			children = (
+				5A75B86226B9629200AE503B /* ReactNativeUnsplashApp-Bridging-Header.h */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				5A75B85F26B9621D00AE503B /* BridgingFile.swift */,
 			);
 			name = ReactNativeUnsplashApp;
 			sourceTree = "<group>";
@@ -139,8 +144,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				61797AFEAB9B9D63900A9672 /* libPods-ReactNativeUnsplashApp.a */,
-				ECC8F46309164DC4B9859025 /* libPods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.a */,
+				219ED5B2FC55DD61A9EF7422 /* libPods-ReactNativeUnsplashApp.a */,
+				F1410B8F85F0BE88E864E6A6 /* libPods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -148,10 +153,10 @@
 		6C1FF1C97A6764CB13F6EA1B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				ECFC414ECEC397FC376F2992 /* Pods-ReactNativeUnsplashApp.debug.xcconfig */,
-				592BB5DB9BC1CC2CCFCD86FF /* Pods-ReactNativeUnsplashApp.release.xcconfig */,
-				4F6CFF711BD58A7E29C31FCE /* Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.debug.xcconfig */,
-				FB475CC9994EFC8B813CB3B1 /* Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.release.xcconfig */,
+				56D3EFEA8F69A87214A6B371 /* Pods-ReactNativeUnsplashApp.debug.xcconfig */,
+				292C1C9528FA8066CEC5832E /* Pods-ReactNativeUnsplashApp.release.xcconfig */,
+				58BBCBE344A4A0351D40BDA0 /* Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.debug.xcconfig */,
+				F08ABF11C586A59D8A1D7074 /* Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -195,11 +200,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "ReactNativeUnsplashAppTests" */;
 			buildPhases = (
-				1D0A4D37B89FD250B0A4DEBD /* [CP] Check Pods Manifest.lock */,
+				B3E0F97AA9E3828186C3F329 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				1F8EBBB4B21065E161012A13 /* [CP] Copy Pods Resources */,
+				F7BFAA95893B713777F0955C /* [CP] Embed Pods Frameworks */,
+				74251910E5B9A127A1A8E8DE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -215,13 +221,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "ReactNativeUnsplashApp" */;
 			buildPhases = (
-				86D0170F594D0AD4671C4444 /* [CP] Check Pods Manifest.lock */,
+				125DD81E2DCE3E674C8A730A /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				42DDB27DF19953B9763D1372 /* [CP] Copy Pods Resources */,
+				BA621067C7595404EAA2ADBE /* [CP] Embed Pods Frameworks */,
+				D0B68937785D56F5878EE067 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -302,7 +309,46 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		1D0A4D37B89FD250B0A4DEBD /* [CP] Check Pods Manifest.lock */ = {
+		125DD81E2DCE3E674C8A730A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ReactNativeUnsplashApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		74251910E5B9A127A1A8E8DE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B3E0F97AA9E3828186C3F329 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -324,24 +370,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1F8EBBB4B21065E161012A13 /* [CP] Copy Pods Resources */ = {
+		BA621067C7595404EAA2ADBE /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-ReactNativeUnsplashApp/Pods-ReactNativeUnsplashApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Copy Pods Resources";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-ReactNativeUnsplashApp/Pods-ReactNativeUnsplashApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ReactNativeUnsplashApp/Pods-ReactNativeUnsplashApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		42DDB27DF19953B9763D1372 /* [CP] Copy Pods Resources */ = {
+		D0B68937785D56F5878EE067 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -358,26 +404,21 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ReactNativeUnsplashApp/Pods-ReactNativeUnsplashApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		86D0170F594D0AD4671C4444 /* [CP] Check Pods Manifest.lock */ = {
+		F7BFAA95893B713777F0955C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ReactNativeUnsplashApp-checkManifestLockResult.txt",
+				"${PODS_ROOT}/Target Support Files/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -415,6 +456,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				5A75B86026B9621D00AE503B /* BridgingFile.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -432,8 +474,9 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4F6CFF711BD58A7E29C31FCE /* Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.debug.xcconfig */;
+			baseConfigurationReference = 58BBCBE344A4A0351D40BDA0 /* Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -459,8 +502,9 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FB475CC9994EFC8B813CB3B1 /* Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.release.xcconfig */;
+			baseConfigurationReference = F08ABF11C586A59D8A1D7074 /* Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = ReactNativeUnsplashAppTests/Info.plist;
@@ -483,7 +527,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ECFC414ECEC397FC376F2992 /* Pods-ReactNativeUnsplashApp.debug.xcconfig */;
+			baseConfigurationReference = 56D3EFEA8F69A87214A6B371 /* Pods-ReactNativeUnsplashApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -511,7 +555,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 592BB5DB9BC1CC2CCFCD86FF /* Pods-ReactNativeUnsplashApp.release.xcconfig */;
+			baseConfigurationReference = 292C1C9528FA8066CEC5832E /* Pods-ReactNativeUnsplashApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

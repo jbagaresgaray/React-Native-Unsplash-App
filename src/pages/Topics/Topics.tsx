@@ -10,22 +10,34 @@ import {
   FlatList,
   RefreshControl,
 } from 'react-native';
+import {useSelector} from 'react-redux';
 import AppCardTopic from '../../components/AppCardTopic/AppCardTopic';
+import {MAX_PER_PAGE} from '../../constants';
 import {COLORS} from '../../constants/Colors';
 
-import TopicsArr from '../../services/fake/topics.json';
+import {useAppDispatch} from '../../stores';
+import {
+  fetchListTopics,
+  topicsSelectors,
+} from '../../stores/slices/topicsSlice';
 
 const Topics = () => {
   const navigation = useNavigation();
+  const dispatch = useAppDispatch();
   const [refreshing, setRefreshing] = useState(false);
+  const TopicsArr = useSelector(topicsSelectors.topics);
 
-  const wait = (timeout: number) => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
-  };
-
-  const onRefresh = React.useCallback(() => {
+  const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
-    wait(2000).then(() => setRefreshing(false));
+    await dispatch(
+      fetchListTopics({
+        ids: null,
+        page: 1,
+        per_page: MAX_PER_PAGE,
+        order_by: 'position',
+      }),
+    );
+    setRefreshing(false);
   }, []);
 
   const onTopicPress = () => {

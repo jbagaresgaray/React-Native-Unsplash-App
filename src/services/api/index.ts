@@ -9,6 +9,9 @@ const API = axios.create({
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
+    Authorization: `Client-ID ${Config.REACT_UNSPLASH_ACCESS_KEY}`,
+    'X-Ratelimit-Limit': 1000,
+    'X-Ratelimit-Remaining': 999,
   },
   transformResponse: data => {
     try {
@@ -28,10 +31,10 @@ API.interceptors.request.use(
     config.headers = {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      Authorization: `Client-ID ${Config.REACT_UNSPLASH_ACCESS_KEY}`,
       'X-Ratelimit-Limit': 1000,
       'X-Ratelimit-Remaining': 999,
     };
-    console.log('request', config);
     return config;
   },
   error => {
@@ -41,11 +44,9 @@ API.interceptors.request.use(
 
 API.interceptors.response.use(
   response => {
-    console.log(response);
     return response;
   },
   async function (error) {
-    console.log(error?.response);
     const originalRequest = error.config;
     return Promise.reject(error);
   },

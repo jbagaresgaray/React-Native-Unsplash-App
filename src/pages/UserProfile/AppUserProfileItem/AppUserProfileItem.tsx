@@ -1,16 +1,14 @@
 import React from 'react';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {Avatar, ListItem} from 'react-native-elements';
+import {IProfileImage} from '../../../models/generic';
 import AppUserProfileFollowMessage from '../AppUserProfileFollowMessage/AppUserProfileFollowMessage';
 
 interface Props {
-  name: string;
-  username: string;
-  profile_image: {
-    small: string;
-    medium: string;
-    large: string;
-  };
+  id?: string;
+  name?: string;
+  username?: string;
+  profile_image?: IProfileImage;
   onProfilePress?: () => void;
 }
 

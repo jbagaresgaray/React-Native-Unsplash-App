@@ -2,24 +2,14 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {COLORS} from '../../../constants/Colors';
+import {ITopic} from '../../../models/topic';
 
 interface Props {
-  item?: {
-    title: string;
-    cover_photo: {
-      urls: {
-        raw: string;
-        full: string;
-        regular: string;
-        small: string;
-        thumb: string;
-      };
-    };
-  };
-  onPress?: () => void;
+  topic?: ITopic;
+  onPress: (ev: any) => void | any;
 }
 
-const AppHomeCategoryCard: React.FC<Props> = ({item, onPress}) => {
+const AppHomeCategoryCard: React.FC<Props> = ({topic, onPress}) => {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -29,12 +19,12 @@ const AppHomeCategoryCard: React.FC<Props> = ({item, onPress}) => {
           onPress={onPress}>
           <FastImage
             style={styles.image}
-            source={{uri: item?.cover_photo?.urls.full}}
+            source={{uri: topic?.cover_photo?.urls.small}}
           />
         </TouchableOpacity>
         <View style={styles.title}>
           <Text numberOfLines={1} style={styles.titleText}>
-            {item?.title}
+            {topic?.title}
           </Text>
         </View>
       </View>
