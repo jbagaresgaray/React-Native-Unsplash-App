@@ -48,7 +48,7 @@ const ImageDetails: React.FC = () => {
     <SafeAreaView style={styles.SafeAreaView}>
       <FastImage
         style={styles.bgImage}
-        source={{uri: image?.urls?.full, priority: FastImage.priority.high}}
+        source={{uri: image?.urls?.regular, priority: FastImage.priority.high}}
         resizeMode={FastImage.resizeMode.cover}
       />
       <View style={styles.footerView}>

@@ -65,8 +65,10 @@ const TabHome = () => {
     navigation.navigate('UserProfile');
   };
 
-  const onImagePress = () => {
-    navigation.navigate('ImageDetails');
+  const onImagePress = (id: string) => {
+    navigation.navigate('ImageDetails', {
+      id,
+    });
   };
 
   const onViewAllPress = () => {
@@ -83,7 +85,7 @@ const TabHome = () => {
     <AppCardItem
       item={item}
       onUserPress={onUserPress}
-      onImagePress={onImagePress}
+      onImagePress={() => onImagePress(item.id)}
     />
   );
 

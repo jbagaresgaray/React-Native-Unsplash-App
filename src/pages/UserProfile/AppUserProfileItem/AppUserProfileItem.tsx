@@ -24,9 +24,9 @@ const AppUserProfileItem: React.FC<Props> = ({
         <Avatar
           onPress={onProfilePress}
           rounded
-          size="medium"
+          size={36}
           source={{
-            uri: profile_image?.medium,
+            uri: profile_image?.small,
           }}
         />
         <ListItem.Content style={styles.profileContainer}>
@@ -49,11 +49,11 @@ const AppUserProfileItem: React.FC<Props> = ({
 
 const styles = StyleSheet.create({
   name: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: '600',
   },
   username: {
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: '400',
     color: '#767676',
   },
