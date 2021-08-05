@@ -3,24 +3,11 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import PhotoGrid from 'react-native-thumbnail-grid';
 import {useEffect} from 'react';
 import AppTag from '../AppTag/AppTag';
+import {ICollection} from '../../models/collection';
 
 interface Props {
   index?: number;
-  item?: {
-    title: string;
-    tags: any[];
-    preview_photos: any[];
-    total_photos: number;
-    user: {
-      name: string;
-      username: string;
-      profile_image: {
-        small: string;
-        medium: string;
-        larget: string;
-      };
-    };
-  };
+  item?: ICollection;
   onPressImage: () => void;
   onPressTitle?: () => void;
 }

@@ -1,5 +1,5 @@
 import API from '.';
-import {ORIENTATION_TYPES} from '../../constants';
+import { ORIENTATION_TYPES } from '../../constants';
 
 export interface SearchPhotosParams {
   query: string;
@@ -28,7 +28,7 @@ const SearchService = {
     });
   },
   searchUsers(params?: BasicSearchParams) {
-    return API.get(`/search/users`);
+    return API.get(`/search/users`, { params });
   },
 };
 

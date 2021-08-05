@@ -1,34 +1,32 @@
-import {
-  NavigationHelpersContext,
-  useNavigation,
-} from '@react-navigation/native';
-import React, {useEffect, useLayoutEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  SafeAreaView,
-  StatusBar,
-  Dimensions,
-} from 'react-native';
-import {SearchBar} from 'react-native-elements';
-import {useSelector} from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from 'react';
+import { StyleSheet, SafeAreaView } from 'react-native';
+import { useSelector } from 'react-redux';
+import debounce from 'lodash/debounce';
+import isEmpty from 'lodash/isEmpty';
 
-import {COLORS} from '../../constants/Colors';
+import { COLORS } from '../../constants/Colors';
 import AppSearchSegment from './AppSearchSegment/AppSearchSegment';
 import AppSearchPhotos from '../../components/AppSearchPhotos/AppSearchPhotos';
 import AppSearchCollections from '../../components/AppSearchCollections/AppSearchCollections';
 import AppSearchUsers from '../../components/AppSearchUsers/AppSearchUsers';
+import AppNoFiles from '../../components/AppNoFiles/AppNoFiles';
+import AppSearchHeaderBar from '../../components/AppSearchHeaderBar/AppSearchHeaderBar';
 
 import {
   fetchListPhotos,
   photosSelectors,
 } from '../../stores/slices/photosSlice';
-import {useAppDispatch} from '../../stores';
+import { collectionsSelectors } from '../../stores/slices/collectionsSlice';
+import { useAppDispatch } from '../../stores';
 
-import CollectionsArr from '../../services/fake/search_collections.json';
-import UsersArr from '../../services/fake/search_users.json';
-import {MAX_PER_PAGE} from '../../constants';
+import { MAX_PER_PAGE } from '../../constants';
+import { searchUsers, usersSelectors } from '../../stores/slices/usersReducer';
 
 const TabSearch = () => {
   const navigation: any = useNavigation();
@@ -38,10 +36,30 @@ const TabSearch = () => {
   const [refreshing, setRefreshing] = useState(false);
 
   const PhotosArr = useSelector(photosSelectors.photos);
+  const CollectionsArr = useSelector(collectionsSelectors.collections);
+  const UsersArr = useSelector(usersSelectors.searchUsers);
 
-  const onSearching = (value: string): any => {
+  const onSearching = useCallback(value => {
     setSearchText(value);
-  };
+    onSearchingDebounce(value);
+  }, []);
+
+  const onSearchingDebounce = useCallback(
+    debounce(async value => {
+      console.log('Search to API Here : ', value);
+      if (value && !isEmpty(value)) {
+        console.log('searchUsers');
+        await dispatch(
+          searchUsers({
+            query: value,
+            page: 1,
+            per_page: MAX_PER_PAGE,
+          }),
+        );
+      }
+    }, 600),
+    [],
+  );
 
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
@@ -79,30 +97,33 @@ const TabSearch = () => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerStyle: {shadowColor: 'transparent', elevation: 0},
-      headerLeft: null,
-      headerTitle: () => (
-        <View style={{width: Dimensions.get('window').width}}>
-          <SearchBar
-            platform="ios"
-            style={styles.searchBar}
-            containerStyle={styles.searchBarContainer}
-            inputContainerStyle={styles.searchBarInputContainer}
-            inputStyle={styles.searchBarInput}
-            cancelButtonProps={{
-              buttonTextStyle: styles.searchBarInput,
-            }}
-            placeholder="Search photos"
-            onChangeText={onSearching}
-            value={searchText}
-          />
-        </View>
-      ),
+      headerShown: false,
     });
   }, [navigation, searchText]);
 
+  const renderUsersSearch = () => {
+    if (UsersArr?.results && UsersArr.results.length) {
+      return (
+        <AppSearchUsers
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+          onPressImage={onPressImage}
+          UsersArr={UsersArr.results}
+        />
+      );
+    } else {
+      return (
+        <AppNoFiles
+          title="No results found"
+          subTitle="Try adjusting your search or filter to find what you're looking for"
+        />
+      );
+    }
+  };
+
   return (
     <SafeAreaView style={styles.SafeAreaView}>
+      <AppSearchHeaderBar onSearching={onSearching} value={searchText} />
       <AppSearchSegment activeIndex={activeTab} onChange={setActiveTab} />
       {activeTab === 0 && (
         <AppSearchPhotos
@@ -118,17 +139,10 @@ const TabSearch = () => {
           onRefresh={onRefresh}
           onPressImage={onPressCollectionImage}
           onPressTitle={onPressCollectionTitle}
-          CollectionsArr={CollectionsArr.results}
+          CollectionsArr={CollectionsArr}
         />
       )}
-      {activeTab === 2 && (
-        <AppSearchUsers
-          refreshing={refreshing}
-          onRefresh={onRefresh}
-          onPressImage={onPressImage}
-          UsersArr={UsersArr.results}
-        />
-      )}
+      {activeTab === 2 && renderUsersSearch()}
     </SafeAreaView>
   );
 };
@@ -138,29 +152,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.white,
   },
-  searchBarInputContainer: {
-    height: 30,
-    backgroundColor: COLORS.white,
-    borderWidth: 0.5,
-    borderColor: '#ddd',
-    borderBottomColor: '#ddd',
-    borderBottomWidth: 0.5,
-    padding: 0,
-  },
-  searchBarInput: {
-    fontSize: 14,
-  },
-  searchBarContainer: {
-    padding: 0,
-    marginStart: 8,
-    marginEnd: 8,
-    // backgroundColor: 'red',
-  },
-  searchBar: {
-    flex: 1,
-    paddingTop: StatusBar.currentHeight,
-  },
-  emptyView: {justifyContent: 'center', alignItems: 'center'},
+  emptyView: { justifyContent: 'center', alignItems: 'center' },
 });
 
 export default TabSearch;

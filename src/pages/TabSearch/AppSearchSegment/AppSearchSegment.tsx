@@ -1,17 +1,20 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {Tab} from 'react-native-elements';
-import {COLORS} from '../../../constants/Colors';
+import { View, Text, StyleSheet, Platform } from 'react-native';
+import { Tab } from 'react-native-elements';
+import { COLORS } from '../../../constants/Colors';
 
 interface Props {
   activeIndex?: number;
   onChange?: (value: number) => void;
 }
 
-const AppSearchSegment: React.FC<Props> = ({activeIndex, onChange}) => {
+const AppSearchSegment: React.FC<Props> = ({ activeIndex, onChange }) => {
   return (
     <View style={styles.SegmentToolbar}>
       <Tab
+        style={{
+          flex: 1,
+        }}
         indicatorStyle={styles.TabIndicatorStyle}
         value={activeIndex}
         onChange={onChange}>
@@ -47,13 +50,14 @@ const styles = StyleSheet.create({
   },
   TabStyle: {
     backgroundColor: COLORS.white,
+    // backgroundColor: 'red',
   },
   TabIndicatorStyle: {
     borderBottomWidth: 2,
     backgroundColor: COLORS.black,
   },
   TabItemStyle: {
-    height: 44,
+    height: Platform.OS === 'ios' ? 44 : 52,
     backgroundColor: COLORS.white,
     tintColor: '#999999',
   },

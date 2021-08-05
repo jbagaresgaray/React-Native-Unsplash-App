@@ -48,7 +48,7 @@ export const getPhoto = createAsyncThunk<IPhotoExtended, string>(
 );
 
 const {actions, reducer} = createSlice({
-  name: 'topics',
+  name: 'photos',
   initialState,
   reducers: {
     incrementPage: state => {

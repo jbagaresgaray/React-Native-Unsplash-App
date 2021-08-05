@@ -1,12 +1,16 @@
-import {createAsyncThunk, createSelector, createSlice} from '@reduxjs/toolkit';
-import {AxiosResponse} from 'axios';
-import {RootState} from '..';
-import {MAX_PER_PAGE} from '../../constants';
-import {ICollection} from '../../models/collection';
+import {
+  createAsyncThunk,
+  createSelector,
+  createSlice,
+} from '@reduxjs/toolkit';
+import { AxiosResponse } from 'axios';
+import { RootState } from '..';
+import { MAX_PER_PAGE } from '../../constants';
+import { ICollection } from '../../models/collection';
 import CollectionsService, {
   ListCollectionsParams,
 } from '../../services/api/collections';
-import {IPhoto} from './../../models/photo';
+import { IPhoto } from './../../models/photo';
 
 export type CollectionState = {
   isLoading: boolean;
@@ -29,7 +33,7 @@ const initialState: CollectionState = {
 export const fetchCollections = createAsyncThunk<
   ICollection[],
   ListCollectionsParams
->('collections/fetchCollections', async ({page, per_page}) => {
+>('collections/fetchCollections', async ({ page, per_page }) => {
   const response: AxiosResponse = await CollectionsService.listCollections({
     page,
     per_page,
@@ -37,8 +41,8 @@ export const fetchCollections = createAsyncThunk<
   return response.data;
 });
 
-const {actions, reducer} = createSlice({
-  name: 'topics',
+const { actions, reducer } = createSlice({
+  name: 'collections',
   initialState,
   reducers: {
     incrementPage: state => {
@@ -52,7 +56,7 @@ const {actions, reducer} = createSlice({
     builder.addCase(fetchCollections.pending, state => {
       state.isLoading = true;
     });
-    builder.addCase(fetchCollections.fulfilled, (state, {payload}) => {
+    builder.addCase(fetchCollections.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.collections = payload;
     });

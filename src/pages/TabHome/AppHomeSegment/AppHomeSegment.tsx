@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Platform} from 'react-native';
 import {Tab} from 'react-native-elements';
 import {COLORS} from '../../../constants/Colors';
 
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.black,
   },
   TabItemStyle: {
-    height: 44,
+    height: Platform.OS === 'ios' ? 44 : 52,
     backgroundColor: COLORS.white,
     tintColor: '#999999',
   },

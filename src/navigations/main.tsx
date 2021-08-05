@@ -3,7 +3,7 @@ import {
   createStackNavigator,
   StackNavigationOptions,
 } from '@react-navigation/stack';
-import {COLORS} from '../constants/Colors';
+import { COLORS } from '../constants/Colors';
 import TabHome from '../pages/TabHome/TabHome';
 import TabCollections from '../pages/TabCollections/TabCollections';
 import TabSearch from '../pages/TabSearch/TabSearch';
@@ -14,6 +14,7 @@ import ImageDetails from '../pages/ImageDetails/ImageDetails';
 import CollectionDetails from '../pages/CollectionDetails/CollectionDetails';
 import Topics from '../pages/Topics/Topics';
 import TopicDetail from '../pages/TopicDetail/TopicDetail';
+import { Platform } from 'react-native';
 
 const Stack = createStackNavigator<any>();
 

@@ -4,12 +4,14 @@ import Config from 'react-native-config';
 import Storage from '../../utils/storage';
 
 const API = axios.create({
-  baseURL: Config.REACT_API_URL,
+  baseURL: Config.REACT_API_URL || 'https://api.unsplash.com/',
   timeout: 30000,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    Authorization: `Client-ID ${Config.REACT_UNSPLASH_ACCESS_KEY}`,
+    Authorization:
+      // `Client-ID ${Config.REACT_UNSPLASH_ACCESS_KEY}` ||
+      `Client-ID nllcFdEQkChHOLqrK9iw4AxrC8Hv-N7L8_ada60RgsU`,
     'X-Ratelimit-Limit': 1000,
     'X-Ratelimit-Remaining': 999,
   },
@@ -31,7 +33,8 @@ API.interceptors.request.use(
     config.headers = {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Client-ID ${Config.REACT_UNSPLASH_ACCESS_KEY}`,
+      Authorization: `Client-ID nllcFdEQkChHOLqrK9iw4AxrC8Hv-N7L8_ada60RgsU`,
+      // Authorization: `Client-ID ${Config.REACT_UNSPLASH_ACCESS_KEY}`,
       'X-Ratelimit-Limit': 1000,
       'X-Ratelimit-Remaining': 999,
     };
