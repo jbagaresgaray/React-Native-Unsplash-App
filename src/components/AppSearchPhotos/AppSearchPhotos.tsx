@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   RefreshControl,
   Text,
@@ -11,16 +11,16 @@ import {
 } from 'react-native';
 // import MasonryList from '@react-native-seoul/masonry-list';
 import FastImage from 'react-native-fast-image';
-import {FlatGrid} from 'react-native-super-grid';
+import isEmpty from 'lodash/isEmpty';
 
 interface Props {
   refreshing: boolean;
   onRefresh?: () => void;
   onPressImage: () => void;
-  PhotosArr?: any[];
+  PhotosArr?: any[] | null;
 }
 
-const ImageCard: React.FC<{item: any; height: number; onPressImage: any}> = ({
+const ImageCard: React.FC<{ item: any; height: number; onPressImage: any }> = ({
   item,
   height,
   onPressImage,
@@ -32,7 +32,7 @@ const ImageCard: React.FC<{item: any; height: number; onPressImage: any}> = ({
       style={styles.ImageCardContainer}
       onPress={onPressImage}>
       <FastImage
-        source={{uri: item.uri}}
+        source={{ uri: item.uri }}
         style={{
           height: 120,
           width: 120,
@@ -55,7 +55,7 @@ const AppSearchPhotos: React.FC<Props> = ({
 
   useEffect(() => {
     let previewsArr: any = [];
-    if (PhotosArr) {
+    if (PhotosArr && !isEmpty(PhotosArr)) {
       previewsArr = PhotosArr?.map(item => {
         return {
           id: item?.id,
@@ -66,7 +66,7 @@ const AppSearchPhotos: React.FC<Props> = ({
     }
   }, []);
 
-  const renderItem = ({item}: any) => {
+  const renderItem = ({ item }: any) => {
     return (
       <ImageCard item={item} height={itemHeight} onPressImage={onPressImage} />
     );
@@ -78,7 +78,7 @@ const AppSearchPhotos: React.FC<Props> = ({
   };
 
   const getItemLayout = (_: any, index: number) => {
-    return {length: itemHeight, offset: itemHeight * index, index};
+    return { length: itemHeight, offset: itemHeight * index, index };
   };
 
   return (
@@ -111,7 +111,7 @@ const AppSearchPhotos: React.FC<Props> = ({
       <FlatList
         onLayout={onLayout}
         style={styles.list}
-        columnWrapperStyle={[styles.columnWrapper, {height: itemHeight}]}
+        columnWrapperStyle={[styles.columnWrapper, { height: itemHeight }]}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }

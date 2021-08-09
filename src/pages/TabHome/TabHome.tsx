@@ -1,5 +1,5 @@
-import {useNavigation} from '@react-navigation/core';
-import React, {useLayoutEffect, useState} from 'react';
+import { useNavigation } from '@react-navigation/core';
+import React, { useLayoutEffect, useState } from 'react';
 import {
   FlatList,
   StyleSheet,
@@ -13,9 +13,9 @@ import AppHomeCategoriesHeader from './AppHomeCategoriesHeader/AppHomeCategories
 import AppHomeSegment from './AppHomeSegment/AppHomeSegment';
 import AppCardItem from '../../components/AppCardItem/AppCardItem';
 
-import {COLORS} from '../../constants/Colors';
-import {useSelector} from 'react-redux';
-import {useAppDispatch} from '../../stores';
+import { COLORS } from '../../constants/Colors';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from '../../stores';
 import {
   fetchListTopics,
   topicsSelectors,
@@ -24,7 +24,7 @@ import {
   fetchListPhotos,
   photosSelectors,
 } from '../../stores/slices/photosSlice';
-import {MAX_PER_PAGE} from '../../constants';
+import { MAX_PER_PAGE } from '../../constants';
 
 const TabHome = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -61,8 +61,10 @@ const TabHome = () => {
     });
   }, [navigation]);
 
-  const onUserPress = () => {
-    navigation.navigate('UserProfile');
+  const onUserPress = (username: string) => {
+    navigation.navigate('UserProfile', {
+      username,
+    });
   };
 
   const onImagePress = (id: string) => {
@@ -81,17 +83,17 @@ const TabHome = () => {
     });
   };
 
-  const renderItem = ({item}: any) => (
+  const renderItem = ({ item }: any) => (
     <AppCardItem
       item={item}
-      onUserPress={onUserPress}
+      onUserPress={() => onUserPress(item?.user?.username)}
       onImagePress={() => onImagePress(item.id)}
     />
   );
 
   const renderEditorial = () => (
     <FlatList
-      contentContainerStyle={{paddingBottom: 20}}
+      contentContainerStyle={{ paddingBottom: 20 }}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
@@ -131,6 +133,6 @@ const styles = StyleSheet.create({
     position: 'relative',
     flex: 1,
   },
-  emptyView: {justifyContent: 'center', alignItems: 'center'},
+  emptyView: { justifyContent: 'center', alignItems: 'center' },
 });
 export default TabHome;

@@ -1,23 +1,20 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
-import {Avatar, ListItem} from 'react-native-elements';
+import { View, StyleSheet } from 'react-native';
+import { Avatar, ListItem } from 'react-native-elements';
 import AppTag from '../../../components/AppTag/AppTag';
+import { IProfileImage, ITag, ITags } from '../../../models/generic';
 import AppUserProfileFollowerFollowing from '../AppUserProfileFollowerFollowing/AppUserProfileFollowerFollowing';
 import AppUserProfileFollowMessage from '../AppUserProfileFollowMessage/AppUserProfileFollowMessage';
 
 interface Props {
-  name: string;
-  username: string;
-  bio: string;
-  location: string;
-  tags: [];
-  followers_count: number;
-  following_count: number;
-  profile_image: {
-    small: string;
-    medium: string;
-    large: string;
-  };
+  name?: string;
+  username?: string;
+  bio?: string;
+  location?: string;
+  tags?: ITag[];
+  followers_count?: number;
+  following_count?: number;
+  profile_image?: IProfileImage;
 }
 
 const AppUserProfileDetail: React.FC<Props> = ({

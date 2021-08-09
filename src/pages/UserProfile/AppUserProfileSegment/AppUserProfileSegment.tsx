@@ -1,14 +1,14 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {Tab} from 'react-native-elements';
-import {COLORS} from '../../../constants/Colors';
+import { View, Text, StyleSheet } from 'react-native';
+import { Tab } from 'react-native-elements';
+import { COLORS } from '../../../constants/Colors';
 
 interface Props {
   activeIndex?: number;
   onChange?: (value: number) => void;
-  total_collections: number;
-  total_likes: number;
-  total_photos: number;
+  total_collections?: number;
+  total_likes?: number;
+  total_photos?: number;
 }
 
 const AppUserProfileSegment: React.FC<Props> = ({

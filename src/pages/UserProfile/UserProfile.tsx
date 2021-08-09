@@ -1,28 +1,45 @@
-import React, {useState, useLayoutEffect} from 'react';
-import {View, ScrollView, SafeAreaView, StyleSheet} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {Button, Icon} from 'react-native-elements';
+import React, { useState, useLayoutEffect, useEffect } from 'react';
+import { View, ScrollView, SafeAreaView, StyleSheet } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { Button, Icon } from 'react-native-elements';
 
-import {COLORS} from '../../constants/Colors';
+import { COLORS } from '../../constants/Colors';
 
 import AppUserProfileSegment from './AppUserProfileSegment/AppUserProfileSegment';
 import AppUserProfileDetail from './AppUserProfileDetail/AppUserProfileDetail';
 import AppSearchPhotos from '../../components/AppSearchPhotos/AppSearchPhotos';
 import AppSearchCollections from '../../components/AppSearchCollections/AppSearchCollections';
 
-import userProfile from '../../services/fake/user/profile.json';
-import PhotosArr from '../../services/fake/user/photos.json';
-import LikesArr from '../../services/fake/user/likes.json';
+import { useAppDispatch } from '../../stores';
+import {
+  getUserLikedPhotos,
+  getUserPhotos,
+  getUserPublicProfile,
+  usersSelectors,
+} from '../../stores/slices/usersSlice';
+import { useSelector } from 'react-redux';
+
 import CollectionsArr from '../../services/fake/user/collections.json';
+import { MAX_PER_PAGE } from '../../constants';
 
 const UserProfile = () => {
   const navigation: any = useNavigation();
+  const { params }: any = useRoute();
   const [activeTab, setActiveTab] = useState(0);
+  const [currentPhotoPage, setCurrentPhotoPage] = useState(1);
+  const [currentLikedPhotoPage, setCurrentLikedPhotoPage] = useState(1);
   const [refreshing, setRefreshing] = useState(false);
+  const [headerTitle, setHeaderTitle] = useState<string | null | undefined>('');
+  const [userId, setUserId] = useState<string>('');
+
+  const dispatch = useAppDispatch();
+  const userProfile = useSelector(usersSelectors.publicUser);
+  const PhotosArr = useSelector(usersSelectors.publicUserPhotos);
+  const LikesArr = useSelector(usersSelectors.publicUserLikedPhotos);
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerTitle: userProfile.name,
+      headerTitle,
       headerRight: () => (
         <Button
           type="clear"
@@ -34,27 +51,71 @@ const UserProfile = () => {
     });
   }, [navigation, userProfile]);
 
-  const wait = (timeout: number) => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
+  useEffect(() => {
+    if (params && params.username) {
+      setUserId(params.username);
+      initProfile(params.username);
+    }
+  }, [params]);
+
+  const initProfile = async (username: string, isRefreshing = false) => {
+    await dispatch(getUserPublicProfile(username));
+
+    dispatch(
+      getUserPhotos({
+        username,
+        params: {
+          page: currentPhotoPage,
+          per_page: MAX_PER_PAGE,
+          order_by: 'latest',
+        },
+      }),
+    );
+
+    dispatch(
+      getUserLikedPhotos({
+        username,
+        params: {
+          page: currentLikedPhotoPage,
+          per_page: MAX_PER_PAGE,
+          order_by: 'latest',
+        },
+      }),
+    );
+
+    setHeaderTitle(userProfile?.name);
+    console.log('userProfile: ', userProfile);
+    if (isRefreshing) {
+      setRefreshing(false);
+    }
   };
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-    wait(2000).then(() => setRefreshing(false));
+
+    initProfile(userId, true);
   }, []);
 
   const onPressImage = () => {};
 
+  const onCollectionPressImage = () => {
+    navigation.navigate('CollectionDetails');
+  };
+
+  const onCollectionPressTitle = () => {
+    navigation.navigate('CollectionDetails');
+  };
+
   const getProfileProps = () => {
     return {
-      name: userProfile.name,
-      username: userProfile.username,
-      bio: userProfile.bio,
-      location: userProfile.location,
-      tags: userProfile.tags.custom,
-      followers_count: userProfile.followers_count,
-      following_count: userProfile.following_count,
-      profile_image: userProfile.profile_image,
+      name: userProfile?.name,
+      username: userProfile?.username,
+      bio: userProfile?.bio,
+      location: userProfile?.location,
+      tags: userProfile?.tags?.custom,
+      followers_count: userProfile?.followers_count,
+      following_count: userProfile?.following_count,
+      profile_image: userProfile?.profile_image,
     };
   };
 
@@ -62,9 +123,9 @@ const UserProfile = () => {
     <SafeAreaView style={styles.SafeAreaView}>
       <AppUserProfileDetail {...getProfileProps()} />
       <AppUserProfileSegment
-        total_collections={userProfile.total_collections}
-        total_likes={userProfile.total_likes}
-        total_photos={userProfile.total_photos}
+        total_collections={userProfile?.total_collections}
+        total_likes={userProfile?.total_likes}
+        total_photos={userProfile?.total_photos}
         activeIndex={activeTab}
         onChange={setActiveTab}
       />
@@ -88,8 +149,9 @@ const UserProfile = () => {
         <AppSearchCollections
           refreshing={refreshing}
           onRefresh={onRefresh}
-          onPressImage={onPressImage}
+          onPressImage={onCollectionPressImage}
           CollectionsArr={CollectionsArr}
+          onPressTitle={onCollectionPressTitle}
         />
       )}
     </SafeAreaView>
@@ -101,7 +163,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.white,
   },
-  emptyView: {justifyContent: 'center', alignItems: 'center'},
+  emptyView: { justifyContent: 'center', alignItems: 'center' },
 });
 
 export default UserProfile;

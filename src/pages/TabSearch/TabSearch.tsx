@@ -24,9 +24,9 @@ import {
 } from '../../stores/slices/photosSlice';
 import { collectionsSelectors } from '../../stores/slices/collectionsSlice';
 import { useAppDispatch } from '../../stores';
-
+import { searchSelectors } from '../../stores/slices/searchReducer';
 import { MAX_PER_PAGE } from '../../constants';
-import { searchUsers, usersSelectors } from '../../stores/slices/usersReducer';
+
 
 const TabSearch = () => {
   const navigation: any = useNavigation();
@@ -37,7 +37,7 @@ const TabSearch = () => {
 
   const PhotosArr = useSelector(photosSelectors.photos);
   const CollectionsArr = useSelector(collectionsSelectors.collections);
-  const UsersArr = useSelector(usersSelectors.searchUsers);
+  const UsersArr = useSelector(searchSelectors.searchUsers);
 
   const onSearching = useCallback(value => {
     setSearchText(value);

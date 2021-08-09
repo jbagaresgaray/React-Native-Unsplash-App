@@ -1,9 +1,9 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 interface Props {
-  followers_count: number;
-  following_count: number;
+  followers_count?: number;
+  following_count?: number;
 }
 
 const AppUserProfileFollowerFollowing: React.FC<Props> = ({

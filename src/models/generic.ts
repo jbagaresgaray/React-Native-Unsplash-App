@@ -77,8 +77,8 @@ export interface ITag {
 }
 
 export interface ITags {
-  custom: ITag;
-  aggregated: ITag;
+  custom: ITag[];
+  aggregated: ITag[];
 }
 
 export interface IExif {
