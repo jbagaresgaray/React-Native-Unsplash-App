@@ -12,7 +12,7 @@ interface Props {
   onRefresh?: () => void;
   onPressImage: () => void;
   onPressTitle: () => void;
-  CollectionsArr?: any[];
+  CollectionsArr?: any[] | null;
 }
 
 const AppSearchCollections: React.FC<Props> = ({
@@ -22,7 +22,7 @@ const AppSearchCollections: React.FC<Props> = ({
   onPressTitle,
   CollectionsArr,
 }) => {
-  const renderItem = ({item}: any) => (
+  const renderItem = ({ item }: any) => (
     <AppCollectionItem
       item={item}
       onPressImage={onPressImage}
@@ -35,7 +35,7 @@ const AppSearchCollections: React.FC<Props> = ({
       style={styles.keyboardAvoidingViewContainer}
       behavior="height">
       <FlatList
-        contentContainerStyle={{paddingBottom: 20}}
+        contentContainerStyle={{ paddingBottom: 20 }}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }

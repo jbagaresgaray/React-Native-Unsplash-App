@@ -19,6 +19,7 @@ export type UsersState = {
   publicUser: IUserProfile | null;
   publicUserPhotos: IPhoto[] | null;
   publicUserLikedPhotos: IPhoto[] | null;
+  publicUserCollectionPhotos: IPhoto[] | null;
   page: number;
   per_page: number;
   error: any | null;
@@ -30,6 +31,7 @@ const initialState: UsersState = {
   publicUser: null,
   publicUserPhotos: null,
   publicUserLikedPhotos: null,
+  publicUserCollectionPhotos: null,
   page: 1,
   per_page: MAX_PER_PAGE,
   error: null,
@@ -67,6 +69,17 @@ export const getUserLikedPhotos = createAsyncThunk<
   return response.data;
 });
 
+export const getUserCollections = createAsyncThunk<
+  IPhoto[],
+  { username: string; params: UserLikedPhotosParams }
+>('users/getUserCollections', async ({ username, params }) => {
+  const response: AxiosResponse = await UsersService.getUserCollections(
+    username,
+    params,
+  );
+  return response.data;
+});
+
 const { actions, reducer } = createSlice({
   name: 'users',
   initialState,
@@ -79,6 +92,9 @@ const { actions, reducer } = createSlice({
     },
   },
   extraReducers(builder) {
+    // ==========================================================================
+    // ==========================================================================
+    // ==========================================================================
     builder.addCase(getUserPublicProfile.pending, state => {
       state.isLoadingUser = true;
     });
@@ -90,6 +106,9 @@ const { actions, reducer } = createSlice({
       state.isLoadingUser = false;
       state.error = action.error;
     });
+    // ==========================================================================
+    // ==========================================================================
+    // ==========================================================================
     builder.addCase(getUserPhotos.pending, state => {
       state.isLoadingUserPhotos = true;
     });
@@ -101,6 +120,9 @@ const { actions, reducer } = createSlice({
       state.isLoadingUserPhotos = false;
       state.error = action.error;
     });
+    // ==========================================================================
+    // ==========================================================================
+    // ==========================================================================
     builder.addCase(getUserLikedPhotos.pending, state => {
       state.isLoadingUserPhotos = true;
     });
@@ -109,6 +131,20 @@ const { actions, reducer } = createSlice({
       state.publicUserLikedPhotos = payload;
     });
     builder.addCase(getUserLikedPhotos.rejected, (state, action) => {
+      state.isLoadingUserPhotos = false;
+      state.error = action.error;
+    });
+    // ==========================================================================
+    // ==========================================================================
+    // ==========================================================================
+    builder.addCase(getUserCollections.pending, state => {
+      state.isLoadingUserPhotos = true;
+    });
+    builder.addCase(getUserCollections.fulfilled, (state, { payload }) => {
+      state.isLoadingUserPhotos = false;
+      state.publicUserCollectionPhotos = payload;
+    });
+    builder.addCase(getUserCollections.rejected, (state, action) => {
       state.isLoadingUserPhotos = false;
       state.error = action.error;
     });
@@ -123,6 +159,10 @@ export const usersSelectors = {
     selectRoot,
     state => state.publicUserLikedPhotos,
   ),
+  publicUserCollectionPhotos: createSelector(
+    selectRoot,
+    state => state.publicUserCollectionPhotos,
+  ),
   isLoadingUser: createSelector(selectRoot, state => state.isLoadingUser),
   isLoadingUserPhotos: createSelector(
     selectRoot,
@@ -135,5 +175,6 @@ export const usersActions = {
   getUserPublicProfile,
   getUserPhotos,
   getUserLikedPhotos,
+  getUserCollections,
 };
 export const usersReducer = reducer;

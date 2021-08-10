@@ -12,6 +12,7 @@ import AppSearchCollections from '../../components/AppSearchCollections/AppSearc
 
 import { useAppDispatch } from '../../stores';
 import {
+  getUserCollections,
   getUserLikedPhotos,
   getUserPhotos,
   getUserPublicProfile,
@@ -19,7 +20,6 @@ import {
 } from '../../stores/slices/usersSlice';
 import { useSelector } from 'react-redux';
 
-import CollectionsArr from '../../services/fake/user/collections.json';
 import { MAX_PER_PAGE } from '../../constants';
 
 const UserProfile = () => {
@@ -36,6 +36,7 @@ const UserProfile = () => {
   const userProfile = useSelector(usersSelectors.publicUser);
   const PhotosArr = useSelector(usersSelectors.publicUserPhotos);
   const LikesArr = useSelector(usersSelectors.publicUserLikedPhotos);
+  const CollectionsArr = useSelector(usersSelectors.publicUserCollectionPhotos);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -79,6 +80,16 @@ const UserProfile = () => {
           page: currentLikedPhotoPage,
           per_page: MAX_PER_PAGE,
           order_by: 'latest',
+        },
+      }),
+    );
+
+    dispatch(
+      getUserCollections({
+        username,
+        params: {
+          page: currentLikedPhotoPage,
+          per_page: MAX_PER_PAGE,
         },
       }),
     );
