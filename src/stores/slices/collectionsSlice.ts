@@ -1,21 +1,22 @@
-import {
-  createAsyncThunk,
-  createSelector,
-  createSlice,
-} from '@reduxjs/toolkit';
-import { AxiosResponse } from 'axios';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '..';
 import { MAX_PER_PAGE } from '../../constants';
 import { ICollection } from '../../models/collection';
-import CollectionsService, {
-  ListCollectionsParams,
-} from '../../services/api/collections';
+import {
+  fetchCollections,
+  getCollection,
+  getCollectionPhotos,
+  getRelatedCollection,
+} from '../middleware/collection';
+
 import { IPhoto } from './../../models/photo';
 
 export type CollectionState = {
   isLoading: boolean;
+  collection: ICollection | null;
   collections: ICollection[];
   collectionPhotos: IPhoto[];
+  collectionRelated: ICollection[];
   page: number;
   per_page: number;
   error: any | null;
@@ -23,23 +24,14 @@ export type CollectionState = {
 
 const initialState: CollectionState = {
   isLoading: false,
+  collection: null,
   collections: [],
   collectionPhotos: [],
+  collectionRelated: [],
   page: 1,
   per_page: MAX_PER_PAGE,
   error: null,
 };
-
-export const fetchCollections = createAsyncThunk<
-  ICollection[],
-  ListCollectionsParams
->('collections/fetchCollections', async ({ page, per_page }) => {
-  const response: AxiosResponse = await CollectionsService.listCollections({
-    page,
-    per_page,
-  });
-  return response.data;
-});
 
 const { actions, reducer } = createSlice({
   name: 'collections',
@@ -64,17 +56,68 @@ const { actions, reducer } = createSlice({
       state.isLoading = false;
       state.error = action.error;
     });
+    // ======================================================
+    // ======================================================
+    // ======================================================
+    builder.addCase(getCollection.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(getCollection.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.collection = payload;
+    });
+    builder.addCase(getCollection.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error;
+    });
+    // ======================================================
+    // ======================================================
+    // ======================================================
+    builder.addCase(getCollectionPhotos.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(getCollectionPhotos.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.collectionPhotos = payload;
+    });
+    builder.addCase(getCollectionPhotos.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error;
+    });
+    // ======================================================
+    // ======================================================
+    // ======================================================
+    builder.addCase(getRelatedCollection.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(getRelatedCollection.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.collectionRelated = payload;
+    });
+    builder.addCase(getRelatedCollection.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error;
+    });
   },
 });
 
 const selectRoot = (state: RootState) => state.collections;
 export const collectionsSelectors = {
+  collection: createSelector(selectRoot, state => state.collection),
   collections: createSelector(selectRoot, state => state.collections),
+  collectionPhotos: createSelector(selectRoot, state => state.collectionPhotos),
+  collectionRelated: createSelector(
+    selectRoot,
+    state => state.collectionRelated,
+  ),
   isLoading: createSelector(selectRoot, state => state.isLoading),
 };
 
 export const collectionsActions = {
   ...actions,
   fetchCollections,
+  getCollection,
+  getRelatedCollection,
+  getCollectionPhotos,
 };
 export const collectionsReducer = reducer;

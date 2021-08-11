@@ -1,13 +1,19 @@
-import {useNavigation, useRoute} from '@react-navigation/native';
-import React, {useState, useLayoutEffect, createRef, useCallback} from 'react';
-import {useEffect} from 'react';
-import {View, Text, SafeAreaView, StyleSheet, Dimensions} from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import React, {
+  useState,
+  useLayoutEffect,
+  createRef,
+  useCallback,
+} from 'react';
+import { useEffect } from 'react';
+import { View, Text, SafeAreaView, StyleSheet, Dimensions } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {useSelector} from 'react-redux';
-import {COLORS} from '../../constants/Colors';
+import { useSelector } from 'react-redux';
+import { COLORS } from '../../constants/Colors';
 
-import {useAppDispatch} from '../../stores';
-import {getPhoto, photosSelectors} from '../../stores/slices/photosSlice';
+import { useAppDispatch } from '../../stores';
+import { getPhoto } from '../../stores/middleware/photos';
+import { photosSelectors } from '../../stores/slices/photosSlice';
 import ImageUserModal from '../ImageUserModal/ImageUserModal';
 import AppUserProfileItem from '../UserProfile/AppUserProfileItem/AppUserProfileItem';
 
@@ -16,7 +22,7 @@ const ImageDetails: React.FC = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [photoId, setPhotoId] = useState('');
   const navigation: any = useNavigation();
-  const {params}: any = useRoute();
+  const { params }: any = useRoute();
   const dispatch = useAppDispatch();
 
   const image = useSelector(photosSelectors.photo);
@@ -48,7 +54,10 @@ const ImageDetails: React.FC = () => {
     <SafeAreaView style={styles.SafeAreaView}>
       <FastImage
         style={styles.bgImage}
-        source={{uri: image?.urls?.regular, priority: FastImage.priority.high}}
+        source={{
+          uri: image?.urls?.regular,
+          priority: FastImage.priority.high,
+        }}
         resizeMode={FastImage.resizeMode.cover}
       />
       <View style={styles.footerView}>
@@ -77,7 +86,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     position: 'relative',
   },
-  emptyView: {justifyContent: 'center', alignItems: 'center'},
+  emptyView: { justifyContent: 'center', alignItems: 'center' },
   bgImage: {
     // height: Dimensions.get('window').height,
     // width: Dimensions.get('window').width,

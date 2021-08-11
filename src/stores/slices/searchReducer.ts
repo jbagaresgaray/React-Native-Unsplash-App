@@ -1,10 +1,4 @@
-import SearchService, { BasicSearchParams } from '../../services/api/search';
-import {
-  createAsyncThunk,
-  createSelector,
-  createSlice,
-} from '@reduxjs/toolkit';
-import { AxiosResponse } from 'axios';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '..';
 import { MAX_PER_PAGE } from '../../constants';
 import {
@@ -12,6 +6,7 @@ import {
   ISearchPhotos,
   ISearchUsers,
 } from '../../models/generic';
+import { searchUsersQry, searchCollectionsQry } from '../middleware/search';
 
 export type SearchState = {
   isLoading: boolean;
@@ -32,31 +27,6 @@ const initialState: SearchState = {
   per_page: MAX_PER_PAGE,
   error: null,
 };
-
-export const searchUsersQry = createAsyncThunk<ISearchUsers, BasicSearchParams>(
-  'search/searchUsers',
-  async ({ query, page, per_page }) => {
-    const response: AxiosResponse = await SearchService.searchUsers({
-      query,
-      page,
-      per_page,
-    });
-    return response.data;
-  },
-);
-
-export const searchCollectionsQry = createAsyncThunk<ISearchCollections, BasicSearchParams>(
-    'search/searchCollections',
-    async ({ query, page, per_page }) => {
-      const response: AxiosResponse = await SearchService.searchCollections({
-        query,
-        page,
-        per_page,
-      });
-      return response.data;
-    },
-  );
-  
 
 const { actions, reducer } = createSlice({
   name: 'users',
@@ -81,18 +51,36 @@ const { actions, reducer } = createSlice({
       state.isLoading = false;
       state.error = action.error;
     });
+    // ===================================================
+    // ===================================================
+    // ===================================================
+    builder.addCase(searchCollectionsQry.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(searchCollectionsQry.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      state.searchCollections = payload;
+    });
+    builder.addCase(searchCollectionsQry.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error;
+    });
   },
 });
 
 const selectRoot = (state: RootState) => state.search;
 export const searchSelectors = {
   searchUsers: createSelector(selectRoot, state => state.searchUsers),
-  searchCollections: createSelector(selectRoot, state => state.searchCollections),
+  searchCollections: createSelector(
+    selectRoot,
+    state => state.searchCollections,
+  ),
   isLoading: createSelector(selectRoot, state => state.isLoading),
 };
 
 export const searchActions = {
   ...actions,
   searchUsersQry,
+  searchCollectionsQry,
 };
 export const searchReducer = reducer;

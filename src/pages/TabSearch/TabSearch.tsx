@@ -18,15 +18,13 @@ import AppSearchUsers from '../../components/AppSearchUsers/AppSearchUsers';
 import AppNoFiles from '../../components/AppNoFiles/AppNoFiles';
 import AppSearchHeaderBar from '../../components/AppSearchHeaderBar/AppSearchHeaderBar';
 
-import {
-  fetchListPhotos,
-  photosSelectors,
-} from '../../stores/slices/photosSlice';
+import { photosSelectors } from '../../stores/slices/photosSlice';
 import { collectionsSelectors } from '../../stores/slices/collectionsSlice';
 import { useAppDispatch } from '../../stores';
 import { searchSelectors } from '../../stores/slices/searchReducer';
 import { MAX_PER_PAGE } from '../../constants';
-
+import { fetchListPhotos } from '../../stores/middleware/photos';
+import { searchUsersQry } from '../../stores/middleware/search';
 
 const TabSearch = () => {
   const navigation: any = useNavigation();
@@ -50,7 +48,7 @@ const TabSearch = () => {
       if (value && !isEmpty(value)) {
         console.log('searchUsers');
         await dispatch(
-          searchUsers({
+          searchUsersQry({
             query: value,
             page: 1,
             per_page: MAX_PER_PAGE,

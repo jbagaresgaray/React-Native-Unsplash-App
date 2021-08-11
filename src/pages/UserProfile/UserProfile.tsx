@@ -11,16 +11,16 @@ import AppSearchPhotos from '../../components/AppSearchPhotos/AppSearchPhotos';
 import AppSearchCollections from '../../components/AppSearchCollections/AppSearchCollections';
 
 import { useAppDispatch } from '../../stores';
+import { usersSelectors } from '../../stores/slices/usersSlice';
+import { useSelector } from 'react-redux';
+
+import { MAX_PER_PAGE } from '../../constants';
 import {
   getUserCollections,
   getUserLikedPhotos,
   getUserPhotos,
   getUserPublicProfile,
-  usersSelectors,
-} from '../../stores/slices/usersSlice';
-import { useSelector } from 'react-redux';
-
-import { MAX_PER_PAGE } from '../../constants';
+} from '../../stores/middleware/users';
 
 const UserProfile = () => {
   const navigation: any = useNavigation();

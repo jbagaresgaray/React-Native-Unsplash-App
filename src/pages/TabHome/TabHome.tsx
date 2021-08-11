@@ -16,15 +16,11 @@ import AppCardItem from '../../components/AppCardItem/AppCardItem';
 import { COLORS } from '../../constants/Colors';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../stores';
-import {
-  fetchListTopics,
-  topicsSelectors,
-} from '../../stores/slices/topicsSlice';
-import {
-  fetchListPhotos,
-  photosSelectors,
-} from '../../stores/slices/photosSlice';
+import { topicsSelectors } from '../../stores/slices/topicsSlice';
+import { photosSelectors } from '../../stores/slices/photosSlice';
 import { MAX_PER_PAGE } from '../../constants';
+import { fetchListTopics } from '../../stores/middleware/topic';
+import { fetchListPhotos } from '../../stores/middleware/photos';
 
 const TabHome = () => {
   const [activeTab, setActiveTab] = useState(0);

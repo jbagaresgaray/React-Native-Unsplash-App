@@ -1,4 +1,4 @@
-import React, {useLayoutEffect, useState} from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import {
   FlatList,
   StyleSheet,
@@ -7,23 +7,21 @@ import {
   KeyboardAvoidingView,
   RefreshControl,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {useDispatch, useSelector} from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
 
-import {COLORS} from '../../constants/Colors';
+import { COLORS } from '../../constants/Colors';
 import AppCollectionsHeader from './AppCollectionsHeader/AppCollectionsHeader';
 import AppCollectionItem from '../../components/AppCollectionItem/AppCollectionItem';
 
-import {
-  collectionsSelectors,
-  fetchCollections,
-} from '../../stores/slices/collectionsSlice';
-import {MAX_PER_PAGE} from '../../constants';
+import { collectionsSelectors } from '../../stores/slices/collectionsSlice';
+import { MAX_PER_PAGE } from '../../constants';
+import { fetchCollections } from '../../stores/middleware/collection';
 
 const TabCollections = () => {
   const [refreshing, setRefreshing] = useState(false);
   const navigation: any = useNavigation();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); 
   const CollectionsArr = useSelector(collectionsSelectors.collections);
 
   useLayoutEffect(() => {
@@ -43,19 +41,23 @@ const TabCollections = () => {
     setRefreshing(false);
   }, []);
 
-  const onPressImage = () => {
-    navigation.navigate('CollectionDetails');
+  const onPressImage = (id: string) => {
+    navigation.navigate('CollectionDetails', {
+      id,
+    });
   };
 
-  const onPressTitle = () => {
-    navigation.navigate('CollectionDetails');
+  const onPressTitle = (id: string) => {
+    navigation.navigate('CollectionDetails', {
+      id,
+    });
   };
 
-  const renderItem = ({item}: any) => (
+  const renderItem = ({ item }: any) => (
     <AppCollectionItem
       item={item}
-      onPressImage={onPressImage}
-      onPressTitle={onPressTitle}
+      onPressImage={() => onPressImage(item.id)}
+      onPressTitle={() => onPressTitle(item.id)}
     />
   );
 
@@ -67,7 +69,7 @@ const TabCollections = () => {
           style={styles.keyboardAvoidingViewContainer}
           behavior="height">
           <FlatList
-            contentContainerStyle={{paddingBottom: 20}}
+            contentContainerStyle={{ paddingBottom: 20 }}
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }
@@ -91,7 +93,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     flex: 1,
   },
-  emptyView: {justifyContent: 'center', alignItems: 'center'},
+  emptyView: { justifyContent: 'center', alignItems: 'center' },
 });
 
 export default TabCollections;

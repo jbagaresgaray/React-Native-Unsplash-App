@@ -26,7 +26,7 @@ const CollectionsService = {
       params,
     });
   },
-  getCollectionRelatedCollection(id: string) {
+  getRelatedCollection(id: string) {
     return API.get(`/collections/${id}/related`);
   },
 };

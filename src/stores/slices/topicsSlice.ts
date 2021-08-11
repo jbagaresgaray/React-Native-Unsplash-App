@@ -1,13 +1,9 @@
-import {ITopic} from '../../models/topic';
-import {createAsyncThunk, createSelector, createSlice} from '@reduxjs/toolkit';
-import {MAX_PER_PAGE, ORDER_BY_TYPES} from '../../constants';
-import {RootState} from '..';
-import TopicsService, {
-  ListTopicsParams,
-  TopicPhotosParams,
-} from '../../services/api/topics';
-import {AxiosResponse} from 'axios';
-import {IPhoto} from '../../models/photo';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
+import { MAX_PER_PAGE, ORDER_BY_TYPES } from '../../constants';
+import { ITopic } from '../../models/topic';
+import { IPhoto } from '../../models/photo';
+import { fetchListTopics, getTopic, getTopicPhotos } from '../middleware/topic';
+import { RootState } from '..';
 
 export type TopicsState = {
   isLoading: boolean;
@@ -31,39 +27,7 @@ const initialState: TopicsState = {
   error: null,
 };
 
-export const fetchListTopics = createAsyncThunk<ITopic[], ListTopicsParams>(
-  'topics/fetchTopics',
-  async ({ids, page, per_page, order_by}) => {
-    const response: AxiosResponse = await TopicsService.listTopics({
-      ids,
-      page,
-      per_page,
-      order_by,
-    });
-    return response.data;
-  },
-);
-
-export const getTopic = createAsyncThunk<ITopic, string>(
-  'topics/getTopic',
-  async (id_or_slug: string) => {
-    const response: AxiosResponse = await TopicsService.getTopic(id_or_slug);
-    return response.data;
-  },
-);
-
-export const getTopicPhotos = createAsyncThunk<
-  IPhoto[],
-  {id_or_slug: string; params: TopicPhotosParams}
->('topics/getTopicPhotos', async ({id_or_slug, params}) => {
-  const response: AxiosResponse = await TopicsService.getTopicPhotos(
-    id_or_slug,
-    params,
-  );
-  return response.data;
-});
-
-const {actions, reducer} = createSlice({
+const { actions, reducer } = createSlice({
   name: 'topics',
   initialState,
   reducers: {
@@ -78,7 +42,7 @@ const {actions, reducer} = createSlice({
     builder.addCase(fetchListTopics.pending, state => {
       state.isLoading = true;
     });
-    builder.addCase(fetchListTopics.fulfilled, (state, {payload}) => {
+    builder.addCase(fetchListTopics.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       // state.topics = state.topics.concat(payload);
       state.topics = payload;
@@ -95,7 +59,7 @@ const {actions, reducer} = createSlice({
     builder.addCase(getTopic.pending, state => {
       state.isLoading = true;
     });
-    builder.addCase(getTopic.fulfilled, (state, {payload}) => {
+    builder.addCase(getTopic.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.topic = payload;
     });
@@ -111,7 +75,7 @@ const {actions, reducer} = createSlice({
     builder.addCase(getTopicPhotos.pending, state => {
       state.isLoading = true;
     });
-    builder.addCase(getTopicPhotos.fulfilled, (state, {payload}) => {
+    builder.addCase(getTopicPhotos.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.topicPhotos = payload;
     });
@@ -133,5 +97,7 @@ export const topicsSelectors = {
 export const topicsActions = {
   ...actions,
   fetchListTopics,
+  getTopic,
+  getTopicPhotos,
 };
 export const topicsReducer = reducer;

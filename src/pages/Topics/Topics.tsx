@@ -1,5 +1,5 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -10,16 +10,14 @@ import {
   FlatList,
   RefreshControl,
 } from 'react-native';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import AppCardTopic from '../../components/AppCardTopic/AppCardTopic';
-import {MAX_PER_PAGE} from '../../constants';
-import {COLORS} from '../../constants/Colors';
+import { MAX_PER_PAGE } from '../../constants';
+import { COLORS } from '../../constants/Colors';
 
-import {useAppDispatch} from '../../stores';
-import {
-  fetchListTopics,
-  topicsSelectors,
-} from '../../stores/slices/topicsSlice';
+import { useAppDispatch } from '../../stores';
+import { fetchListTopics } from '../../stores/middleware/topic';
+import { topicsSelectors } from '../../stores/slices/topicsSlice';
 
 const Topics = () => {
   const navigation = useNavigation();
@@ -50,7 +48,7 @@ const Topics = () => {
     navigation.navigate('UserProfile');
   };
 
-  const renderItem = ({item}: any) => (
+  const renderItem = ({ item }: any) => (
     <AppCardTopic
       title={item.title}
       description={item.description}
@@ -71,7 +69,7 @@ const Topics = () => {
           style={styles.keyboardAvoidingViewContainer}
           behavior="height">
           <FlatList
-            contentContainerStyle={{paddingBottom: 20}}
+            contentContainerStyle={{ paddingBottom: 20 }}
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }
@@ -94,7 +92,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     flex: 1,
   },
-  emptyView: {justifyContent: 'center', alignItems: 'center'},
+  emptyView: { justifyContent: 'center', alignItems: 'center' },
 });
 
 export default Topics;

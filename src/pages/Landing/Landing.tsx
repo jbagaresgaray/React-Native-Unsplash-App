@@ -1,6 +1,6 @@
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 import {
   ImageBackground,
   SafeAreaView,
@@ -10,20 +10,22 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import landingImg from '../../assets/img/landing-unsplash.jpg';
 import AppButton from '../../components/AppButton/AppButton';
 import AppFacebookButton from '../../components/AppFacebookButton/AppFacebookButton';
 import AppHeaderLogo from '../../components/AppHeaderLogo/AppHeaderLogo';
 
-import {MAX_PER_PAGE} from '../../constants';
-import {COLORS} from '../../constants/Colors';
+import { MAX_PER_PAGE } from '../../constants';
+import { COLORS } from '../../constants/Colors';
 
-import {useAppDispatch} from '../../stores';
-import {fetchCollections} from '../../stores/slices/collectionsSlice';
-import {fetchListPhotos, PhotosState} from '../../stores/slices/photosSlice';
-import {fetchListTopics, TopicsState} from '../../stores/slices/topicsSlice';
+import { useAppDispatch } from '../../stores';
+import { fetchCollections } from '../../stores/middleware/collection';
+import { fetchListPhotos } from '../../stores/middleware/photos';
+import { fetchListTopics } from '../../stores/middleware/topic';
+import { PhotosState } from '../../stores/slices/photosSlice';
+import { TopicsState } from '../../stores/slices/topicsSlice';
 
 const Landing: React.FC = () => {
   const navigation = useNavigation();
@@ -78,7 +80,7 @@ const Landing: React.FC = () => {
       <StatusBar barStyle="light-content" />
       <ImageBackground
         source={landingImg}
-        style={{width: '100%', height: '100%'}}>
+        style={{ width: '100%', height: '100%' }}>
         <SafeAreaView />
         <View style={styles.headerContainer}>{SkipButton()}</View>
         <View style={styles.contentContainer}>
@@ -142,7 +144,7 @@ const styles = StyleSheet.create({
     paddingTop: 4,
     paddingBottom: 4,
   },
-  buttonViews: {paddingBottom: 8},
+  buttonViews: { paddingBottom: 8 },
   haveAccountContainer: {
     marginTop: 16,
     flexDirection: 'row',

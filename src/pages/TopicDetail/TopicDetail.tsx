@@ -1,5 +1,5 @@
-import {useNavigation, useRoute} from '@react-navigation/native';
-import React, {useState, useCallback, useEffect} from 'react';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import React, { useState, useCallback, useEffect } from 'react';
 import {
   View,
   Text,
@@ -10,33 +10,29 @@ import {
   FlatList,
   RefreshControl,
 } from 'react-native';
-import {ListItem, Icon, Avatar} from 'react-native-elements';
+import { ListItem, Icon, Avatar } from 'react-native-elements';
 import HTMLView from 'react-native-htmlview';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import AppCardItem from '../../components/AppCardItem/AppCardItem';
 import AppStatus from '../../components/AppStatus/AppStatus';
-import {MAX_PER_PAGE} from '../../constants';
-import {COLORS} from '../../constants/Colors';
+import { MAX_PER_PAGE } from '../../constants';
+import { COLORS } from '../../constants/Colors';
 
-import {useAppDispatch} from '../../stores';
-import {
-  getTopic,
-  getTopicPhotos,
-  topicsSelectors,
-} from '../../stores/slices/topicsSlice';
+import { useAppDispatch } from '../../stores';
+import { getTopic, getTopicPhotos } from '../../stores/middleware/topic';
+import { topicsSelectors } from '../../stores/slices/topicsSlice';
 
 const TopicDetail = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [idSlug, setIdSlug] = useState('');
   const navigation: any = useNavigation();
-  const {params}: any = useRoute();
+  const { params }: any = useRoute();
   const dispatch = useAppDispatch();
 
   const topic = useSelector(topicsSelectors.topic);
   const TopicPhotos = useSelector(topicsSelectors.topicPhotos);
   const isLoading = useSelector(topicsSelectors.isLoading);
-
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
@@ -62,7 +58,7 @@ const TopicDetail = () => {
     navigation.navigate('ImageDetails');
   };
 
-  const renderItem = ({item}: any) => (
+  const renderItem = ({ item }: any) => (
     <AppCardItem
       item={item}
       onUserPress={onUserPress}
@@ -96,7 +92,7 @@ const TopicDetail = () => {
           style={styles.keyboardAvoidingViewContainer}
           behavior="height">
           <FlatList
-            contentContainerStyle={{paddingBottom: 20}}
+            contentContainerStyle={{ paddingBottom: 20 }}
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }

@@ -1,9 +1,8 @@
-import {createAsyncThunk, createSelector, createSlice} from '@reduxjs/toolkit';
-import {AxiosResponse} from 'axios';
-import {RootState} from '..';
-import {MAX_PER_PAGE, ORDER_BY_TYPES} from '../../constants';
-import PhotosService, {ListPhotosParams} from '../../services/api/photos';
-import {IPhotoExtended} from './../../models/photo';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
+import { RootState } from '..';
+import { MAX_PER_PAGE, ORDER_BY_TYPES } from '../../constants';
+import { fetchListPhotos, getPhoto } from '../middleware/photos';
+import { IPhotoExtended } from './../../models/photo';
 
 export type PhotosState = {
   isLoading: boolean;
@@ -27,27 +26,7 @@ const initialState: PhotosState = {
   error: null,
 };
 
-export const fetchListPhotos = createAsyncThunk<IPhotoExtended[], ListPhotosParams>(
-  'photos/fetchPhotos',
-  async ({page, per_page, order_by}) => {
-    const response: AxiosResponse = await PhotosService.listPhotos({
-      page,
-      per_page,
-      order_by,
-    });
-    return response.data;
-  },
-);
-
-export const getPhoto = createAsyncThunk<IPhotoExtended, string>(
-  'photos/getPhoto',
-  async id => {
-    const response: AxiosResponse = await PhotosService.getPhoto(id);
-    return response.data;
-  },
-);
-
-const {actions, reducer} = createSlice({
+const { actions, reducer } = createSlice({
   name: 'photos',
   initialState,
   reducers: {
@@ -62,7 +41,7 @@ const {actions, reducer} = createSlice({
     builder.addCase(fetchListPhotos.pending, state => {
       state.isLoading = true;
     });
-    builder.addCase(fetchListPhotos.fulfilled, (state, {payload}) => {
+    builder.addCase(fetchListPhotos.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       // state.topics = state.topics.concat(payload);
       state.photos = payload;
@@ -79,7 +58,7 @@ const {actions, reducer} = createSlice({
     builder.addCase(getPhoto.pending, state => {
       state.isLoading = true;
     });
-    builder.addCase(getPhoto.fulfilled, (state, {payload}) => {
+    builder.addCase(getPhoto.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.photo = payload;
     });
@@ -100,5 +79,6 @@ export const photosSelectors = {
 export const photosActions = {
   ...actions,
   fetchListPhotos,
+  getPhoto,
 };
 export const photosReducer = reducer;

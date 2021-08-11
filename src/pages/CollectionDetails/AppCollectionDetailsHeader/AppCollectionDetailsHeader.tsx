@@ -1,18 +1,15 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {Avatar, Button, ListItem, Icon} from 'react-native-elements';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {COLORS} from '../../../constants/Colors';
+import { View, Text, StyleSheet } from 'react-native';
+import { Avatar, Button, ListItem, Icon } from 'react-native-elements';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { COLORS } from '../../../constants/Colors';
+import { IProfileImage } from '../../../models/generic';
 
 interface Props {
-  title: string;
-  name: string;
-  username: string;
-  profile_image: {
-    small: string;
-    medium: string;
-    large: string;
-  };
+  title?: string;
+  name?: string;
+  username?: string;
+  profile_image?: IProfileImage;
   onProfilePress?: () => void;
 }
 
