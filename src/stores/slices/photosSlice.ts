@@ -5,7 +5,9 @@ import { fetchListPhotos, getPhoto } from '../middleware/photos';
 import { IPhotoExtended } from './../../models/photo';
 
 export type PhotosState = {
-  isLoading: boolean;
+  isLoadingPhoto: boolean;
+  isLoadingPhotos: boolean;
+  isLoadingRandomPhotos: boolean;
   randomPhotos: IPhotoExtended[];
   photos: IPhotoExtended[];
   photo: IPhotoExtended | null;
@@ -16,7 +18,9 @@ export type PhotosState = {
 };
 
 const initialState: PhotosState = {
-  isLoading: false,
+  isLoadingPhoto: false,
+  isLoadingPhotos: false,
+  isLoadingRandomPhotos: false,
   photos: [],
   randomPhotos: [],
   photo: null,
@@ -39,15 +43,15 @@ const { actions, reducer } = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(fetchListPhotos.pending, state => {
-      state.isLoading = true;
+      state.isLoadingPhotos = true;
     });
     builder.addCase(fetchListPhotos.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
+      state.isLoadingPhotos = false;
       // state.topics = state.topics.concat(payload);
       state.photos = payload;
     });
     builder.addCase(fetchListPhotos.rejected, (state, action) => {
-      state.isLoading = false;
+      state.isLoadingPhotos = false;
       state.error = action.error;
     });
 
@@ -56,14 +60,14 @@ const { actions, reducer } = createSlice({
     // ===================================================
 
     builder.addCase(getPhoto.pending, state => {
-      state.isLoading = true;
+      state.isLoadingPhoto = true;
     });
     builder.addCase(getPhoto.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
+      state.isLoadingPhoto = false;
       state.photo = payload;
     });
     builder.addCase(getPhoto.rejected, (state, action) => {
-      state.isLoading = false;
+      state.isLoadingPhoto = false;
       state.error = action.error;
     });
   },
@@ -73,7 +77,8 @@ const selectRoot = (state: RootState) => state.photos;
 export const photosSelectors = {
   photos: createSelector(selectRoot, state => state.photos),
   photo: createSelector(selectRoot, state => state.photo),
-  isLoading: createSelector(selectRoot, state => state.isLoading),
+  isLoadingPhoto: createSelector(selectRoot, state => state.isLoadingPhoto),
+  isLoadingPhotos: createSelector(selectRoot, state => state.isLoadingPhotos),
 };
 
 export const photosActions = {

@@ -12,7 +12,10 @@ import {
 import { IPhoto } from './../../models/photo';
 
 export type CollectionState = {
-  isLoading: boolean;
+  isLoadingCollection: boolean;
+  isLoadingCollections: boolean;
+  isLoadingCollectionPhotos: boolean;
+  isLoadingCollectionRelated: boolean;
   collection: ICollection | null;
   collections: ICollection[];
   collectionPhotos: IPhoto[];
@@ -23,7 +26,10 @@ export type CollectionState = {
 };
 
 const initialState: CollectionState = {
-  isLoading: false,
+  isLoadingCollection: false,
+  isLoadingCollections: false,
+  isLoadingCollectionPhotos: false,
+  isLoadingCollectionRelated: false,
   collection: null,
   collections: [],
   collectionPhotos: [],
@@ -46,56 +52,56 @@ const { actions, reducer } = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(fetchCollections.pending, state => {
-      state.isLoading = true;
+      state.isLoadingCollections = true;
     });
     builder.addCase(fetchCollections.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
+      state.isLoadingCollections = false;
       state.collections = payload;
     });
     builder.addCase(fetchCollections.rejected, (state, action) => {
-      state.isLoading = false;
+      state.isLoadingCollections = false;
       state.error = action.error;
     });
     // ======================================================
     // ======================================================
     // ======================================================
     builder.addCase(getCollection.pending, state => {
-      state.isLoading = true;
+      state.isLoadingCollection = true;
     });
     builder.addCase(getCollection.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
+      state.isLoadingCollection = false;
       state.collection = payload;
     });
     builder.addCase(getCollection.rejected, (state, action) => {
-      state.isLoading = false;
+      state.isLoadingCollection = false;
       state.error = action.error;
     });
     // ======================================================
     // ======================================================
     // ======================================================
     builder.addCase(getCollectionPhotos.pending, state => {
-      state.isLoading = true;
+      state.isLoadingCollectionPhotos = true;
     });
     builder.addCase(getCollectionPhotos.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
+      state.isLoadingCollectionPhotos = false;
       state.collectionPhotos = payload;
     });
     builder.addCase(getCollectionPhotos.rejected, (state, action) => {
-      state.isLoading = false;
+      state.isLoadingCollectionPhotos = false;
       state.error = action.error;
     });
     // ======================================================
     // ======================================================
     // ======================================================
     builder.addCase(getRelatedCollection.pending, state => {
-      state.isLoading = true;
+      state.isLoadingCollectionRelated = true;
     });
     builder.addCase(getRelatedCollection.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
+      state.isLoadingCollectionRelated = false;
       state.collectionRelated = payload;
     });
     builder.addCase(getRelatedCollection.rejected, (state, action) => {
-      state.isLoading = false;
+      state.isLoadingCollectionRelated = false;
       state.error = action.error;
     });
   },
@@ -110,7 +116,10 @@ export const collectionsSelectors = {
     selectRoot,
     state => state.collectionRelated,
   ),
-  isLoading: createSelector(selectRoot, state => state.isLoading),
+  isLoadingCollection: createSelector(selectRoot, state => state.isLoadingCollection),
+  isLoadingCollections: createSelector(selectRoot, state => state.isLoadingCollections),
+  isLoadingCollectionPhotos: createSelector(selectRoot, state => state.isLoadingCollectionPhotos),
+  isLoadingCollectionRelated: createSelector(selectRoot, state => state.isLoadingCollectionRelated),
 };
 
 export const collectionsActions = {

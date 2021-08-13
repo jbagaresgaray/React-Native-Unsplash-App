@@ -1,6 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosResponse } from 'axios';
-import { ISearchCollections, ISearchUsers } from '../../models/generic';
+import {
+  ISearchCollections,
+  ISearchPhotos,
+  ISearchUsers,
+} from '../../models/generic';
 import SearchService, { BasicSearchParams } from '../../services/api/search';
 
 export const searchUsersQry = createAsyncThunk<ISearchUsers, BasicSearchParams>(
@@ -20,6 +24,18 @@ export const searchCollectionsQry = createAsyncThunk<
   BasicSearchParams
 >('search/searchCollections', async ({ query, page, per_page }) => {
   const response: AxiosResponse = await SearchService.searchCollections({
+    query,
+    page,
+    per_page,
+  });
+  return response.data;
+});
+
+export const searchPhotosQry = createAsyncThunk<
+  ISearchPhotos,
+  BasicSearchParams
+>('search/searchPhotos', async ({ query, page, per_page }) => {
+  const response: AxiosResponse = await SearchService.searchPhotos({
     query,
     page,
     per_page,

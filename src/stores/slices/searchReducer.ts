@@ -6,10 +6,16 @@ import {
   ISearchPhotos,
   ISearchUsers,
 } from '../../models/generic';
-import { searchUsersQry, searchCollectionsQry } from '../middleware/search';
+import {
+  searchUsersQry,
+  searchCollectionsQry,
+  searchPhotosQry,
+} from '../middleware/search';
 
 export type SearchState = {
-  isLoading: boolean;
+  isLoadingSearchUsers: boolean;
+  isLoadingSearchCollections: boolean;
+  isLoadingSearchPhotos: boolean;
   searchUsers: ISearchUsers | null;
   searchCollections: ISearchCollections | null;
   searchPhotos: ISearchPhotos | null;
@@ -19,7 +25,9 @@ export type SearchState = {
 };
 
 const initialState: SearchState = {
-  isLoading: false,
+  isLoadingSearchUsers: false,
+  isLoadingSearchCollections: false,
+  isLoadingSearchPhotos: false,
   searchUsers: null,
   searchCollections: null,
   searchPhotos: null,
@@ -41,28 +49,42 @@ const { actions, reducer } = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(searchUsersQry.pending, state => {
-      state.isLoading = true;
+      state.isLoadingSearchUsers = true;
     });
     builder.addCase(searchUsersQry.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
+      state.isLoadingSearchUsers = false;
       state.searchUsers = payload;
     });
     builder.addCase(searchUsersQry.rejected, (state, action) => {
-      state.isLoading = false;
+      state.isLoadingSearchUsers = false;
       state.error = action.error;
     });
     // ===================================================
     // ===================================================
     // ===================================================
     builder.addCase(searchCollectionsQry.pending, state => {
-      state.isLoading = true;
+      state.isLoadingSearchCollections = true;
     });
     builder.addCase(searchCollectionsQry.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
+      state.isLoadingSearchCollections = false;
       state.searchCollections = payload;
     });
     builder.addCase(searchCollectionsQry.rejected, (state, action) => {
-      state.isLoading = false;
+      state.isLoadingSearchCollections = false;
+      state.error = action.error;
+    });
+    // ===================================================
+    // ===================================================
+    // ===================================================
+    builder.addCase(searchPhotosQry.pending, state => {
+      state.isLoadingSearchPhotos = true;
+    });
+    builder.addCase(searchPhotosQry.fulfilled, (state, { payload }) => {
+      state.isLoadingSearchPhotos = false;
+      state.searchPhotos = payload;
+    });
+    builder.addCase(searchPhotosQry.rejected, (state, action) => {
+      state.isLoadingSearchPhotos = false;
       state.error = action.error;
     });
   },
@@ -75,7 +97,18 @@ export const searchSelectors = {
     selectRoot,
     state => state.searchCollections,
   ),
-  isLoading: createSelector(selectRoot, state => state.isLoading),
+  isLoadingSearchUsers: createSelector(
+    selectRoot,
+    state => state.isLoadingSearchUsers,
+  ),
+  isLoadingSearchCollections: createSelector(
+    selectRoot,
+    state => state.isLoadingSearchCollections,
+  ),
+  isLoadingSearchPhotos: createSelector(
+    selectRoot,
+    state => state.isLoadingSearchPhotos,
+  ),
 };
 
 export const searchActions = {

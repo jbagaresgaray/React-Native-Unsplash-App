@@ -6,7 +6,9 @@ import { fetchListTopics, getTopic, getTopicPhotos } from '../middleware/topic';
 import { RootState } from '..';
 
 export type TopicsState = {
-  isLoading: boolean;
+  isLoadingTopic: boolean;
+  isLoadingTopics: boolean;
+  isLoadingTopicPhotos: boolean;
   topics: ITopic[];
   topic: ITopic | null;
   topicPhotos: IPhoto[] | null;
@@ -17,7 +19,9 @@ export type TopicsState = {
 };
 
 const initialState: TopicsState = {
-  isLoading: false,
+  isLoadingTopic: false,
+  isLoadingTopics: false,
+  isLoadingTopicPhotos: false,
   topics: [],
   topic: null,
   topicPhotos: [],
@@ -40,15 +44,15 @@ const { actions, reducer } = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(fetchListTopics.pending, state => {
-      state.isLoading = true;
+      state.isLoadingTopics = true;
     });
     builder.addCase(fetchListTopics.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
+      state.isLoadingTopics = false;
       // state.topics = state.topics.concat(payload);
       state.topics = payload;
     });
     builder.addCase(fetchListTopics.rejected, (state, action) => {
-      state.isLoading = false;
+      state.isLoadingTopics = false;
       state.error = action.error;
     });
 
@@ -57,14 +61,14 @@ const { actions, reducer } = createSlice({
     // ===================================================
 
     builder.addCase(getTopic.pending, state => {
-      state.isLoading = true;
+      state.isLoadingTopic = true;
     });
     builder.addCase(getTopic.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
+      state.isLoadingTopic = false;
       state.topic = payload;
     });
     builder.addCase(getTopic.rejected, (state, action) => {
-      state.isLoading = false;
+      state.isLoadingTopic = false;
       state.error = action.error;
     });
 
@@ -73,14 +77,14 @@ const { actions, reducer } = createSlice({
     // ===================================================
 
     builder.addCase(getTopicPhotos.pending, state => {
-      state.isLoading = true;
+      state.isLoadingTopicPhotos = true;
     });
     builder.addCase(getTopicPhotos.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
+      state.isLoadingTopicPhotos = false;
       state.topicPhotos = payload;
     });
     builder.addCase(getTopicPhotos.rejected, (state, action) => {
-      state.isLoading = false;
+      state.isLoadingTopicPhotos = false;
       state.error = action.error;
     });
   },
@@ -91,7 +95,9 @@ export const topicsSelectors = {
   topics: createSelector(selectRoot, state => state.topics),
   topic: createSelector(selectRoot, state => state.topic),
   topicPhotos: createSelector(selectRoot, state => state.topicPhotos),
-  isLoading: createSelector(selectRoot, state => state.isLoading),
+  isLoading: createSelector(selectRoot, state => state.isLoadingTopic),
+  isLoadingTopics: createSelector(selectRoot, state => state.isLoadingTopics),
+  isLoadingTopicPhotos: createSelector(selectRoot, state => state.isLoadingTopicPhotos),
 };
 
 export const topicsActions = {
