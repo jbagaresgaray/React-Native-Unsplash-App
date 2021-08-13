@@ -95,9 +95,12 @@ export const topicsSelectors = {
   topics: createSelector(selectRoot, state => state.topics),
   topic: createSelector(selectRoot, state => state.topic),
   topicPhotos: createSelector(selectRoot, state => state.topicPhotos),
-  isLoading: createSelector(selectRoot, state => state.isLoadingTopic),
+  isLoadingTopic: createSelector(selectRoot, state => state.isLoadingTopic),
   isLoadingTopics: createSelector(selectRoot, state => state.isLoadingTopics),
-  isLoadingTopicPhotos: createSelector(selectRoot, state => state.isLoadingTopicPhotos),
+  isLoadingTopicPhotos: createSelector(
+    selectRoot,
+    state => state.isLoadingTopicPhotos,
+  ),
 };
 
 export const topicsActions = {
