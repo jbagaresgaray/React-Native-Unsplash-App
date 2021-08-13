@@ -1,20 +1,21 @@
-import axios from 'axios';
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import Config from 'react-native-config';
 
 import Storage from '../../utils/storage';
 
+const baseURL = Config.REACT_API_URL;
+const headers = {
+  Accept: 'application/json',
+  'Content-Type': 'application/json',
+  Authorization: `Client-ID ${Config.REACT_UNSPLASH_ACCESS_KEY}`,
+  'X-Ratelimit-Limit': 1000,
+  'X-Ratelimit-Remaining': 999,
+};
+
 const API = axios.create({
-  baseURL: Config.REACT_API_URL || 'https://api.unsplash.com/',
+  baseURL,
   timeout: 30000,
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    Authorization:
-      // `Client-ID ${Config.REACT_UNSPLASH_ACCESS_KEY}` ||
-      `Client-ID nllcFdEQkChHOLqrK9iw4AxrC8Hv-N7L8_ada60RgsU`,
-    'X-Ratelimit-Limit': 1000,
-    'X-Ratelimit-Remaining': 999,
-  },
+  headers,
   transformResponse: data => {
     try {
       return JSON.parse(data);
@@ -29,27 +30,20 @@ const API = axios.create({
 });
 
 API.interceptors.request.use(
-  async config => {
-    config.headers = {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Client-ID nllcFdEQkChHOLqrK9iw4AxrC8Hv-N7L8_ada60RgsU`,
-      // Authorization: `Client-ID ${Config.REACT_UNSPLASH_ACCESS_KEY}`,
-      'X-Ratelimit-Limit': 1000,
-      'X-Ratelimit-Remaining': 999,
-    };
+  async (config: AxiosRequestConfig) => {
+    config.headers = headers;
     return config;
   },
-  error => {
+  (error: any) => {
     Promise.reject(error);
   },
 );
 
 API.interceptors.response.use(
-  response => {
+  (response: AxiosResponse) => {
     return response;
   },
-  async function (error) {
+  async (error: AxiosError) => {
     const originalRequest = error.config;
     return Promise.reject(error);
   },

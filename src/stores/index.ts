@@ -32,7 +32,6 @@ const store = configureStore({
           'persist/REHYDRATE',
           'persist/PERSIST',
         ],
-        ingoredPaths: ['topics.topics.4.config.transformRequest.0'],
       },
     });
     return setupReduxFlipper([...defaultMiddlewares, thunk]);

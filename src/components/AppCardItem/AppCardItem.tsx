@@ -1,18 +1,20 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {Button} from 'react-native-elements';
+import { View, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { Button } from 'react-native-elements';
 import FastImage from 'react-native-fast-image';
-import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import {
   default as Icon,
   default as Icons,
 } from 'react-native-vector-icons/MaterialCommunityIcons';
-import {COLORS} from '../../constants/Colors';
-import {IProfileImage} from '../../models/generic';
-import {IPhoto} from '../../models/photo';
+import { COLORS } from '../../constants/Colors';
+import { IPhoto } from '../../models/photo';
+import { getWindowHeight } from '../../utils';
+import AppUserCardItem from '../AppUserCardItem/AppUserCardItem';
 
 interface Props {
   item?: IPhoto;
+  showLoading?: boolean;
   onUserPress?: () => void;
   onMorePress?: () => void;
   onImagePress?: () => void;
@@ -20,36 +22,58 @@ interface Props {
 
 const AppCardItem: React.FC<Props> = ({
   item,
+  showLoading,
   onUserPress,
   onMorePress,
   onImagePress,
 }) => {
-  return (
+  const renderLoadingSkeleton = () => (
+    <>
+      <SkeletonPlaceholder>
+        <SkeletonPlaceholder.Item
+          paddingTop={16}
+          paddingBottom={16}
+          marginStart={16}
+          marginEnd={16}
+          flexDirection="row"
+          alignItems="center">
+          <SkeletonPlaceholder.Item width={36} height={36} borderRadius={999} />
+          <SkeletonPlaceholder.Item marginLeft={10}>
+            <SkeletonPlaceholder.Item
+              width={120}
+              height={14}
+              borderRadius={4}
+            />
+            <SkeletonPlaceholder.Item
+              marginTop={6}
+              width={80}
+              height={12}
+              borderRadius={4}
+            />
+          </SkeletonPlaceholder.Item>
+        </SkeletonPlaceholder.Item>
+      </SkeletonPlaceholder>
+      <SkeletonPlaceholder>
+        <SkeletonPlaceholder.Item
+          width={Dimensions.get('window').width}
+          height={300}
+        />
+      </SkeletonPlaceholder>
+    </>
+  );
+
+  const renderCardItem = () => (
     <View style={styles.cardContainer}>
-      <View style={styles.postHeader}>
-        <TouchableWithoutFeedback
-          style={styles.infoWrapper}
-          onPress={onUserPress}>
-          <FastImage
-            style={styles.avatar}
-            source={{
-              uri: item?.user?.profile_image.small,
-            }}
-          />
-          <View>
-            <Text style={styles.name}>{item?.user?.name}</Text>
-            <Text style={styles.username}>{item?.user?.username}</Text>
-          </View>
-        </TouchableWithoutFeedback>
-        <TouchableOpacity onPress={onMorePress}>
-          <Icons name="dots-vertical" size={24} />
-        </TouchableOpacity>
-      </View>
+      <AppUserCardItem
+        user={item?.user}
+        onMorePress={onMorePress}
+        onUserPress={onUserPress}
+      />
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={onImagePress}
         style={styles.imageContainer}>
-        <FastImage style={styles.image} source={{uri: item?.urls?.small}} />
+        <FastImage style={styles.image} source={{ uri: item?.urls?.small }} />
       </TouchableOpacity>
       <View style={styles.reactionsWrapper}>
         <View style={styles.reactions}>
@@ -79,6 +103,8 @@ const AppCardItem: React.FC<Props> = ({
       </View>
     </View>
   );
+
+  return showLoading ? renderLoadingSkeleton() : renderCardItem();
 };
 
 const styles = StyleSheet.create({
@@ -92,35 +118,6 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
-  },
-  postHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 16,
-    borderBottomColor: '#ddd',
-    borderBottomWidth: 0.5,
-  },
-  infoWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  name: {
-    fontSize: 15,
-    fontWeight: '600',
-  },
-  username: {
-    fontSize: 14,
-    fontWeight: '400',
-    color: '#999',
-  },
-  avatar: {
-    borderColor: '#ddd',
-    borderWidth: 0.3,
-    height: 36,
-    width: 36,
-    borderRadius: 36,
-    marginRight: 10,
   },
   moreIcon: {
     color: COLORS.white,

@@ -1,15 +1,15 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {COLORS} from '../../../constants/Colors';
-import {ITopic} from '../../../models/topic';
+import { COLORS } from '../../../constants/Colors';
+import { ITopic } from '../../../models/topic';
 
 interface Props {
   topic?: ITopic;
   onPress: (ev: any) => void | any;
 }
 
-const AppHomeCategoryCard: React.FC<Props> = ({topic, onPress}) => {
+const AppHomeCategoryCard: React.FC<Props> = ({ topic, onPress }) => {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -19,7 +19,10 @@ const AppHomeCategoryCard: React.FC<Props> = ({topic, onPress}) => {
           onPress={onPress}>
           <FastImage
             style={styles.image}
-            source={{uri: topic?.cover_photo?.urls.small}}
+            source={{
+              uri: topic?.cover_photo?.urls.small,
+              priority: FastImage.priority.low,
+            }}
           />
         </TouchableOpacity>
         <View style={styles.title}>

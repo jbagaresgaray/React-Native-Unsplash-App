@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import { View, ScrollView, StyleSheet, Platform } from 'react-native';
 import { ITopic } from '../../../models/topic';
 import { loadFakeData } from '../../../utils';
 import AppHomeCategoryCard from '../AppHomeCategoryCard/AppHomeCategoryCard';
@@ -19,12 +19,17 @@ const AppHomeCategories: React.FC<Props> = ({
   const fakeArr = loadFakeData();
 
   const renderLoadingSkeleton = () => {
-    return fakeArr.map((item, index) => (
-      <SkeletonPlaceholder>
+    return fakeArr.map((_item, index) => (
+      <SkeletonPlaceholder key={index}>
         <SkeletonPlaceholder.Item
           width={110}
           height={160}
           borderRadius={12}
+          {...Platform.select({
+            android: {
+              margin: 4,
+            },
+          })}
         />
       </SkeletonPlaceholder>
     ));

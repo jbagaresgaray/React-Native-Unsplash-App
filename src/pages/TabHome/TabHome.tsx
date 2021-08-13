@@ -8,27 +8,31 @@ import {
   KeyboardAvoidingView,
   RefreshControl,
 } from 'react-native';
+import { useSelector } from 'react-redux';
+
 import AppHomeCategories from './AppHomeCategories/AppHomeCategories';
 import AppHomeCategoriesHeader from './AppHomeCategoriesHeader/AppHomeCategoriesHeader';
 import AppHomeSegment from './AppHomeSegment/AppHomeSegment';
 import AppCardItem from '../../components/AppCardItem/AppCardItem';
 
 import { COLORS } from '../../constants/Colors';
-import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../stores';
 import { topicsSelectors } from '../../stores/slices/topicsSlice';
 import { photosSelectors } from '../../stores/slices/photosSlice';
 import { MAX_PER_PAGE } from '../../constants';
 import { fetchListTopics } from '../../stores/middleware/topic';
 import { fetchListPhotos } from '../../stores/middleware/photos';
+import { loadFakeData } from '../../utils';
 
 const TabHome = () => {
+  const fakePhotosArr = loadFakeData();
   const [activeTab, setActiveTab] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
 
   const TopicsArr = useSelector(topicsSelectors.topics);
   const PhotosArr = useSelector(photosSelectors.photos);
   const isLoadingPhotos = useSelector(photosSelectors.isLoadingPhotos);
+  // const isLoadingPhotos = true;
   const isLoadingTopics = useSelector(topicsSelectors.isLoadingTopics);
 
   const navigation: any = useNavigation();
@@ -36,7 +40,7 @@ const TabHome = () => {
 
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
-    await dispatch(
+    dispatch(
       fetchListTopics({
         ids: null,
         page: 1,
@@ -44,7 +48,7 @@ const TabHome = () => {
         order_by: 'position',
       }),
     );
-    await dispatch(
+    dispatch(
       fetchListPhotos({
         page: 1,
         per_page: MAX_PER_PAGE,
@@ -85,9 +89,21 @@ const TabHome = () => {
   const renderItem = ({ item }: any) => (
     <AppCardItem
       item={item}
+      showLoading={isLoadingPhotos}
       onUserPress={() => onUserPress(item?.user?.username)}
       onImagePress={() => onImagePress(item.id)}
     />
+  );
+
+  const listHeaderComponent = () => (
+    <>
+      <AppHomeCategoriesHeader onViewAllPress={onViewAllPress} />
+      <AppHomeCategories
+        showLoading={isLoadingTopics}
+        topics={TopicsArr}
+        onPress={onTopicPress}
+      />
+    </>
   );
 
   const renderEditorial = () => (
@@ -96,19 +112,10 @@ const TabHome = () => {
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
-      ListHeaderComponent={() => (
-        <>
-          <AppHomeCategoriesHeader onViewAllPress={onViewAllPress} />
-          <AppHomeCategories
-            showLoading={isLoadingTopics}
-            topics={TopicsArr}
-            onPress={onTopicPress}
-          />
-        </>
-      )}
-      data={PhotosArr}
+      ListHeaderComponent={listHeaderComponent()}
+      data={isLoadingPhotos ? fakePhotosArr : PhotosArr}
       renderItem={renderItem}
-      keyExtractor={item => item.id}
+      keyExtractor={(item, index) => 'key' + index}
     />
   );
 
