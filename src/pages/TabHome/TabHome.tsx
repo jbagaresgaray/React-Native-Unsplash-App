@@ -25,8 +25,11 @@ import { fetchListPhotos } from '../../stores/middleware/photos';
 const TabHome = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
+
   const TopicsArr = useSelector(topicsSelectors.topics);
   const PhotosArr = useSelector(photosSelectors.photos);
+  const isLoadingPhotos = useSelector(photosSelectors.isLoadingPhotos);
+  const isLoadingTopics = useSelector(topicsSelectors.isLoadingTopics);
 
   const navigation: any = useNavigation();
   const dispatch = useAppDispatch();
@@ -96,7 +99,11 @@ const TabHome = () => {
       ListHeaderComponent={() => (
         <>
           <AppHomeCategoriesHeader onViewAllPress={onViewAllPress} />
-          <AppHomeCategories topics={TopicsArr} onPress={onTopicPress} />
+          <AppHomeCategories
+            showLoading={isLoadingTopics}
+            topics={TopicsArr}
+            onPress={onTopicPress}
+          />
         </>
       )}
       data={PhotosArr}
