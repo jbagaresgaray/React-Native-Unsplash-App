@@ -44,8 +44,10 @@ const Topics = () => {
     });
   };
 
-  const onUserPress = () => {
-    navigation.navigate('UserProfile');
+  const onUserPress = (username: string) => {
+    navigation.navigate('UserProfile', {
+      username,
+    });
   };
 
   const renderItem = ({ item }: any) => (
@@ -57,7 +59,7 @@ const Topics = () => {
       total_photos={item?.total_photos}
       status={item?.status}
       onPress={() => onTopicPress(item.id)}
-      onUserPress={onUserPress}
+      onUserPress={() => onUserPress(item?.user?.username)}
     />
   );
 

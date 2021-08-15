@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Tab } from 'react-native-elements';
+import { View, StyleSheet, Platform } from 'react-native';
+import { Tab, Icon } from 'react-native-elements';
 import { COLORS } from '../../../constants/Colors';
 
 interface Props {
@@ -28,19 +28,19 @@ const AppUserProfileSegment: React.FC<Props> = ({
           containerStyle={styles.TabStyle}
           buttonStyle={styles.TabItemStyle}
           titleStyle={styles.TabItemTitleStyle}
-          title={`Photos`}
+          icon={<Icon name="photo" type="material" />}
         />
         <Tab.Item
           containerStyle={styles.TabStyle}
           buttonStyle={styles.TabItemStyle}
           titleStyle={styles.TabItemTitleStyle}
-          title={`Likes`}
+          icon={<Icon name="heart" type="material-community" />}
         />
         <Tab.Item
           containerStyle={styles.TabStyle}
           buttonStyle={styles.TabItemStyle}
           titleStyle={styles.TabItemTitleStyle}
-          title={`Collections`}
+          icon={<Icon name="layers" type="ionicons" />}
         />
       </Tab>
     </View>
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.black,
   },
   TabItemStyle: {
-    height: 44,
+    height: Platform.OS === 'ios' ? 44 : 52,
     backgroundColor: COLORS.white,
     tintColor: '#999999',
   },

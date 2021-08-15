@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { ListItem, Icon, Avatar, Divider } from 'react-native-elements';
+import { View, StyleSheet } from 'react-native';
+import { ListItem, Icon, Avatar } from 'react-native-elements';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import AppStatus from '../../components/AppStatus/AppStatus';
 import { ITopic } from '../../models/topic';

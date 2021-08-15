@@ -93,6 +93,7 @@ const { actions, reducer } = createSlice({
 const selectRoot = (state: RootState) => state.search;
 export const searchSelectors = {
   searchUsers: createSelector(selectRoot, state => state.searchUsers),
+  searchPhotos: createSelector(selectRoot, state => state.searchPhotos),
   searchCollections: createSelector(
     selectRoot,
     state => state.searchCollections,

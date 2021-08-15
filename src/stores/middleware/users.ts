@@ -3,6 +3,7 @@ import { AxiosResponse } from 'axios';
 import { IPhoto } from '../../models/photo';
 import { IUserProfile } from '../../models/user';
 import UsersService, {
+  UserCollectionsParams,
   UserLikedPhotosParams,
   UserPhotosParams,
 } from './../../services/api/users';
@@ -41,7 +42,7 @@ export const getUserLikedPhotos = createAsyncThunk<
 
 export const getUserCollections = createAsyncThunk<
   IPhoto[],
-  { username: string; params: UserLikedPhotosParams }
+  { username: string; params: UserCollectionsParams }
 >('users/getUserCollections', async ({ username, params }) => {
   const response: AxiosResponse = await UsersService.getUserCollections(
     username,

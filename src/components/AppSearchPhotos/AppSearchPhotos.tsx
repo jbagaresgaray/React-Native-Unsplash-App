@@ -12,12 +12,13 @@ import {
 // import MasonryList from '@react-native-seoul/masonry-list';
 import FastImage from 'react-native-fast-image';
 import isEmpty from 'lodash/isEmpty';
+import { useNavigation } from '@react-navigation/core';
+import { IPhoto } from '../../models/photo';
 
 interface Props {
   refreshing: boolean;
   onRefresh?: () => void;
-  onPressImage: () => void;
-  PhotosArr?: any[] | null;
+  PhotosArr?: IPhoto[];
 }
 
 const ImageCard: React.FC<{ item: any; height: number; onPressImage: any }> = ({
@@ -47,11 +48,11 @@ const ImageCard: React.FC<{ item: any; height: number; onPressImage: any }> = ({
 const AppSearchPhotos: React.FC<Props> = ({
   refreshing,
   onRefresh,
-  onPressImage,
   PhotosArr,
 }) => {
   const [photoList, setPhotoList] = useState([]);
   const [itemHeight, setItemHeight] = useState(0);
+  const navigation = useNavigation();
 
   useEffect(() => {
     let previewsArr: any = [];
@@ -66,9 +67,19 @@ const AppSearchPhotos: React.FC<Props> = ({
     }
   }, []);
 
+  const onImagePress = (id: string) => {
+    navigation.navigate('ImageDetails', {
+      id,
+    });
+  };
+
   const renderItem = ({ item }: any) => {
     return (
-      <ImageCard item={item} height={itemHeight} onPressImage={onPressImage} />
+      <ImageCard
+        item={item}
+        height={itemHeight}
+        onPressImage={() => onImagePress(item.id)}
+      />
     );
   };
 

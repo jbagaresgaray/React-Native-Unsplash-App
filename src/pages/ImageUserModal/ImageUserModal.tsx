@@ -1,14 +1,14 @@
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import {View, Text, StyleSheet, Dimensions} from 'react-native';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import ActionSheet from 'react-native-actions-sheet';
-import {ScrollView} from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler';
 import AppRelatedCollections from '../../components/AppRelatedCollections/AppRelatedCollections';
 import AppRelatedPhotos from '../../components/AppRelatedPhotos/AppRelatedPhotos';
 import AppRelatedTags from '../../components/AppRelatedTags/AppRelatedTags';
-import {ICollection} from '../../models/collection';
-import {IProfileImage, ITag} from '../../models/generic';
-import {IPhoto} from '../../models/photo';
+import { ICollection } from '../../models/collection';
+import { IProfileImage, ITag } from '../../models/generic';
+import { IPhoto } from '../../models/photo';
 import AppUserProfileItem from '../UserProfile/AppUserProfileItem/AppUserProfileItem';
 
 interface Props {
@@ -34,11 +34,33 @@ const ImageUserModal: React.FC<Props> = ({
 
   const onImagePress = () => {};
 
+  const onPressImage = (id: string) => {
+    dismiss();
+
+    setTimeout(() => {
+      navigation.navigate('CollectionDetails', {
+        id,
+      });
+    });
+  };
+
+  const onPressTitle = (id: string) => {
+    dismiss();
+
+    setTimeout(() => {
+      navigation.navigate('CollectionDetails', {
+        id,
+      });
+    });
+  };
+
   const onProfileView = () => {
     dismiss();
 
     setTimeout(() => {
-      navigation.navigate('UserProfile');
+      navigation.navigate('UserProfile', {
+        username,
+      });
     }, 100);
   };
 
@@ -62,7 +84,7 @@ const ImageUserModal: React.FC<Props> = ({
         profile_image={profile_image}
         onProfilePress={onProfileView}
       />
-      <ScrollView style={styles.content}>
+      <ScrollView nestedScrollEnabled style={styles.content}>
         {related_photos && (
           <>
             <AppRelatedPhotos
@@ -75,7 +97,8 @@ const ImageUserModal: React.FC<Props> = ({
         {related_collections && (
           <>
             <AppRelatedCollections
-              onPressImage={onImagePress}
+              onPressImage={onPressImage}
+              onPressTitle={onPressTitle}
               CollectionsArr={related_collections}
             />
             <View style={styles.divider}></View>

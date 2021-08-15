@@ -10,8 +10,8 @@ import AppCollectionItem from '../AppCollectionItem/AppCollectionItem';
 interface Props {
   refreshing: boolean;
   onRefresh?: () => void;
-  onPressImage: () => void;
-  onPressTitle: () => void;
+  onPressImage: (ev?: any) => void;
+  onPressTitle: (ev?: any) => void;
   CollectionsArr?: any[] | null;
 }
 
@@ -25,8 +25,8 @@ const AppSearchCollections: React.FC<Props> = ({
   const renderItem = ({ item }: any) => (
     <AppCollectionItem
       item={item}
-      onPressImage={onPressImage}
-      onPressTitle={onPressTitle}
+      onPressImage={() => onPressImage(item.id)}
+      onPressTitle={() => onPressTitle(item.id)}
     />
   );
 

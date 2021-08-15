@@ -56,19 +56,23 @@ const CollectionDetails: React.FC = () => {
     }
   }, [params]);
 
-  const onUserPress = () => {
-    navigation.navigate('UserProfile');
+  const onUserPress = (username: string) => {
+    navigation.navigate('UserProfile', {
+      username,
+    });
   };
 
-  const onImagePress = () => {
-    navigation.navigate('ImageDetails');
+  const onImagePress = (id: string) => {
+    navigation.navigate('ImageDetails', {
+      id,
+    });
   };
 
   const renderItem = ({ item }: any) => (
     <AppCardItem
       item={item}
-      onUserPress={onUserPress}
-      onImagePress={onImagePress}
+      onUserPress={() => onUserPress(item?.user?.username)}
+      onImagePress={() => onImagePress(item.id)}
     />
   );
 

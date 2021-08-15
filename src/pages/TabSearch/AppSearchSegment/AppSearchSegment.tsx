@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, Platform } from 'react-native';
-import { Tab } from 'react-native-elements';
+import { View, StyleSheet, Platform } from 'react-native';
+import { Tab, Icon } from 'react-native-elements';
 import { COLORS } from '../../../constants/Colors';
 
 interface Props {
@@ -22,19 +22,19 @@ const AppSearchSegment: React.FC<Props> = ({ activeIndex, onChange }) => {
           containerStyle={styles.TabStyle}
           buttonStyle={styles.TabItemStyle}
           titleStyle={styles.TabItemTitleStyle}
-          title="Photos"
+          icon={<Icon name="photo" type="material" />}
         />
         <Tab.Item
           containerStyle={styles.TabStyle}
           buttonStyle={styles.TabItemStyle}
           titleStyle={styles.TabItemTitleStyle}
-          title="Collections"
+          icon={<Icon name="layers" type="ionicons" />}
         />
         <Tab.Item
           containerStyle={styles.TabStyle}
           buttonStyle={styles.TabItemStyle}
           titleStyle={styles.TabItemTitleStyle}
-          title="Users"
+          icon={<Icon name="people" type="ionicons" />}
         />
       </Tab>
     </View>

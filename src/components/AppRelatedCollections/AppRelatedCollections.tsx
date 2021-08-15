@@ -1,15 +1,17 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import AppSearchCollections from '../AppSearchCollections/AppSearchCollections';
 import AppSearchPhotos from '../AppSearchPhotos/AppSearchPhotos';
 
 interface Props {
-  onPressImage: () => void;
+  onPressImage: (ev?: any) => void;
+  onPressTitle: (ev?: any) => void;
   CollectionsArr?: any[];
 }
 
 const AppRelatedCollections: React.FC<Props> = ({
   onPressImage,
+  onPressTitle,
   CollectionsArr,
 }) => {
   return (
@@ -18,6 +20,7 @@ const AppRelatedCollections: React.FC<Props> = ({
       <AppSearchCollections
         refreshing={false}
         onPressImage={onPressImage}
+        onPressTitle={onPressTitle}
         CollectionsArr={CollectionsArr}
       />
     </View>

@@ -1,5 +1,5 @@
-import {useNavigation} from '@react-navigation/core';
-import React, {useLayoutEffect, useState} from 'react';
+import { useNavigation } from '@react-navigation/core';
+import React, { useLayoutEffect, useState } from 'react';
 import {
   FlatList,
   StyleSheet,
@@ -9,16 +9,15 @@ import {
   RefreshControl,
 } from 'react-native';
 import AppUserItem from '../AppUserItem/AppUserItem';
-import {COLORS} from '../../constants/Colors';
+import { COLORS } from '../../constants/Colors';
 
 interface Props {
   refreshing: boolean;
   onRefresh: () => void;
-  onPressImage: () => void;
   UsersArr: any[];
 }
 
-const AppSearchUsers: React.FC<Props> = ({UsersArr}) => {
+const AppSearchUsers: React.FC<Props> = ({ UsersArr }) => {
   const [refreshing, setRefreshing] = useState(false);
   const navigation: any = useNavigation();
 
@@ -31,17 +30,19 @@ const AppSearchUsers: React.FC<Props> = ({UsersArr}) => {
     wait(2000).then(() => setRefreshing(false));
   }, []);
 
-  const onUserPress = () => {
-    navigation.navigate('UserProfile');
+  const onUserPress = (username: string) => {
+    navigation.navigate('UserProfile', {
+      username,
+    });
   };
 
-  const renderItem = ({item}: any) => (
+  const renderItem = ({ item }: any) => (
     <AppUserItem
       id={item.id}
       name={item.name}
       username={item.username}
       profile_image={item.profile_image}
-      onPress={onUserPress}
+      onPress={() => onUserPress(item.username)}
     />
   );
 
@@ -53,7 +54,7 @@ const AppSearchUsers: React.FC<Props> = ({UsersArr}) => {
           style={styles.keyboardAvoidingViewContainer}
           behavior="height">
           <FlatList
-            contentContainerStyle={{paddingBottom: 20}}
+            contentContainerStyle={{ paddingBottom: 20 }}
             refreshControl={
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }

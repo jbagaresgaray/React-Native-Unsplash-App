@@ -24,7 +24,11 @@ import { useAppDispatch } from '../../stores';
 import { searchSelectors } from '../../stores/slices/searchReducer';
 import { MAX_PER_PAGE } from '../../constants';
 import { fetchListPhotos } from '../../stores/middleware/photos';
-import { searchUsersQry } from '../../stores/middleware/search';
+import {
+  searchCollectionsQry,
+  searchPhotosQry,
+  searchUsersQry,
+} from '../../stores/middleware/search';
 
 const TabSearch = () => {
   const navigation: any = useNavigation();
@@ -33,9 +37,19 @@ const TabSearch = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
 
-  const PhotosArr = useSelector(photosSelectors.photos);
-  const CollectionsArr = useSelector(collectionsSelectors.collections);
+  const PhotosArr = useSelector(searchSelectors.searchPhotos);
+  const CollectionsArr = useSelector(searchSelectors.searchCollections);
   const UsersArr = useSelector(searchSelectors.searchUsers);
+
+  const isLoadingSearchUsers = useSelector(
+    searchSelectors.isLoadingSearchUsers,
+  );
+  const isLoadingSearchCollections = useSelector(
+    searchSelectors.isLoadingSearchCollections,
+  );
+  const isLoadingSearchPhotos = useSelector(
+    searchSelectors.isLoadingSearchPhotos,
+  );
 
   const onSearching = useCallback(value => {
     setSearchText(value);
@@ -47,8 +61,24 @@ const TabSearch = () => {
       console.log('Search to API Here : ', value);
       if (value && !isEmpty(value)) {
         console.log('searchUsers');
-        await dispatch(
+        dispatch(
           searchUsersQry({
+            query: value,
+            page: 1,
+            per_page: MAX_PER_PAGE,
+          }),
+        );
+
+        dispatch(
+          searchPhotosQry({
+            query: value,
+            page: 1,
+            per_page: MAX_PER_PAGE,
+          }),
+        );
+
+        dispatch(
+          searchCollectionsQry({
             query: value,
             page: 1,
             per_page: MAX_PER_PAGE,
@@ -105,7 +135,6 @@ const TabSearch = () => {
         <AppSearchUsers
           refreshing={refreshing}
           onRefresh={onRefresh}
-          onPressImage={onPressImage}
           UsersArr={UsersArr.results}
         />
       );
@@ -123,21 +152,20 @@ const TabSearch = () => {
     <SafeAreaView style={styles.SafeAreaView}>
       <AppSearchHeaderBar onSearching={onSearching} value={searchText} />
       <AppSearchSegment activeIndex={activeTab} onChange={setActiveTab} />
-      {activeTab === 0 && (
+      {activeTab === 0 && PhotosArr && PhotosArr.results && (
         <AppSearchPhotos
           refreshing={refreshing}
           onRefresh={onRefresh}
-          onPressImage={onPressImage}
-          PhotosArr={PhotosArr}
+          PhotosArr={PhotosArr.results}
         />
       )}
-      {activeTab === 1 && (
+      {activeTab === 1 && CollectionsArr && CollectionsArr.results && (
         <AppSearchCollections
           refreshing={refreshing}
           onRefresh={onRefresh}
           onPressImage={onPressCollectionImage}
           onPressTitle={onPressCollectionTitle}
-          CollectionsArr={CollectionsArr}
+          CollectionsArr={CollectionsArr.results}
         />
       )}
       {activeTab === 2 && renderUsersSearch()}
