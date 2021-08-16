@@ -27,6 +27,8 @@ import { loadFakeData } from '../../utils';
 const TabHome = () => {
   const fakePhotosArr = loadFakeData();
   const [activeTab, setActiveTab] = useState(0);
+  const [photosPage, setPhotosPage] = useState(1);
+  const [topicsPage, setTopicsPage] = useState(1);
   const [refreshing, setRefreshing] = useState(false);
 
   const TopicsArr = useSelector(topicsSelectors.topics);
@@ -43,14 +45,14 @@ const TabHome = () => {
     dispatch(
       fetchListTopics({
         ids: null,
-        page: 1,
+        page: topicsPage,
         per_page: MAX_PER_PAGE,
         order_by: 'position',
       }),
     );
     dispatch(
       fetchListPhotos({
-        page: 1,
+        page: photosPage,
         per_page: MAX_PER_PAGE,
         order_by: 'latest',
       }),
