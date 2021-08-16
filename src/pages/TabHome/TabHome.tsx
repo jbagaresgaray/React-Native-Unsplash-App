@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/core';
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState, useCallback } from 'react';
 import {
   FlatList,
   StyleSheet,
@@ -7,6 +7,8 @@ import {
   StatusBar,
   KeyboardAvoidingView,
   RefreshControl,
+  View,
+  ActivityIndicator,
 } from 'react-native';
 import { useSelector } from 'react-redux';
 
@@ -30,6 +32,8 @@ const TabHome = () => {
   const [photosPage, setPhotosPage] = useState(1);
   const [topicsPage, setTopicsPage] = useState(1);
   const [refreshing, setRefreshing] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [loadingTopicMore, setLoadingTopicMore] = useState(false);
 
   const TopicsArr = useSelector(topicsSelectors.topics);
   const PhotosArr = useSelector(photosSelectors.photos);
@@ -40,9 +44,48 @@ const TabHome = () => {
   const navigation: any = useNavigation();
   const dispatch = useAppDispatch();
 
-  const onRefresh = React.useCallback(async () => {
+  const onRefresh = useCallback(async () => {
     setRefreshing(true);
+    setLoadingMore(false);
+
+    setPhotosPage(1);
+    setTopicsPage(1);
+
     dispatch(
+      fetchListTopics({
+        ids: null,
+        page: 1,
+        per_page: MAX_PER_PAGE,
+        order_by: 'position',
+      }),
+    );
+    dispatch(
+      fetchListPhotos({
+        page: 1,
+        per_page: MAX_PER_PAGE,
+        order_by: 'latest',
+      }),
+    );
+    setRefreshing(false);
+  }, []);
+
+  const loadMorePhotos = useCallback(async () => {
+    setLoadingMore(true);
+    setPhotosPage(page => page + 1);
+    await dispatch(
+      fetchListPhotos({
+        page: photosPage,
+        per_page: MAX_PER_PAGE,
+        order_by: 'latest',
+      }),
+    );
+    setLoadingMore(false);
+  }, []);
+
+  const loadMoreTopics = useCallback(async () => {
+    setLoadingTopicMore(true);
+    setTopicsPage(page => page + 1);
+    await dispatch(
       fetchListTopics({
         ids: null,
         page: topicsPage,
@@ -50,14 +93,7 @@ const TabHome = () => {
         order_by: 'position',
       }),
     );
-    dispatch(
-      fetchListPhotos({
-        page: photosPage,
-        per_page: MAX_PER_PAGE,
-        order_by: 'latest',
-      }),
-    );
-    setRefreshing(false);
+    setLoadingTopicMore(false);
   }, []);
 
   useLayoutEffect(() => {
@@ -108,16 +144,39 @@ const TabHome = () => {
     </>
   );
 
+  const listFooterComponent = () => {
+    if (!loadingMore) return null;
+
+    return (
+      <View
+        style={{
+          position: 'relative',
+          width: '100%',
+          height: 60,
+          paddingVertical: 20,
+          marginTop: 10,
+          marginBottom: 10,
+          justifyContent: 'center',
+        }}>
+        <ActivityIndicator animating size="large" color="#bbb" />
+      </View>
+    );
+  };
+
   const renderEditorial = () => (
     <FlatList
       contentContainerStyle={{ paddingBottom: 20 }}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
-      ListHeaderComponent={listHeaderComponent()}
+      ListHeaderComponent={listHeaderComponent}
+      ListFooterComponent={listFooterComponent}
       data={isLoadingPhotos ? fakePhotosArr : PhotosArr}
       renderItem={renderItem}
       keyExtractor={(item, index) => 'key' + index}
+      onEndReached={loadMorePhotos}
+      onEndReachedThreshold={0.5}
+      initialNumToRender={10}
     />
   );
 
