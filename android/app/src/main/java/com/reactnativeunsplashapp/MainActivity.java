@@ -1,9 +1,11 @@
+package com.reactnativeunsplashapp;
+
 import expo.modules.devmenu.react.DevMenuAwareReactActivity;
 import android.content.Intent;
 import expo.modules.devlauncher.DevLauncherController;
 import expo.modules.ReactActivityDelegateWrapper;
 import com.facebook.react.ReactActivityDelegate;
-package com.reactnativeunsplashapp;
+
 
 import com.facebook.react.ReactActivity;
 

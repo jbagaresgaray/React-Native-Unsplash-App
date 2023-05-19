@@ -124,13 +124,16 @@ const TabHome = () => {
     });
   };
 
-  const renderItem = ({ item }: any) => (
-    <AppCardItem
-      item={item}
-      showLoading={isLoadingPhotos}
-      onUserPress={() => onUserPress(item?.user?.username)}
-      onImagePress={() => onImagePress(item.id)}
-    />
+  const renderItem = useCallback(
+    ({ item }: any) => (
+      <AppCardItem
+        item={item}
+        showLoading={isLoadingPhotos}
+        onUserPress={() => onUserPress(item?.user?.username)}
+        onImagePress={() => onImagePress(item.id)}
+      />
+    ),
+    [],
   );
 
   const listHeaderComponent = () => (

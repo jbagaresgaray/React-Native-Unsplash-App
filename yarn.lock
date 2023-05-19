@@ -8886,10 +8886,10 @@ react-native-fast-image@^8.3.7:
   resolved "https://registry.npmjs.org/react-native-fast-image/-/react-native-fast-image-8.3.7.tgz#c4877de17903101f6d94b6736a4f7e5d7b019224"
   integrity sha512-J++Ad04PTUe4YgjyGv63gfgV8Fz1gZKAgQHpblf8Z87D9dxfc8UfXHTPv9VLGdTJU4IzdTnQqzoFgDtWdsvBsQ==
 
-react-native-flipper@^0.100.0:
-  version "0.100.0"
-  resolved "https://registry.npmjs.org/react-native-flipper/-/react-native-flipper-0.100.0.tgz#fbcd568a82060592f107f3ea5ccecdb971c6f8f7"
-  integrity sha512-UsRlT9UAPHs9K+w1gVi/QEZgYem+W1Z2YXwr5NToAwNMsmTCfl0OpfWS0Xw9FiNQIOcpT2MTlPDHzL3sAQH44A==
+react-native-flipper@^0.191.0:
+  version "0.191.0"
+  resolved "https://registry.yarnpkg.com/react-native-flipper/-/react-native-flipper-0.191.0.tgz#5447f49f02d955891667f8c3128fd66e4fabd1c0"
+  integrity sha512-JKi9Fm9lfOboRLf01iKtVbjs1bVHE/63ls+mvjzn6hsNAKXkXVtI5VE0Jb/TDkGtwN1l7e+qMrh0EKhc40Iu8A==
 
 react-native-gesture-handler@~2.9.0:
   version "2.9.0"
@@ -8902,7 +8902,7 @@ react-native-gesture-handler@~2.9.0:
     lodash "^4.17.21"
     prop-types "^15.7.2"
 
-react-native-gradle-plugin@^0.71.18:
+react-native-gradle-plugin@^0.71.17:
   version "0.71.18"
   resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.71.18.tgz#20ef199bc85be32e45bb6cc069ec2e7dcb1a74a6"
   integrity sha512-7F6bD7B8Xsn3JllxcwHhFcsl9aHIig47+3eN4IHFNqfLhZr++3ElDrcqfMzugM+niWbaMi7bJ0kAkAL8eCpdWg==
@@ -9039,10 +9039,10 @@ react-native-web@~0.18.10:
     postcss-value-parser "^4.2.0"
     styleq "^0.1.2"
 
-react-native@0.71.8:
-  version "0.71.8"
-  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.71.8.tgz#4314145341c49448cf7465b93ced52a433a5e191"
-  integrity sha512-ftMAuhpgTkbHU9brrqsEyxcNrpYvXKeATY+if22Nfhhg1zW+6wn95w9otwTnA3xHkljPCbng8mUhmmERjGEl7g==
+react-native@0.71.7:
+  version "0.71.7"
+  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.71.7.tgz#d0ae409f6ee4fc7e7a876b4ca9d8d28934133228"
+  integrity sha512-Id6iRLS581fJMFGbBl1jP5uSmjExtGOvw5Gvh7694zISXjsRAsFMmU+izs0pyCLqDBoHK7y4BT7WGPGw693nYw==
   dependencies:
     "@jest/create-cache-key-function" "^29.2.1"
     "@react-native-community/cli" "10.2.2"
@@ -9069,7 +9069,7 @@ react-native@0.71.8:
     promise "^8.3.0"
     react-devtools-core "^4.26.1"
     react-native-codegen "^0.71.5"
-    react-native-gradle-plugin "^0.71.18"
+    react-native-gradle-plugin "^0.71.17"
     react-refresh "^0.4.0"
     react-shallow-renderer "^16.15.0"
     regenerator-runtime "^0.13.2"

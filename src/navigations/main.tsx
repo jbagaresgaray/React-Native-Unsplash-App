@@ -30,7 +30,7 @@ const navigationOptions: StackNavigationOptions = {
 
 export const HomeStackNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={navigationOptions}>
+    <Stack.Navigator screenOptions={navigationOptions} initialRouteName="Home">
       <Stack.Screen name="Home" component={TabHome} />
       <Stack.Screen name="UserProfile" component={UserProfile} />
       <Stack.Screen name="ImageDetails" component={ImageDetails} />
