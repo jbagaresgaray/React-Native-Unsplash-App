@@ -1,3 +1,4 @@
+#import <Expo/Expo.h>
 //
 //  ReactNativeUnsplashApp-Bridging-Header.h
 //  ReactNativeUnsplashApp
