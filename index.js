@@ -1,3 +1,5 @@
+import 'expo-dev-client';
+
 /**
  * @format
  */

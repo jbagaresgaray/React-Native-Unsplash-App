@@ -1,4 +1,15 @@
 {
   "name": "ReactNativeUnsplashApp",
-  "displayName": "ReactNativeUnsplashApp"
+  "displayName": "ReactNativeUnsplashApp",
+  "expo": {
+    "name": "reactnativeunsplashapp",
+    "slug": "reactnativeunsplashapp",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "android": {
+      "package": "com.reactnativeunsplashapp"
+    }
+  }
 }

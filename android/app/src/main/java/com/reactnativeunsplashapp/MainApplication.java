@@ -1,3 +1,5 @@
+import expo.modules.updates.UpdatesDevLauncherController;
+import expo.modules.devlauncher.DevLauncherController;
 import android.content.res.Configuration;
 import expo.modules.ApplicationLifecycleDispatcher;
 import expo.modules.ReactNativeHostWrapper;
@@ -22,7 +24,7 @@ public class MainApplication extends Application implements ReactApplication {
       new ReactNativeHostWrapper(this, new ReactNativeHost(this) {
         @Override
         public boolean getUseDeveloperSupport() {
-          return BuildConfig.DEBUG;
+      return DevLauncherController.getInstance().getUseDeveloperSupport();
         }
 
         @Override
@@ -49,6 +51,10 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
+    DevLauncherController.initialize(this, getReactNativeHost());
+    if (BuildConfig.DEBUG) {
+      DevLauncherController.getInstance().setUpdatesInterface(UpdatesDevLauncherController.initialize(this));
+    }
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
     ApplicationLifecycleDispatcher.onApplicationCreate(this);
   }
