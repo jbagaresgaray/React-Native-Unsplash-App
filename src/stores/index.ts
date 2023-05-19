@@ -1,7 +1,7 @@
-import {configureStore, StoreEnhancer} from '@reduxjs/toolkit';
-import {persistReducer, persistStore} from 'redux-persist';
+import { configureStore, StoreEnhancer } from '@reduxjs/toolkit';
+import { persistReducer, persistStore } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducer';
 
@@ -26,13 +26,8 @@ const store = configureStore({
   reducer: persistedReducer,
   middleware(getDefault) {
     const defaultMiddlewares = getDefault({
-      serializableCheck: {
-        ignoredActions: [
-          'persist/REGISTER',
-          'persist/REHYDRATE',
-          'persist/PERSIST',
-        ],
-      },
+      serializableCheck: false,
+      immutableCheck: false,
     });
     return setupReduxFlipper([...defaultMiddlewares, thunk]);
   },
@@ -41,6 +36,6 @@ const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
-export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppDispatch = () => useDispatch<any>();
 const persistor = persistStore(store);
-export {store, persistor};
+export { store, persistor };

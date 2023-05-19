@@ -71,10 +71,8 @@ const ImageUserModal: React.FC<Props> = ({
   return (
     <ActionSheet
       statusBarTranslucent
-      bounceOnOpen
       gestureEnabled
       drawUnderStatusBar={false}
-      bounciness={4}
       defaultOverlayOpacity={0.4}
       containerStyle={styles.innerContainer}
       ref={actionSheetRef}>

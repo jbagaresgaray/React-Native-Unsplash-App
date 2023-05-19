@@ -34,7 +34,6 @@ const TabHomeBottomTabOptions: BottomTabNavigationOptions = {
       size={28}
       type="ionicon"
       color={focused ? COLORS.black : '#999999'}
-      tvParallaxProperties={null}
     />
   ),
 };
@@ -46,7 +45,6 @@ const TabCollectionsBottomTabOptions: BottomTabNavigationOptions = {
       size={28}
       type="ionicon"
       color={focused ? COLORS.black : '#999999'}
-      tvParallaxProperties={null}
     />
   ),
 };
@@ -58,7 +56,6 @@ const TabSearchBottomTabOptions: BottomTabNavigationOptions = {
       size={28}
       type="ionicon"
       color={focused ? COLORS.black : '#999999'}
-      tvParallaxProperties={null}
     />
   ),
 };
@@ -70,7 +67,6 @@ const TabAccountBottomTabOptions: BottomTabNavigationOptions = {
       size={28}
       type="ionicon"
       color={focused ? COLORS.black : '#999999'}
-      tvParallaxProperties={null}
     />
   ),
 };
@@ -82,7 +78,6 @@ const TabUploadBottomTabOptions: BottomTabNavigationOptions = {
       size={28}
       type="font-awesome"
       color={focused ? COLORS.black : '#999999'}
-      tvParallaxProperties={null}
     />
   ),
 };

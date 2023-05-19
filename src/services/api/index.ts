@@ -3,7 +3,7 @@ import Config from 'react-native-config';
 
 import Storage from '../../utils/storage';
 
-const baseURL = Config.REACT_API_URL;
+const baseURL = Config.REACT_API_URL || 'https://api.unsplash.com';
 const headers = {
   Accept: 'application/json',
   'Content-Type': 'application/json',
@@ -11,6 +11,8 @@ const headers = {
   'X-Ratelimit-Limit': 1000,
   'X-Ratelimit-Remaining': 999,
 };
+
+console.log('baseURL: ', baseURL);
 
 const API = axios.create({
   baseURL,
@@ -35,6 +37,7 @@ API.interceptors.request.use(
     return config;
   },
   (error: any) => {
+    console.log("request error: ", error);
     Promise.reject(error);
   },
 );
@@ -44,6 +47,7 @@ API.interceptors.response.use(
     return response;
   },
   async (error: AxiosError) => {
+    console.log("response error: ", error);
     const originalRequest = error.config;
     return Promise.reject(error);
   },

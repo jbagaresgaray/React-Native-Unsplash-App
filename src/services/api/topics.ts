@@ -1,5 +1,5 @@
-import API from '.';
-import {ORIENTATION_TYPES, ORDER_BY_TYPES} from '../../constants';
+import API from './';
+import { ORIENTATION_TYPES, ORDER_BY_TYPES } from '../../constants';
 
 export interface ListTopicsParams {
   ids?: string | null;
@@ -17,6 +17,7 @@ export interface TopicPhotosParams {
 
 const TopicsService = {
   listTopics(params?: ListTopicsParams) {
+    console.log('listTopics: ', params);
     return API.get('/topics', {
       params,
     });
