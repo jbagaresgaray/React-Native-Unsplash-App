@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* ReactNativeUnsplashAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ReactNativeUnsplashAppTests.m */; };
+		0106FCFFE4B9207CBE117D8B /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5455C3C0DB0569B272E0599E /* ExpoModulesProvider.swift */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -15,12 +16,13 @@
 		5A75B86026B9621D00AE503B /* BridgingFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A75B85F26B9621D00AE503B /* BridgingFile.swift */; };
 		6A5EB1E82F259738FAD8A866 /* libPods-ReactNativeUnsplashApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 219ED5B2FC55DD61A9EF7422 /* libPods-ReactNativeUnsplashApp.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		A161B5FC756FFDBB40626E95 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2828FEF9DEB7410B5E9E1B2F /* ExpoModulesProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		00E356F41AD99517003FC87E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 83CBB9F71A601CBA00E9B192;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
 			remoteInfo = ReactNativeUnsplashApp;
@@ -39,9 +41,11 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ReactNativeUnsplashApp/main.m; sourceTree = "<group>"; };
 		1D64245CF85B4154A75011AF /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		219ED5B2FC55DD61A9EF7422 /* libPods-ReactNativeUnsplashApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactNativeUnsplashApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2828FEF9DEB7410B5E9E1B2F /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-ReactNativeUnsplashApp/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		28A190E5EA6840F890C9F7E1 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		292C1C9528FA8066CEC5832E /* Pods-ReactNativeUnsplashApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeUnsplashApp.release.xcconfig"; path = "Target Support Files/Pods-ReactNativeUnsplashApp/Pods-ReactNativeUnsplashApp.release.xcconfig"; sourceTree = "<group>"; };
 		3278297E28874A52AD85D01D /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		5455C3C0DB0569B272E0599E /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		55B35B7C5A6C4F1C948D16C5 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		56D3EFEA8F69A87214A6B371 /* Pods-ReactNativeUnsplashApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeUnsplashApp.debug.xcconfig"; path = "Target Support Files/Pods-ReactNativeUnsplashApp/Pods-ReactNativeUnsplashApp.debug.xcconfig"; sourceTree = "<group>"; };
 		58BBCBE344A4A0351D40BDA0 /* Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.debug.xcconfig"; path = "Target Support Files/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests/Pods-ReactNativeUnsplashApp-ReactNativeUnsplashAppTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -125,6 +129,22 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		0E1561A1967C7A259030C131 /* ReactNativeUnsplashAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				5455C3C0DB0569B272E0599E /* ExpoModulesProvider.swift */,
+			);
+			name = ReactNativeUnsplashAppTests;
+			sourceTree = "<group>";
+		};
+		12D153A73525AA54E5353A17 /* ReactNativeUnsplashApp */ = {
+			isa = PBXGroup;
+			children = (
+				2828FEF9DEB7410B5E9E1B2F /* ExpoModulesProvider.swift */,
+			);
+			name = ReactNativeUnsplashApp;
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* ReactNativeUnsplashApp */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,7 +188,7 @@
 			name = Libraries;
 			sourceTree = "<group>";
 		};
-		83CBB9F61A601CBA00E9B192 /* PBXGroup */ = {
+		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
 				13B07FAE1A68108700A75B9A /* ReactNativeUnsplashApp */,
@@ -178,6 +198,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				6C1FF1C97A6764CB13F6EA1B /* Pods */,
 				0A81C5EA62E946EDBCE59F5B /* Resources */,
+				FE0EDBCF94A9AE1E9E4F0CCB /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -191,6 +212,15 @@
 				00E356EE1AD99517003FC87E /* ReactNativeUnsplashAppTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		FE0EDBCF94A9AE1E9E4F0CCB /* ExpoModulesProviders */ = {
+			isa = PBXGroup;
+			children = (
+				12D153A73525AA54E5353A17 /* ReactNativeUnsplashApp */,
+				0E1561A1967C7A259030C131 /* ReactNativeUnsplashAppTests */,
+			);
+			name = ExpoModulesProviders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,14 +272,14 @@
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		83CBB9F71A601CBA00E9B192 = {
+		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1210;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						TestTargetID = 13B07F861A680F5B00A75B9A /* ReactNativeUnsplashApp */;
+						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
 						LastSwiftMigration = 1250;
@@ -264,7 +294,7 @@
 				en,
 				Base,
 			);
-			mainGroup = 83CBB9F61A601CBA00E9B192 /* PBXGroup */;
+			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -448,6 +478,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00E356F31AD99517003FC87E /* ReactNativeUnsplashAppTests.m in Sources */,
+				0106FCFFE4B9207CBE117D8B /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,6 +489,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				5A75B86026B9621D00AE503B /* BridgingFile.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				A161B5FC756FFDBB40626E95 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,6 +526,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReactNativeUnsplashApp.app/ReactNativeUnsplashApp";
@@ -519,6 +552,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReactNativeUnsplashApp.app/ReactNativeUnsplashApp";
@@ -544,6 +578,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.UnsplashApp;
 				PRODUCT_NAME = ReactNativeUnsplashApp;
 				SWIFT_OBJC_BRIDGING_HEADER = "ReactNativeUnsplashApp-Bridging-Header.h";
@@ -571,6 +606,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.UnsplashApp;
 				PRODUCT_NAME = ReactNativeUnsplashApp;
 				SWIFT_OBJC_BRIDGING_HEADER = "ReactNativeUnsplashApp-Bridging-Header.h";
@@ -584,7 +620,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -612,7 +648,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -633,9 +669,10 @@
 					/usr/lib/swift,
 					"$(inherited)",
 				);
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "$(SDKROOT)/usr/lib/swift";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -645,7 +682,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -673,7 +710,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -687,8 +724,9 @@
 					/usr/lib/swift,
 					"$(inherited)",
 				);
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = "$(SDKROOT)/usr/lib/swift";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -726,5 +764,5 @@
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 83CBB9F71A601CBA00E9B192;
+	rootObject = 83CBB9F71A601CBA00E9B192 /* Project object */;
 }
