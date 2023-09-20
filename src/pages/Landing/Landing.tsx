@@ -10,7 +10,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { useSelector } from 'react-redux';
 
 import landingImg from '../../assets/img/landing-unsplash.jpg';
 
@@ -29,7 +28,7 @@ import { PhotosState } from '../../stores/slices/photosSlice';
 import { TopicsState } from '../../stores/slices/topicsSlice';
 
 const Landing: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
   const dispatch = useAppDispatch();
 
   const skipLanding = () => {

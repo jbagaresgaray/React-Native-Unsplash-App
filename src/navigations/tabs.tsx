@@ -1,11 +1,9 @@
 import React from 'react';
-import {View} from 'react-native';
 import {
-  BottomTabBarOptions,
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import {Icon} from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 
 import {
   AccountsStackNavigator,
@@ -14,21 +12,13 @@ import {
   SearchStackNavigator,
 } from './main';
 import Main from '../pages/Main';
-import {COLORS} from '../constants/Colors';
+import { COLORS } from '../constants/Colors';
 import AppTabBar from '../components/AppTabBar/AppTabBar';
 
 const Tab = createBottomTabNavigator<any>();
 
-const tabBarOptions: BottomTabBarOptions = {
-  activeTintColor: COLORS.black,
-  inactiveTintColor: '#999999',
-  labelStyle: {
-    fontWeight: '500',
-  },
-};
-
 const TabHomeBottomTabOptions: BottomTabNavigationOptions = {
-  tabBarIcon: ({focused}) => (
+  tabBarIcon: ({ focused }) => (
     <Icon
       name="home"
       size={28}
@@ -39,7 +29,7 @@ const TabHomeBottomTabOptions: BottomTabNavigationOptions = {
 };
 
 const TabCollectionsBottomTabOptions: BottomTabNavigationOptions = {
-  tabBarIcon: ({focused}) => (
+  tabBarIcon: ({ focused }) => (
     <Icon
       name="file-tray-full"
       size={28}
@@ -50,7 +40,7 @@ const TabCollectionsBottomTabOptions: BottomTabNavigationOptions = {
 };
 
 const TabSearchBottomTabOptions: BottomTabNavigationOptions = {
-  tabBarIcon: ({focused}) => (
+  tabBarIcon: ({ focused }) => (
     <Icon
       name="search"
       size={28}
@@ -61,7 +51,7 @@ const TabSearchBottomTabOptions: BottomTabNavigationOptions = {
 };
 
 const TabAccountBottomTabOptions: BottomTabNavigationOptions = {
-  tabBarIcon: ({focused}) => (
+  tabBarIcon: ({ focused }) => (
     <Icon
       name="person"
       size={28}
@@ -72,7 +62,7 @@ const TabAccountBottomTabOptions: BottomTabNavigationOptions = {
 };
 
 const TabUploadBottomTabOptions: BottomTabNavigationOptions = {
-  tabBarIcon: ({focused}) => (
+  tabBarIcon: ({ focused }) => (
     <Icon
       name="plus-square"
       size={28}
@@ -86,7 +76,15 @@ const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      tabBarOptions={tabBarOptions}
+      screenOptions={{
+        tabBarActiveTintColor: COLORS.black,
+        tabBarInactiveTintColor: '#999999',
+        tabBarLabelStyle: {
+          fontWeight: '500',
+        },
+        tabBarShowLabel: false,
+        headerShown: false,
+      }}
       tabBar={AppTabBar}>
       <Tab.Screen
         name="Home"

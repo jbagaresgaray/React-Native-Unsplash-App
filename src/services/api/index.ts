@@ -7,7 +7,8 @@ const baseURL = Config.REACT_API_URL || 'https://api.unsplash.com';
 const headers = {
   Accept: 'application/json',
   'Content-Type': 'application/json',
-  Authorization: `Client-ID ${Config.REACT_UNSPLASH_ACCESS_KEY}`,
+  // Authorization: `Client-ID ${Config.REACT_UNSPLASH_ACCESS_KEY}`,
+  Authorization: `Client-ID nllcFdEQkChHOLqrK9iw4AxrC8Hv-N7L8_ada60RgsU`,
   'X-Ratelimit-Limit': 1000,
   'X-Ratelimit-Remaining': 999,
 };
@@ -37,7 +38,7 @@ API.interceptors.request.use(
     return config;
   },
   (error: any) => {
-    console.log("request error: ", error);
+    console.log('request error: ', error);
     Promise.reject(error);
   },
 );
@@ -47,7 +48,7 @@ API.interceptors.response.use(
     return response;
   },
   async (error: AxiosError) => {
-    console.log("response error: ", error);
+    console.log('response error: ', error);
     const originalRequest = error.config;
     return Promise.reject(error);
   },
