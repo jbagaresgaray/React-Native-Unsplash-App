@@ -5,7 +5,7 @@ import {
   View,
   StyleSheet,
   KeyboardAvoidingView,
-  TouchableOpacity,
+  Pressable,
   LayoutChangeEvent,
   FlatList,
 } from 'react-native';
@@ -27,20 +27,20 @@ const ImageCard: React.FC<{ item: any; height: number; onPressImage: any }> = ({
   onPressImage,
 }) => {
   return (
-    <TouchableOpacity
-      activeOpacity={0.8}
+    <Pressable
       key={item.id}
       style={styles.ImageCardContainer}
       onPress={onPressImage}>
       <Image
         source={{ uri: item.uri }}
+        placeholder={item?.blur_hash}
         style={{
           height: 120,
           width: 120,
           padding: 2,
         }}
       />
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

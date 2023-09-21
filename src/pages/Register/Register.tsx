@@ -5,18 +5,18 @@ import {
   StatusBar,
   ImageBackground,
   SafeAreaView,
-  TouchableOpacity,
+  Pressable,
   StyleSheet,
   ScrollView,
   KeyboardAvoidingView,
 } from 'react-native';
-import {Input} from 'react-native-elements';
+import { Input } from 'react-native-elements';
 
 import landingImg from '../../assets/img/landing-unsplash1.jpg';
 import AppButton from '../../components/AppButton/AppButton';
 import AppFacebookButton from '../../components/AppFacebookButton/AppFacebookButton';
 import AppHeaderLogo from '../../components/AppHeaderLogo/AppHeaderLogo';
-import {COLORS} from '../../constants/Colors';
+import { COLORS } from '../../constants/Colors';
 
 const Register = () => {
   return (
@@ -24,7 +24,7 @@ const Register = () => {
       <StatusBar barStyle="light-content" />
       <ImageBackground
         source={landingImg}
-        style={{width: '100%', height: '100%'}}>
+        style={{ width: '100%', height: '100%' }}>
         <SafeAreaView />
         <ScrollView contentContainerStyle={styles.scrollView}>
           <View style={styles.contentContainer}>
@@ -72,13 +72,13 @@ const Register = () => {
               <Text style={styles.haveAccountText}>
                 By joining, you agree to the
               </Text>
-              <TouchableOpacity activeOpacity={0.8}>
+              <Pressable>
                 <Text style={styles.loginButtonText}>Terms</Text>
-              </TouchableOpacity>
+              </Pressable>
               <Text style={styles.haveAccountText}>and</Text>
-              <TouchableOpacity activeOpacity={0.8}>
+              <Pressable>
                 <Text style={styles.loginButtonText}>Privacy Policy</Text>
-              </TouchableOpacity>
+              </Pressable>
             </View>
           </View>
         </ScrollView>
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     paddingTop: 4,
     paddingBottom: 4,
   },
-  buttonViews: {paddingBottom: 8},
+  buttonViews: { paddingBottom: 8 },
   haveAccountContainer: {
     marginTop: 16,
     flexDirection: 'row',

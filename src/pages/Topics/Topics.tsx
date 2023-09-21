@@ -10,18 +10,17 @@ import {
   FlatList,
   RefreshControl,
 } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AppCardTopic from '../../components/AppCardTopic/AppCardTopic';
 import { MAX_PER_PAGE } from '../../constants';
 import { COLORS } from '../../constants/Colors';
 
-import { useAppDispatch } from '../../stores';
 import { fetchListTopics } from '../../stores/slices/topics/thunk';
 import { topicsSelectors } from '../../stores/slices/topics';
 
 const Topics = () => {
   const navigation = useNavigation();
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch<any>();
   const [refreshing, setRefreshing] = useState(false);
   const TopicsArr = useSelector(topicsSelectors.topics);
 

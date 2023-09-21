@@ -1,4 +1,4 @@
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import {
   View,
@@ -6,18 +6,18 @@ import {
   StatusBar,
   ImageBackground,
   SafeAreaView,
-  TouchableOpacity,
+  Pressable,
   StyleSheet,
   ScrollView,
   KeyboardAvoidingView,
 } from 'react-native';
-import {Input} from 'react-native-elements';
+import { Input } from 'react-native-elements';
 
 import landingImg from '../../assets/img/landing-unsplash1.jpg';
 import AppButton from '../../components/AppButton/AppButton';
 import AppFacebookButton from '../../components/AppFacebookButton/AppFacebookButton';
 import AppHeaderLogo from '../../components/AppHeaderLogo/AppHeaderLogo';
-import {COLORS} from '../../constants/Colors';
+import { COLORS } from '../../constants/Colors';
 
 const Login = () => {
   const navigation = useNavigation();
@@ -27,9 +27,9 @@ const Login = () => {
   };
 
   const SkipButton = () => (
-    <TouchableOpacity style={styles.skipButton} onPress={skipLanding}>
+    <Pressable style={styles.skipButton} onPress={skipLanding}>
       <Text style={styles.skipButtonText}>Skip</Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 
   return (
@@ -37,7 +37,7 @@ const Login = () => {
       <StatusBar barStyle="light-content" />
       <ImageBackground
         source={landingImg}
-        style={{width: '100%', height: '100%'}}>
+        style={{ width: '100%', height: '100%' }}>
         <SafeAreaView />
         <ScrollView contentContainerStyle={styles.scrollView}>
           <View style={styles.headerContainer}>{SkipButton()}</View>
@@ -60,9 +60,9 @@ const Login = () => {
                 inputStyle={styles.labelText}
               />
               <View style={styles.haveAccountContainer}>
-                <TouchableOpacity activeOpacity={0.6}>
+                <Pressable>
                   <Text style={styles.loginButtonText}>Forgot Password?</Text>
-                </TouchableOpacity>
+                </Pressable>
               </View>
             </KeyboardAvoidingView>
             <View style={styles.buttonViews}>
@@ -71,9 +71,9 @@ const Login = () => {
             </View>
             <View style={styles.haveAccountContainer}>
               <Text style={styles.haveAccountText}>Don't have an account?</Text>
-              <TouchableOpacity activeOpacity={0.8}>
+              <Pressable>
                 <Text style={styles.loginButtonText}>Join</Text>
-              </TouchableOpacity>
+              </Pressable>
             </View>
           </View>
         </ScrollView>
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     paddingTop: 4,
     paddingBottom: 4,
   },
-  buttonViews: {paddingBottom: 8},
+  buttonViews: { paddingBottom: 8 },
   haveAccountContainer: {
     marginTop: 16,
     marginBottom: 16,

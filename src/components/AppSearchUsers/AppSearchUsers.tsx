@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/core';
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   FlatList,
   StyleSheet,

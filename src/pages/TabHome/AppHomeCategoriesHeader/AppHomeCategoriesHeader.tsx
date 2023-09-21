@@ -1,19 +1,19 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import {COLORS} from '../../../constants/Colors';
+import { View, Text, Pressable, StyleSheet } from 'react-native';
+import { COLORS } from '../../../constants/Colors';
 
 interface Props {
   onViewAllPress?: () => void;
 }
 
-const AppHomeCategoriesHeader: React.FC<Props> = ({onViewAllPress}) => {
+const AppHomeCategoriesHeader: React.FC<Props> = ({ onViewAllPress }) => {
   return (
     <View style={styles.container}>
       <View style={styles.categoryHeader}>
         <Text style={styles.categoryHeaderTitle}>Topics</Text>
-        <TouchableOpacity onPress={onViewAllPress}>
+        <Pressable onPress={onViewAllPress}>
           <Text style={styles.viewAll}>View all</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
       <View style={styles.categorySubHeader}>
         <Text style={styles.mostPopular}>Most Popular</Text>

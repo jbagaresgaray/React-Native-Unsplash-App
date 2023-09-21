@@ -8,10 +8,9 @@ import React, {
 import { useEffect } from 'react';
 import { View, Text, SafeAreaView, StyleSheet, Dimensions } from 'react-native';
 import { Image } from 'expo-image';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { COLORS } from '../../constants/Colors';
 
-import { useAppDispatch } from '../../stores';
 import { getPhoto } from '../../stores/slices/photos/thunk';
 import { photosSelectors } from '../../stores/slices/photos';
 import ImageUserModal from '../ImageUserModal/ImageUserModal';
@@ -23,7 +22,7 @@ const ImageDetails: React.FC = () => {
   const [photoId, setPhotoId] = useState('');
   const navigation: any = useNavigation();
   const { params }: any = useRoute();
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch<any>();
 
   const image = useSelector(photosSelectors.photo);
 
@@ -54,6 +53,7 @@ const ImageDetails: React.FC = () => {
     <SafeAreaView style={styles.SafeAreaView}>
       <Image
         style={styles.bgImage}
+        placeholder={image?.blur_hash}
         source={{
           uri: image?.urls?.regular,
         }}

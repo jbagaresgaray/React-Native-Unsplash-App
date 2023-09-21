@@ -10,9 +10,8 @@ import AppUserProfileDetail from './AppUserProfileDetail/AppUserProfileDetail';
 import AppSearchPhotos from '../../components/AppSearchPhotos/AppSearchPhotos';
 import AppSearchCollections from '../../components/AppSearchCollections/AppSearchCollections';
 
-import { useAppDispatch } from '../../stores';
 import { usersSelectors } from '../../stores/slices/users';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { MAX_PER_PAGE } from '../../constants';
 import {
@@ -32,7 +31,7 @@ const UserProfile = () => {
   const [headerTitle, setHeaderTitle] = useState<string | null | undefined>('');
   const [userId, setUserId] = useState<string>('');
 
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch<any>();
   const userProfile = useSelector(usersSelectors.publicUser);
   const PhotosArr = useSelector(usersSelectors.publicUserPhotos);
   const LikesArr = useSelector(usersSelectors.publicUserLikedPhotos);

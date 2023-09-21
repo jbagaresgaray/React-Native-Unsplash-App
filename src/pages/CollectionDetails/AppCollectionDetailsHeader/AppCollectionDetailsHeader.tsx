@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { Avatar, Button, ListItem, Icon } from 'react-native-elements';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { COLORS } from '../../../constants/Colors';
 import { IProfileImage } from '../../../interfaces/generic';
 
@@ -10,7 +9,7 @@ interface Props {
   name?: string;
   username?: string;
   profile_image?: IProfileImage;
-  onProfilePress?: () => void;
+  onProfilePress?(): void | undefined;
 }
 
 const AppCollectionDetailsHeader: React.FC<Props> = ({
@@ -35,14 +34,14 @@ const AppCollectionDetailsHeader: React.FC<Props> = ({
           }}
         />
         <ListItem.Content style={styles.profileContainer}>
-          <TouchableOpacity onPress={onProfilePress}>
+          <Pressable onPress={onProfilePress}>
             <ListItem.Title numberOfLines={1} style={styles.name}>
               {name}
             </ListItem.Title>
             <ListItem.Subtitle style={styles.username}>
               {username}
             </ListItem.Subtitle>
-          </TouchableOpacity>
+          </Pressable>
           <Button
             containerStyle={styles.followButton}
             buttonStyle={styles.followButtonStyle}

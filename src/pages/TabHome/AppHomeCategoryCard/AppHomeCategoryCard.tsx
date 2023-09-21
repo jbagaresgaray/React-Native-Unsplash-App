@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { Image } from 'expo-image';
 import { COLORS } from '../../../constants/Colors';
 import { ITopic } from '../../../interfaces/topic';
@@ -13,17 +13,17 @@ const AppHomeCategoryCard: React.FC<Props> = ({ topic, onPress }) => {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <TouchableOpacity
-          activeOpacity={0.8}
+        <Pressable
           style={styles.imageWrapper}
           onPress={onPress}>
           <Image
             style={styles.image}
+            placeholder={topic?.cover_photo?.blur_hash}
             source={{
               uri: topic?.cover_photo?.urls.small,
             }}
           />
-        </TouchableOpacity>
+        </Pressable>
         <View style={styles.title}>
           <Text numberOfLines={1} style={styles.titleText}>
             {topic?.title}

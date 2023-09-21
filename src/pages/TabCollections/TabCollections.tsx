@@ -8,21 +8,21 @@ import {
   RefreshControl,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { COLORS } from '../../constants/Colors';
 import AppCollectionsHeader from './AppCollectionsHeader/AppCollectionsHeader';
-import AppCollectionItem from '../../components/AppCollectionItem/AppCollectionItem';
+import { AppCollectionItem } from '../../components';
 
-import { collectionsSelectors } from '../../stores/slices/collections';
 import { MAX_PER_PAGE } from '../../constants';
 import { fetchCollections } from '../../stores/slices/collections/thunk';
+import { useCollections } from '../../hooks';
 
 const TabCollections = () => {
   const [refreshing, setRefreshing] = useState(false);
   const navigation: any = useNavigation();
-  const dispatch = useDispatch(); 
-  const CollectionsArr = useSelector(collectionsSelectors.collections);
+  const dispatch = useDispatch<any>();
+  const { Collections } = useCollections();
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -74,7 +74,7 @@ const TabCollections = () => {
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }
             ListHeaderComponent={() => <AppCollectionsHeader />}
-            data={CollectionsArr}
+            data={Collections}
             renderItem={renderItem}
             keyExtractor={item => item.id}
           />

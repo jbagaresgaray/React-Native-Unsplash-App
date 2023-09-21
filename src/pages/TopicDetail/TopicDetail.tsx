@@ -11,13 +11,12 @@ import {
   RefreshControl,
 } from 'react-native';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AppCardItem from '../../components/AppCardItem/AppCardItem';
 
 import { MAX_PER_PAGE } from '../../constants';
 import { COLORS } from '../../constants/Colors';
 
-import { useAppDispatch } from '../../stores';
 import { getTopic, getTopicPhotos } from '../../stores/slices/topics/thunk';
 import { topicsSelectors } from '../../stores/slices/topics';
 import TopicDetailInformation from './TopicDetailInformation';
@@ -29,7 +28,7 @@ const TopicDetail = () => {
   const [idSlug, setIdSlug] = useState('');
   const navigation: any = useNavigation();
   const { params }: any = useRoute();
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   const topic = useSelector(topicsSelectors.topic);
   const TopicPhotos = useSelector(topicsSelectors.topicPhotos);

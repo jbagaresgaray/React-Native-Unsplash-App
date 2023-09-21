@@ -7,7 +7,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
-  TouchableOpacity,
+  Pressable,
   View,
 } from 'react-native';
 
@@ -20,16 +20,16 @@ import AppHeaderLogo from '../../components/AppHeaderLogo/AppHeaderLogo';
 import { MAX_PER_PAGE } from '../../constants';
 import { COLORS } from '../../constants/Colors';
 
-import { useAppDispatch } from '../../stores';
 import { fetchCollections } from '../../stores/slices/collections/thunk';
 import { fetchListPhotos } from '../../stores/slices/photos/thunk';
 import { fetchListTopics } from '../../stores/slices/topics/thunk';
 import { PhotosState } from '../../stores/slices/photos';
 import { TopicsState } from '../../stores/slices/topics';
+import { useDispatch } from 'react-redux';
 
 const Landing: React.FC = () => {
   const navigation = useNavigation<any>();
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   const skipLanding = () => {
     navigation.navigate('Main');
@@ -44,9 +44,9 @@ const Landing: React.FC = () => {
   };
 
   const SkipButton = () => (
-    <TouchableOpacity style={styles.skipButton} onPress={skipLanding}>
+    <Pressable style={styles.skipButton} onPress={skipLanding}>
       <Text style={styles.skipButtonText}>Skip</Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 
   useEffect(() => {
@@ -92,9 +92,9 @@ const Landing: React.FC = () => {
           </View>
           <View style={styles.haveAccountContainer}>
             <Text style={styles.haveAccountText}>Already have an account?</Text>
-            <TouchableOpacity onPress={onLogin}>
+            <Pressable onPress={onLogin}>
               <Text style={styles.loginButtonText}>Login</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </View>
       </ImageBackground>

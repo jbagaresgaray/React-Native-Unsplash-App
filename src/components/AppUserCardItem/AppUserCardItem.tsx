@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { Image } from 'expo-image';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
@@ -33,9 +33,9 @@ const AppUserCardItem: React.FC<Props> = ({
           <Text style={styles.username}>{user?.username}</Text>
         </View>
       </TouchableWithoutFeedback>
-      <TouchableOpacity onPress={onMorePress}>
+      <Pressable onPress={onMorePress}>
         <Icons name="dots-vertical" size={24} />
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 };

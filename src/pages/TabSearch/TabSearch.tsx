@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react';
 import { StyleSheet, SafeAreaView } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import debounce from 'lodash/debounce';
 import isEmpty from 'lodash/isEmpty';
 
@@ -20,7 +20,6 @@ import AppSearchHeaderBar from '../../components/AppSearchHeaderBar/AppSearchHea
 
 import { photosSelectors } from '../../stores/slices/photos';
 import { collectionsSelectors } from '../../stores/slices/collections';
-import { useAppDispatch } from '../../stores';
 import { searchSelectors } from '../../stores/slices/search';
 import { MAX_PER_PAGE } from '../../constants';
 import { fetchListPhotos } from '../../stores/slices/photos/thunk';
@@ -32,7 +31,7 @@ import {
 
 const TabSearch = () => {
   const navigation: any = useNavigation();
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
   const [searchText, setSearchText] = useState('');
   const [activeTab, setActiveTab] = useState(0);
   const [refreshing, setRefreshing] = useState(false);

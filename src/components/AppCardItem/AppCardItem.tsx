@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { View, StyleSheet, Pressable, Dimensions } from 'react-native';
 import { Button } from 'react-native-elements';
 import { Image } from 'expo-image';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
@@ -69,12 +69,15 @@ const AppCardItem: React.FC<Props> = ({
         onMorePress={onMorePress}
         onUserPress={onUserPress}
       />
-      <TouchableOpacity
-        activeOpacity={0.8}
+      <Pressable
         onPress={onImagePress}
         style={styles.imageContainer}>
-        <Image style={styles.image} source={{ uri: item?.urls?.small }} />
-      </TouchableOpacity>
+        <Image
+          style={styles.image}
+          placeholder={item?.blur_hash}
+          source={{ uri: item?.urls?.small }}
+        />
+      </Pressable>
       <View style={styles.reactionsWrapper}>
         <View style={styles.reactions}>
           <View style={styles.lReactions}>

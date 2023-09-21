@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
-import {Avatar, ListItem} from 'react-native-elements';
-import {IProfileImage} from '../../../interfaces/generic';
+import { View, StyleSheet, Pressable } from 'react-native';
+import { Avatar, ListItem } from 'react-native-elements';
+import { IProfileImage } from '../../../interfaces/generic';
 import AppUserProfileFollowMessage from '../AppUserProfileFollowMessage/AppUserProfileFollowMessage';
 
 interface Props {
@@ -30,14 +30,14 @@ const AppUserProfileItem: React.FC<Props> = ({
           }}
         />
         <ListItem.Content style={styles.profileContainer}>
-          <TouchableOpacity onPress={onProfilePress}>
+          <Pressable onPress={onProfilePress}>
             <ListItem.Title numberOfLines={1} style={styles.name}>
               {name}
             </ListItem.Title>
             <ListItem.Subtitle style={styles.username}>
               {username}
             </ListItem.Subtitle>
-          </TouchableOpacity>
+          </Pressable>
           <View>
             <AppUserProfileFollowMessage />
           </View>

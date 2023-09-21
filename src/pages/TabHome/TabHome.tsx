@@ -10,21 +10,19 @@ import {
   View,
   ActivityIndicator,
 } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import AppHomeCategories from './AppHomeCategories/AppHomeCategories';
 import AppHomeCategoriesHeader from './AppHomeCategoriesHeader/AppHomeCategoriesHeader';
 import AppHomeSegment from './AppHomeSegment/AppHomeSegment';
-import AppCardItem from '../../components/AppCardItem/AppCardItem';
+import { AppCardItem } from '../../components';
 
 import { COLORS } from '../../constants/Colors';
-import { useAppDispatch } from '../../stores';
-import { topicsSelectors } from '../../stores/slices/topics';
-import { photosSelectors } from '../../stores/slices/photos';
 import { MAX_PER_PAGE } from '../../constants';
 import { fetchListTopics } from '../../stores/slices/topics/thunk';
 import { fetchListPhotos } from '../../stores/slices/photos/thunk';
 import { loadFakeData } from '../../utils';
+import { usePhotos, useTopics } from '../../hooks';
 
 const TabHome = () => {
   const fakePhotosArr = loadFakeData();
@@ -35,14 +33,11 @@ const TabHome = () => {
   const [loadingMore, setLoadingMore] = useState(false);
   const [loadingTopicMore, setLoadingTopicMore] = useState(false);
 
-  const TopicsArr = useSelector(topicsSelectors.topics);
-  const PhotosArr = useSelector(photosSelectors.photos);
-  const isLoadingPhotos = useSelector(photosSelectors.isLoadingPhotos);
-  // const isLoadingPhotos = true;
-  const isLoadingTopics = useSelector(topicsSelectors.isLoadingTopics);
+  const { isLoadingTopics, Topics } = useTopics();
+  const { isLoadingPhotos, Photos } = usePhotos();
 
   const navigation: any = useNavigation();
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch<any>();
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
@@ -51,21 +46,24 @@ const TabHome = () => {
     setPhotosPage(1);
     setTopicsPage(1);
 
-    dispatch(
-      fetchListTopics({
-        ids: null,
-        page: 1,
-        per_page: MAX_PER_PAGE,
-        order_by: 'position',
-      }),
-    );
-    dispatch(
-      fetchListPhotos({
-        page: 1,
-        per_page: MAX_PER_PAGE,
-        order_by: 'latest',
-      }),
-    );
+    await Promise.all([
+      dispatch(
+        fetchListTopics({
+          ids: null,
+          page: 1,
+          per_page: MAX_PER_PAGE,
+          order_by: 'position',
+        }),
+      ),
+      dispatch(
+        fetchListPhotos({
+          page: 1,
+          per_page: MAX_PER_PAGE,
+          order_by: 'latest',
+        }),
+      ),
+    ]);
+
     setRefreshing(false);
   }, []);
 
@@ -141,7 +139,7 @@ const TabHome = () => {
       <AppHomeCategoriesHeader onViewAllPress={onViewAllPress} />
       <AppHomeCategories
         showLoading={isLoadingTopics}
-        topics={TopicsArr}
+        topics={Topics}
         onPress={onTopicPress}
       />
     </>
@@ -174,7 +172,7 @@ const TabHome = () => {
       }
       ListHeaderComponent={listHeaderComponent}
       ListFooterComponent={listFooterComponent}
-      data={isLoadingPhotos ? fakePhotosArr : PhotosArr}
+      data={isLoadingPhotos ? fakePhotosArr : Photos}
       renderItem={renderItem}
       keyExtractor={(item, index) => 'key' + index}
       onEndReached={loadMorePhotos}

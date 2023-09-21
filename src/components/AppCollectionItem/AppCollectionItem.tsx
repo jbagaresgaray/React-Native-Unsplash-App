@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import PhotoGrid from 'react-native-thumbnail-grid';
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 import AppTag from '../AppTag/AppTag';
-import {ICollection} from '../../interfaces/collection';
+import { ICollection } from '../../interfaces/collection';
 
 interface Props {
   index?: number;
@@ -33,13 +33,13 @@ const AppCollectionItem: React.FC<Props> = ({
     <View style={styles.cardContainer}>
       <View style={styles.postHeader}>
         <View style={styles.infoWrapper}>
-          <TouchableOpacity onPress={onPressTitle}>
+          <Pressable onPress={onPressTitle}>
             <Text style={styles.name}>{item?.title}</Text>
             <Text style={styles.username}>
               {item?.total_photos} Photos{' '}
               <Text>· Curated by {item?.user?.username}</Text>
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         </View>
         <View style={styles.tagsWrapper}>
           {item?.tags &&

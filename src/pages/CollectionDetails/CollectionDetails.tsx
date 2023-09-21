@@ -12,27 +12,22 @@ import AppCardItem from '../../components/AppCardItem/AppCardItem';
 import AppCollectionDetailsHeader from './AppCollectionDetailsHeader/AppCollectionDetailsHeader';
 
 import { COLORS } from '../../constants/Colors';
-
-import { useAppDispatch } from '../../stores';
 import {
   getCollection,
   getCollectionPhotos,
 } from '../../stores/slices/collections/thunk';
-import { useSelector } from 'react-redux';
-import { collectionsSelectors } from '../../stores/slices/collections';
+import { useDispatch } from 'react-redux';
 import { MAX_PER_PAGE } from '../../constants';
+import { useCollections } from '../../hooks';
 
 const CollectionDetails: React.FC = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [collectionId, setCollectionId] = useState('');
   const navigation: any = useNavigation();
   const { params }: any = useRoute();
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch<any>();
 
-  const Collection = useSelector(collectionsSelectors.collection);
-  const CollectionPhotosArr = useSelector(
-    collectionsSelectors.collectionPhotos,
-  );
+  const { Collection, CollectionPhotos } = useCollections();
 
   const wait = (timeout: number) => {
     return new Promise(resolve => setTimeout(resolve, timeout));
@@ -99,7 +94,7 @@ const CollectionDetails: React.FC = () => {
                 />
               </>
             )}
-            data={CollectionPhotosArr}
+            data={CollectionPhotos}
             renderItem={renderItem}
             keyExtractor={item => item.id}
           />

@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Dimensions,
   StyleSheet,
-  TouchableOpacity,
+  Pressable,
   TouchableWithoutFeedback,
 } from 'react-native';
 import { View, Text } from 'react-native';
@@ -53,6 +53,7 @@ const AppCardTopic: React.FC<Props> = ({
             source={{
               uri: cover_photo?.urls?.small,
             }}
+            placeholder={cover_photo?.blur_hash}
             style={styles.cardImage}
           />
         </View>
@@ -64,7 +65,7 @@ const AppCardTopic: React.FC<Props> = ({
                 by {owners?.name}
               </Text>
             </View>
-            <TouchableOpacity activeOpacity={0.8} onPress={onUserPress}>
+            <Pressable onPress={onUserPress}>
               <Avatar
                 rounded
                 source={{
@@ -73,7 +74,7 @@ const AppCardTopic: React.FC<Props> = ({
                 size="medium"
                 containerStyle={styles.topicCardHeaderAvatar}
               />
-            </TouchableOpacity>
+            </Pressable>
           </View>
           <View style={styles.topicDescriptionView}>
             <Text style={styles.topicDescriptionText} numberOfLines={2}>
