@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import { topicsReducer } from './slices/topicsSlice';
-import { photosReducer } from './slices/photosSlice';
-import { collectionsReducer } from './slices/collectionsSlice';
-import { usersReducer } from './slices/usersSlice';
-import { searchReducer } from './slices/searchReducer';
+import { topicsReducer } from './slices/topics';
+import { photosReducer } from './slices/photos';
+import { collectionsReducer } from './slices/collections';
+import { usersReducer } from './slices/users';
+import { searchReducer } from './slices/search';
 
 const rootReducer = combineReducers({
   topics: topicsReducer,

@@ -17,9 +17,9 @@ import { useAppDispatch } from '../../stores';
 import {
   getCollection,
   getCollectionPhotos,
-} from '../../stores/middleware/collection';
+} from '../../stores/slices/collections/thunk';
 import { useSelector } from 'react-redux';
-import { collectionsSelectors } from '../../stores/slices/collectionsSlice';
+import { collectionsSelectors } from '../../stores/slices/collections';
 import { MAX_PER_PAGE } from '../../constants';
 
 const CollectionDetails: React.FC = () => {

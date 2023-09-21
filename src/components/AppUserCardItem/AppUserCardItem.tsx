@@ -4,7 +4,7 @@ import FastImage from 'react-native-fast-image';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import { default as Icons } from 'react-native-vector-icons/MaterialCommunityIcons';
-import { IUser } from '../../models/user';
+import { IUser } from '../../interfaces/user';
 
 interface Props {
   user?: IUser;

@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosResponse } from 'axios';
-import { IPhotoExtended } from '../../models/photo';
-import PhotosService, { ListPhotosParams } from '../../services/api/photos';
+import { IPhotoExtended } from '../../../interfaces/photo';
+import PhotosService, { ListPhotosParams } from '../../../services/api/photos';
 
 export const fetchListPhotos = createAsyncThunk<
   IPhotoExtended[],

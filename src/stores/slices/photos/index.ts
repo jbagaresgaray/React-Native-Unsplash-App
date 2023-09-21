@@ -1,8 +1,8 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '..';
-import { MAX_PER_PAGE, ORDER_BY_TYPES } from '../../constants';
-import { fetchListPhotos, getPhoto } from '../middleware/photos';
-import { IPhotoExtended } from './../../models/photo';
+import { RootState } from '../..';
+import { MAX_PER_PAGE, ORDER_BY_TYPES } from '../../../constants';
+import { fetchListPhotos, getPhoto } from './thunk';
+import { IPhotoExtended } from '../../../interfaces/photo';
 
 export type PhotosState = {
   isLoadingPhoto: boolean;

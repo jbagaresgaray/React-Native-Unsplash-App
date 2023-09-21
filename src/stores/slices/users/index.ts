@@ -3,11 +3,11 @@ import {
   createSlice,
 } from '@reduxjs/toolkit';
 
-import { RootState } from '..';
-import { MAX_PER_PAGE } from '../../constants';
-import { IPhoto } from '../../models/photo';
-import { IUserProfile } from '../../models/user';
-import { getUserCollections, getUserLikedPhotos, getUserPhotos, getUserPublicProfile } from '../middleware/users';
+import { RootState } from '../..';
+import { MAX_PER_PAGE } from '../../../constants';
+import { IPhoto } from '../../../interfaces/photo';
+import { IUserProfile } from '../../../interfaces/user';
+import { getUserCollections, getUserLikedPhotos, getUserPhotos, getUserPublicProfile } from './thunk';
 
 
 export type UsersState = {

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Avatar, ListItem } from 'react-native-elements';
 import AppTag from '../../../components/AppTag/AppTag';
-import { IProfileImage, ITag, ITags } from '../../../models/generic';
+import { IProfileImage, ITag, ITags } from '../../../interfaces/generic';
 import AppUserProfileFollowerFollowing from '../AppUserProfileFollowerFollowing/AppUserProfileFollowerFollowing';
 import AppUserProfileFollowMessage from '../AppUserProfileFollowMessage/AppUserProfileFollowMessage';
 

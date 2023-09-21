@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {Avatar, ListItem} from 'react-native-elements';
-import {IProfileImage} from '../../../models/generic';
+import {IProfileImage} from '../../../interfaces/generic';
 import AppUserProfileFollowMessage from '../AppUserProfileFollowMessage/AppUserProfileFollowMessage';
 
 interface Props {

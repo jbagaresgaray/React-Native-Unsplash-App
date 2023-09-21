@@ -14,9 +14,9 @@ import { COLORS } from '../../constants/Colors';
 import AppCollectionsHeader from './AppCollectionsHeader/AppCollectionsHeader';
 import AppCollectionItem from '../../components/AppCollectionItem/AppCollectionItem';
 
-import { collectionsSelectors } from '../../stores/slices/collectionsSlice';
+import { collectionsSelectors } from '../../stores/slices/collections';
 import { MAX_PER_PAGE } from '../../constants';
-import { fetchCollections } from '../../stores/middleware/collection';
+import { fetchCollections } from '../../stores/slices/collections/thunk';
 
 const TabCollections = () => {
   const [refreshing, setRefreshing] = useState(false);

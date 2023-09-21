@@ -19,11 +19,11 @@ import AppCardItem from '../../components/AppCardItem/AppCardItem';
 
 import { COLORS } from '../../constants/Colors';
 import { useAppDispatch } from '../../stores';
-import { topicsSelectors } from '../../stores/slices/topicsSlice';
-import { photosSelectors } from '../../stores/slices/photosSlice';
+import { topicsSelectors } from '../../stores/slices/topics';
+import { photosSelectors } from '../../stores/slices/photos';
 import { MAX_PER_PAGE } from '../../constants';
-import { fetchListTopics } from '../../stores/middleware/topic';
-import { fetchListPhotos } from '../../stores/middleware/photos';
+import { fetchListTopics } from '../../stores/slices/topics/thunk';
+import { fetchListPhotos } from '../../stores/slices/photos/thunk';
 import { loadFakeData } from '../../utils';
 
 const TabHome = () => {

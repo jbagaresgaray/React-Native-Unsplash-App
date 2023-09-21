@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import PhotoGrid from 'react-native-thumbnail-grid';
 import {useEffect} from 'react';
 import AppTag from '../AppTag/AppTag';
-import {ICollection} from '../../models/collection';
+import {ICollection} from '../../interfaces/collection';
 
 interface Props {
   index?: number;

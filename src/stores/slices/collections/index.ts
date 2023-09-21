@@ -1,15 +1,15 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '..';
-import { MAX_PER_PAGE } from '../../constants';
-import { ICollection } from '../../models/collection';
+import { RootState } from '../..';
+import { MAX_PER_PAGE } from '../../../constants';
+import { ICollection } from '../../../interfaces/collection';
 import {
   fetchCollections,
   getCollection,
   getCollectionPhotos,
   getRelatedCollection,
-} from '../middleware/collection';
+} from './thunk';
 
-import { IPhoto } from './../../models/photo';
+import { IPhoto } from '../../../interfaces/photo';
 
 export type CollectionState = {
   isLoadingCollection: boolean;

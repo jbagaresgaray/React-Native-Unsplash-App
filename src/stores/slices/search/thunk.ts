@@ -4,8 +4,8 @@ import {
   ISearchCollections,
   ISearchPhotos,
   ISearchUsers,
-} from '../../models/generic';
-import SearchService, { BasicSearchParams } from '../../services/api/search';
+} from '../../../interfaces/generic';
+import SearchService, { BasicSearchParams } from '../../../services/api/search';
 
 export const searchUsersQry = createAsyncThunk<ISearchUsers, BasicSearchParams>(
   'search/searchUsers',

@@ -21,11 +21,11 @@ import { MAX_PER_PAGE } from '../../constants';
 import { COLORS } from '../../constants/Colors';
 
 import { useAppDispatch } from '../../stores';
-import { fetchCollections } from '../../stores/middleware/collection';
-import { fetchListPhotos } from '../../stores/middleware/photos';
-import { fetchListTopics } from '../../stores/middleware/topic';
-import { PhotosState } from '../../stores/slices/photosSlice';
-import { TopicsState } from '../../stores/slices/topicsSlice';
+import { fetchCollections } from '../../stores/slices/collections/thunk';
+import { fetchListPhotos } from '../../stores/slices/photos/thunk';
+import { fetchListTopics } from '../../stores/slices/topics/thunk';
+import { PhotosState } from '../../stores/slices/photos';
+import { TopicsState } from '../../stores/slices/topics';
 
 const Landing: React.FC = () => {
   const navigation = useNavigation<any>();

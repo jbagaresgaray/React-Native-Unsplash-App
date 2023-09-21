@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import HTMLView from 'react-native-htmlview';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
-import { ITopic } from '../../models/topic';
+import { ITopic } from '../../interfaces/topic';
 import { getWindowWidth } from '../../utils';
 
 interface Props {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, ScrollView, StyleSheet, Platform } from 'react-native';
-import { ITopic } from '../../../models/topic';
+import { ITopic } from '../../../interfaces/topic';
 import { loadFakeData } from '../../../utils';
 import AppHomeCategoryCard from '../AppHomeCategoryCard/AppHomeCategoryCard';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';

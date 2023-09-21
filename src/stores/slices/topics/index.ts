@@ -1,9 +1,9 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
-import { MAX_PER_PAGE, ORDER_BY_TYPES } from '../../constants';
-import { ITopic } from '../../models/topic';
-import { IPhoto } from '../../models/photo';
-import { fetchListTopics, getTopic, getTopicPhotos } from '../middleware/topic';
-import { RootState } from '..';
+import { MAX_PER_PAGE, ORDER_BY_TYPES } from '../../../constants';
+import { ITopic } from '../../../interfaces/topic';
+import { IPhoto } from '../../../interfaces/photo';
+import { fetchListTopics, getTopic, getTopicPhotos } from './thunk';
+import { RootState } from '../..';
 
 export type TopicsState = {
   isLoadingTopic: boolean;

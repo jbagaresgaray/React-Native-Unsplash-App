@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosResponse } from 'axios';
-import { ICollection } from '../../models/collection';
-import { IPhoto } from '../../models/photo';
+import { ICollection } from '../../../interfaces/collection';
+import { IPhoto } from '../../../interfaces/photo';
 import CollectionsService, {
   ListCollectionsParams,
-} from '../../services/api/collections';
-import { CollectionPhotosParams } from '../../services/api/photos';
+} from '../../../services/api/collections';
+import { CollectionPhotosParams } from '../../../services/api/photos';
 
 export const fetchCollections = createAsyncThunk<
   ICollection[],

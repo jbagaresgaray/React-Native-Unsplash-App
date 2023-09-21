@@ -12,8 +12,8 @@ import { useSelector } from 'react-redux';
 import { COLORS } from '../../constants/Colors';
 
 import { useAppDispatch } from '../../stores';
-import { getPhoto } from '../../stores/middleware/photos';
-import { photosSelectors } from '../../stores/slices/photosSlice';
+import { getPhoto } from '../../stores/slices/photos/thunk';
+import { photosSelectors } from '../../stores/slices/photos';
 import ImageUserModal from '../ImageUserModal/ImageUserModal';
 import AppUserProfileItem from '../UserProfile/AppUserProfileItem/AppUserProfileItem';
 

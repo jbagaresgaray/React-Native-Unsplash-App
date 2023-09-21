@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { ListItem, Icon, Avatar } from 'react-native-elements';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import AppStatus from '../../components/AppStatus/AppStatus';
-import { ITopic } from '../../models/topic';
+import { ITopic } from '../../interfaces/topic';
 
 interface Props {
   topic?: ITopic | null;

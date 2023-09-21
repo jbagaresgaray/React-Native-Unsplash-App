@@ -1,16 +1,16 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '..';
-import { MAX_PER_PAGE } from '../../constants';
+import { RootState } from '../..';
+import { MAX_PER_PAGE } from '../../../constants';
 import {
   ISearchCollections,
   ISearchPhotos,
   ISearchUsers,
-} from '../../models/generic';
+} from '../../../interfaces/generic';
 import {
   searchUsersQry,
   searchCollectionsQry,
   searchPhotosQry,
-} from '../middleware/search';
+} from './thunk';
 
 export type SearchState = {
   isLoadingSearchUsers: boolean;

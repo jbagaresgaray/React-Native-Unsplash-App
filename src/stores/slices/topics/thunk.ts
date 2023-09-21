@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosResponse } from 'axios';
-import { IPhoto } from '../../models/photo';
-import { ITopic } from '../../models/topic';
+import { IPhoto } from '../../../interfaces/photo';
+import { ITopic } from '../../../interfaces/topic';
 import TopicsService, {
   ListTopicsParams,
   TopicPhotosParams,
-} from '../../services/api/topics';
+} from '../../../services/api/topics';
 
 export const fetchListTopics = createAsyncThunk<ITopic[], ListTopicsParams>(
   'topics/fetchTopics',

@@ -11,7 +11,7 @@ import AppSearchPhotos from '../../components/AppSearchPhotos/AppSearchPhotos';
 import AppSearchCollections from '../../components/AppSearchCollections/AppSearchCollections';
 
 import { useAppDispatch } from '../../stores';
-import { usersSelectors } from '../../stores/slices/usersSlice';
+import { usersSelectors } from '../../stores/slices/users';
 import { useSelector } from 'react-redux';
 
 import { MAX_PER_PAGE } from '../../constants';
@@ -20,7 +20,7 @@ import {
   getUserLikedPhotos,
   getUserPhotos,
   getUserPublicProfile,
-} from '../../stores/middleware/users';
+} from '../../stores/slices/users/thunk';
 
 const UserProfile = () => {
   const navigation: any = useNavigation();

@@ -13,7 +13,7 @@ import {
 import FastImage from 'react-native-fast-image';
 import isEmpty from 'lodash/isEmpty';
 import { useNavigation } from '@react-navigation/core';
-import { IPhoto } from '../../models/photo';
+import { IPhoto } from '../../interfaces/photo';
 
 interface Props {
   refreshing: boolean;

@@ -18,17 +18,17 @@ import AppSearchUsers from '../../components/AppSearchUsers/AppSearchUsers';
 import AppNoFiles from '../../components/AppNoFiles/AppNoFiles';
 import AppSearchHeaderBar from '../../components/AppSearchHeaderBar/AppSearchHeaderBar';
 
-import { photosSelectors } from '../../stores/slices/photosSlice';
-import { collectionsSelectors } from '../../stores/slices/collectionsSlice';
+import { photosSelectors } from '../../stores/slices/photos';
+import { collectionsSelectors } from '../../stores/slices/collections';
 import { useAppDispatch } from '../../stores';
-import { searchSelectors } from '../../stores/slices/searchReducer';
+import { searchSelectors } from '../../stores/slices/search';
 import { MAX_PER_PAGE } from '../../constants';
-import { fetchListPhotos } from '../../stores/middleware/photos';
+import { fetchListPhotos } from '../../stores/slices/photos/thunk';
 import {
   searchCollectionsQry,
   searchPhotosQry,
   searchUsersQry,
-} from '../../stores/middleware/search';
+} from '../../stores/slices/search/thunk';
 
 const TabSearch = () => {
   const navigation: any = useNavigation();

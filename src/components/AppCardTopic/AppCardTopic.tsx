@@ -9,9 +9,9 @@ import {View, Text} from 'react-native';
 import {Avatar, Icon} from 'react-native-elements';
 import FastImage from 'react-native-fast-image';
 import {COLORS} from '../../constants/Colors';
-import {IPreviewPhotos} from '../../models/generic';
-import {IPhoto} from '../../models/photo';
-import {IUser} from '../../models/user';
+import {IPreviewPhotos} from '../../interfaces/generic';
+import {IPhoto} from '../../interfaces/photo';
+import {IUser} from '../../interfaces/user';
 import AppStatus from '../AppStatus/AppStatus';
 
 interface Props {

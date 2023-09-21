@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { COLORS } from '../../../constants/Colors';
-import { ITopic } from '../../../models/topic';
+import { ITopic } from '../../../interfaces/topic';
 
 interface Props {
   topic?: ITopic;

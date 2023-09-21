@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosResponse } from 'axios';
-import { IPhoto } from '../../models/photo';
-import { IUserProfile } from '../../models/user';
+import { IPhoto } from '../../../interfaces/photo';
+import { IUserProfile } from '../../../interfaces/user';
 import UsersService, {
   UserCollectionsParams,
   UserLikedPhotosParams,
   UserPhotosParams,
-} from './../../services/api/users';
+} from '../../../services/api/users';
 
 export const getUserPublicProfile = createAsyncThunk<IUserProfile, string>(
   'users/getUserPublicProfile',

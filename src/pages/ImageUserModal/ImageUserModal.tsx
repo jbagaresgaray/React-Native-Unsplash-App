@@ -6,9 +6,9 @@ import { ScrollView } from 'react-native-gesture-handler';
 import AppRelatedCollections from '../../components/AppRelatedCollections/AppRelatedCollections';
 import AppRelatedPhotos from '../../components/AppRelatedPhotos/AppRelatedPhotos';
 import AppRelatedTags from '../../components/AppRelatedTags/AppRelatedTags';
-import { ICollection } from '../../models/collection';
-import { IProfileImage, ITag } from '../../models/generic';
-import { IPhoto } from '../../models/photo';
+import { ICollection } from '../../interfaces/collection';
+import { IProfileImage, ITag } from '../../interfaces/generic';
+import { IPhoto } from '../../interfaces/photo';
 import AppUserProfileItem from '../UserProfile/AppUserProfileItem/AppUserProfileItem';
 
 interface Props {

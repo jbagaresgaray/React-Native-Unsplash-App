@@ -8,7 +8,7 @@ import {
   default as Icons,
 } from 'react-native-vector-icons/MaterialCommunityIcons';
 import { COLORS } from '../../constants/Colors';
-import { IPhoto } from '../../models/photo';
+import { IPhoto } from '../../interfaces/photo';
 import { getWindowHeight } from '../../utils';
 import AppUserCardItem from '../AppUserCardItem/AppUserCardItem';
 

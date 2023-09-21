@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Avatar, Button, ListItem, Icon } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { COLORS } from '../../../constants/Colors';
-import { IProfileImage } from '../../../models/generic';
+import { IProfileImage } from '../../../interfaces/generic';
 
 interface Props {
   title?: string;

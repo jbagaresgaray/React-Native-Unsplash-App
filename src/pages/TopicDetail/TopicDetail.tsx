@@ -18,8 +18,8 @@ import { MAX_PER_PAGE } from '../../constants';
 import { COLORS } from '../../constants/Colors';
 
 import { useAppDispatch } from '../../stores';
-import { getTopic, getTopicPhotos } from '../../stores/middleware/topic';
-import { topicsSelectors } from '../../stores/slices/topicsSlice';
+import { getTopic, getTopicPhotos } from '../../stores/slices/topics/thunk';
+import { topicsSelectors } from '../../stores/slices/topics';
 import TopicDetailInformation from './TopicDetailInformation';
 import TopicDetailStatus from './TopicDetailStatus';
 
