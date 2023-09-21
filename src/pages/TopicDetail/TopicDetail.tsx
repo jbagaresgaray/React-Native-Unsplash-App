@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 import { useDispatch, useSelector } from 'react-redux';
-import AppCardItem from '../../components/AppCardItem/AppCardItem';
+import { AppCardItem } from '../../components';
 
 import { MAX_PER_PAGE } from '../../constants';
 import { COLORS } from '../../constants/Colors';
@@ -28,7 +28,7 @@ const TopicDetail = () => {
   const [idSlug, setIdSlug] = useState('');
   const navigation: any = useNavigation();
   const { params }: any = useRoute();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
 
   const topic = useSelector(topicsSelectors.topic);
   const TopicPhotos = useSelector(topicsSelectors.topicPhotos);

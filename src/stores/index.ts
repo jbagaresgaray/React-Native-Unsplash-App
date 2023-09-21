@@ -1,7 +1,6 @@
-import { configureStore, StoreEnhancer } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useDispatch } from 'react-redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducer';
 

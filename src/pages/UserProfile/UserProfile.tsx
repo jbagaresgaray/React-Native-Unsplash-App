@@ -7,8 +7,7 @@ import { COLORS } from '../../constants/Colors';
 
 import AppUserProfileSegment from './AppUserProfileSegment/AppUserProfileSegment';
 import AppUserProfileDetail from './AppUserProfileDetail/AppUserProfileDetail';
-import AppSearchPhotos from '../../components/AppSearchPhotos/AppSearchPhotos';
-import AppSearchCollections from '../../components/AppSearchCollections/AppSearchCollections';
+import { AppSearchPhotos, AppSearchCollections } from '../../components';
 
 import { usersSelectors } from '../../stores/slices/users';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,6 +19,7 @@ import {
   getUserPhotos,
   getUserPublicProfile,
 } from '../../stores/slices/users/thunk';
+import { useUsers } from '../../hooks';
 
 const UserProfile = () => {
   const navigation: any = useNavigation();
@@ -32,10 +32,7 @@ const UserProfile = () => {
   const [userId, setUserId] = useState<string>('');
 
   const dispatch = useDispatch<any>();
-  const userProfile = useSelector(usersSelectors.publicUser);
-  const PhotosArr = useSelector(usersSelectors.publicUserPhotos);
-  const LikesArr = useSelector(usersSelectors.publicUserLikedPhotos);
-  const CollectionsArr = useSelector(usersSelectors.publicUserCollectionPhotos);
+  const { userProfile, Photos, Likes, Collections } = useUsers();
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -144,7 +141,7 @@ const UserProfile = () => {
           refreshing={refreshing}
           onRefresh={onRefresh}
           onPressImage={onPressImage}
-          PhotosArr={PhotosArr}
+          PhotosArr={Photos!}
         />
       )}
       {activeTab === 1 && (
@@ -152,7 +149,7 @@ const UserProfile = () => {
           refreshing={refreshing}
           onRefresh={onRefresh}
           onPressImage={onPressImage}
-          PhotosArr={LikesArr}
+          PhotosArr={Likes!}
         />
       )}
       {activeTab === 2 && (
@@ -160,7 +157,7 @@ const UserProfile = () => {
           refreshing={refreshing}
           onRefresh={onRefresh}
           onPressImage={onCollectionPressImage}
-          CollectionsArr={CollectionsArr}
+          CollectionsArr={Collections}
           onPressTitle={onCollectionPressTitle}
         />
       )}

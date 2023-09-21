@@ -3,7 +3,7 @@ import { collectionsSelectors } from '../stores/slices/collections';
 
 const useCollections = () => {
   const Collection = useSelector(collectionsSelectors.collection);
-  const Collections = useSelector(collectionsSelectors.collection);
+  const Collections = useSelector(collectionsSelectors.collections);
   const CollectionPhotos = useSelector(collectionsSelectors.collectionPhotos);
   const CollectionRelated = useSelector(collectionsSelectors.collectionRelated);
 
