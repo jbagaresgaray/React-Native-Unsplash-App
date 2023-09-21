@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import { useEffect } from 'react';
 import { View, Text, SafeAreaView, StyleSheet, Dimensions } from 'react-native';
-import FastImage from 'react-native-fast-image';
+import { Image } from 'expo-image';
 import { useSelector } from 'react-redux';
 import { COLORS } from '../../constants/Colors';
 
@@ -52,13 +52,11 @@ const ImageDetails: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.SafeAreaView}>
-      <FastImage
+      <Image
         style={styles.bgImage}
         source={{
           uri: image?.urls?.regular,
-          priority: FastImage.priority.high,
         }}
-        resizeMode={FastImage.resizeMode.cover}
       />
       <View style={styles.footerView}>
         <AppUserProfileItem

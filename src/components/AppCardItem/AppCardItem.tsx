@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { Button } from 'react-native-elements';
-import FastImage from 'react-native-fast-image';
+import { Image } from 'expo-image';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import {
   default as Icon,
@@ -73,7 +73,7 @@ const AppCardItem: React.FC<Props> = ({
         activeOpacity={0.8}
         onPress={onImagePress}
         style={styles.imageContainer}>
-        <FastImage style={styles.image} source={{ uri: item?.urls?.small }} />
+        <Image style={styles.image} source={{ uri: item?.urls?.small }} />
       </TouchableOpacity>
       <View style={styles.reactionsWrapper}>
         <View style={styles.reactions}>

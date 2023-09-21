@@ -10,7 +10,7 @@ import {
   FlatList,
 } from 'react-native';
 // import MasonryList from '@react-native-seoul/masonry-list';
-import FastImage from 'react-native-fast-image';
+import { Image } from 'expo-image';
 import isEmpty from 'lodash/isEmpty';
 import { useNavigation } from '@react-navigation/core';
 import { IPhoto } from '../../interfaces/photo';
@@ -32,14 +32,13 @@ const ImageCard: React.FC<{ item: any; height: number; onPressImage: any }> = ({
       key={item.id}
       style={styles.ImageCardContainer}
       onPress={onPressImage}>
-      <FastImage
+      <Image
         source={{ uri: item.uri }}
         style={{
           height: 120,
           width: 120,
           padding: 2,
         }}
-        resizeMode="cover"
       />
     </TouchableOpacity>
   );

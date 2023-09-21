@@ -5,13 +5,13 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
 } from 'react-native';
-import {View, Text} from 'react-native';
-import {Avatar, Icon} from 'react-native-elements';
-import FastImage from 'react-native-fast-image';
-import {COLORS} from '../../constants/Colors';
-import {IPreviewPhotos} from '../../interfaces/generic';
-import {IPhoto} from '../../interfaces/photo';
-import {IUser} from '../../interfaces/user';
+import { View, Text } from 'react-native';
+import { Avatar, Icon } from 'react-native-elements';
+import { Image } from 'expo-image';
+import { COLORS } from '../../constants/Colors';
+import { IPreviewPhotos } from '../../interfaces/generic';
+import { IPhoto } from '../../interfaces/photo';
+import { IUser } from '../../interfaces/user';
 import AppStatus from '../AppStatus/AppStatus';
 
 interface Props {
@@ -49,12 +49,11 @@ const AppCardTopic: React.FC<Props> = ({
               <AppStatus />
             </View>
           )}
-          <FastImage
+          <Image
             source={{
               uri: cover_photo?.urls?.small,
             }}
             style={styles.cardImage}
-            resizeMode={FastImage.resizeMode.cover}
           />
         </View>
         <View style={styles.topicCardContent}>

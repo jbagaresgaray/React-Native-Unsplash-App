@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import FastImage from 'react-native-fast-image';
+import { Image } from 'expo-image';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import { default as Icons } from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -22,7 +22,7 @@ const AppUserCardItem: React.FC<Props> = ({
       <TouchableWithoutFeedback
         style={styles.infoWrapper}
         onPress={onUserPress}>
-        <FastImage
+        <Image
           style={styles.avatar}
           source={{
             uri: user?.profile_image?.small,

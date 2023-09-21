@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import FastImage from 'react-native-fast-image';
+import { Image } from 'expo-image';
 import { COLORS } from '../../../constants/Colors';
 import { ITopic } from '../../../interfaces/topic';
 
@@ -17,11 +17,10 @@ const AppHomeCategoryCard: React.FC<Props> = ({ topic, onPress }) => {
           activeOpacity={0.8}
           style={styles.imageWrapper}
           onPress={onPress}>
-          <FastImage
+          <Image
             style={styles.image}
             source={{
               uri: topic?.cover_photo?.urls.small,
-              priority: FastImage.priority.low,
             }}
           />
         </TouchableOpacity>
