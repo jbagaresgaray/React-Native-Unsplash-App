@@ -31,7 +31,7 @@ import {
 
 const TabSearch = () => {
   const navigation: any = useNavigation();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
   const [searchText, setSearchText] = useState('');
   const [activeTab, setActiveTab] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
@@ -50,7 +50,7 @@ const TabSearch = () => {
     searchSelectors.isLoadingSearchPhotos,
   );
 
-  const onSearching = useCallback(value => {
+  const onSearching = useCallback((value: string) => {
     setSearchText(value);
     onSearchingDebounce(value);
   }, []);

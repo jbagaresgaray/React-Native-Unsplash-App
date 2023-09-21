@@ -2,7 +2,6 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useState, useCallback, useEffect } from 'react';
 import {
   View,
-  Text,
   SafeAreaView,
   StyleSheet,
   StatusBar,
@@ -11,16 +10,16 @@ import {
   RefreshControl,
 } from 'react-native';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { AppCardItem } from '../../components';
 
 import { MAX_PER_PAGE } from '../../constants';
 import { COLORS } from '../../constants/Colors';
 
 import { getTopic, getTopicPhotos } from '../../stores/slices/topics/thunk';
-import { topicsSelectors } from '../../stores/slices/topics';
 import TopicDetailInformation from './TopicDetailInformation';
 import TopicDetailStatus from './TopicDetailStatus';
+import { useTopics } from '../../hooks';
 
 const TopicDetail = () => {
   const [refreshing, setRefreshing] = useState(false);
@@ -30,26 +29,24 @@ const TopicDetail = () => {
   const { params }: any = useRoute();
   const dispatch = useDispatch<any>();
 
-  const topic = useSelector(topicsSelectors.topic);
-  const TopicPhotos = useSelector(topicsSelectors.topicPhotos);
-  const isLoadingTopic = useSelector(topicsSelectors.isLoadingTopic);
-  const isLoadingTopicPhotos = useSelector(
-    topicsSelectors.isLoadingTopicPhotos,
-  );
+  const { Topic, TopicPhotos, isLoadingTopic, isLoadingTopicPhotos } =
+    useTopics();
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
-    dispatch(getTopic(idSlug));
-    dispatch(
-      getTopicPhotos({
-        id_or_slug: idSlug,
-        params: {
-          page: currentPage,
-          per_page: MAX_PER_PAGE,
-          order_by: 'latest',
-        },
-      }),
-    );
+    await Promise.all([
+      dispatch(getTopic(idSlug)),
+      dispatch(
+        getTopicPhotos({
+          id_or_slug: idSlug,
+          params: {
+            page: currentPage,
+            per_page: MAX_PER_PAGE,
+            order_by: 'latest',
+          },
+        }),
+      ),
+    ]);
     setRefreshing(false);
   }, []);
 
@@ -81,7 +78,7 @@ const TopicDetail = () => {
         }),
       );
     }
-  }, [params]);
+  }, [params, dispatch]);
 
   const renderItem = ({ item }: any) => (
     <AppCardItem
@@ -94,9 +91,9 @@ const TopicDetail = () => {
 
   const listHeaderComponent = () => (
     <View style={styles.detailView}>
-      <TopicDetailInformation topic={topic} showLoading={isLoadingTopic} />
+      <TopicDetailInformation topic={Topic} showLoading={isLoadingTopic} />
       <TopicDetailStatus
-        topic={topic}
+        topic={Topic}
         showLoading={isLoadingTopic}
         onUserPress={onUserPress}
       />

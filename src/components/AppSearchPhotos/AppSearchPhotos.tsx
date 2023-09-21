@@ -51,7 +51,7 @@ const AppSearchPhotos: React.FC<Props> = ({
 }) => {
   const [photoList, setPhotoList] = useState([]);
   const [itemHeight, setItemHeight] = useState(0);
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
 
   useEffect(() => {
     let previewsArr: any = [];
