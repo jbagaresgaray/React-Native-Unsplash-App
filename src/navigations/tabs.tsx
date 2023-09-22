@@ -87,12 +87,12 @@ const BottomTabNavigator = () => {
       }}
       tabBar={AppTabBar}>
       <Tab.Screen
-        name="Home"
+        name="HomeStack"
         component={HomeStackNavigator}
         options={TabHomeBottomTabOptions}
       />
       <Tab.Screen
-        name="Collections"
+        name="CollectionsStack"
         component={CollectionStackNavigator}
         options={TabCollectionsBottomTabOptions}
       />
@@ -107,13 +107,13 @@ const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Search"
+        name="SearchStack"
         component={SearchStackNavigator}
         options={TabSearchBottomTabOptions}
       />
       <Tab.Screen
         component={AccountsStackNavigator}
-        name="Account"
+        name="AccountStack"
         options={TabAccountBottomTabOptions}
       />
     </Tab.Navigator>

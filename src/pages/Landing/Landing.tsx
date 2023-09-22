@@ -29,10 +29,12 @@ import { useDispatch } from 'react-redux';
 
 const Landing: React.FC = () => {
   const navigation = useNavigation<any>();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
 
   const skipLanding = () => {
-    navigation.navigate('Main');
+    navigation.navigate('Main', {
+      screen: 'HomeStack',
+    });
   };
 
   const onSignUp = () => {
@@ -42,12 +44,6 @@ const Landing: React.FC = () => {
   const onLogin = () => {
     navigation.navigate('Login');
   };
-
-  const SkipButton = () => (
-    <Pressable style={styles.skipButton} onPress={skipLanding}>
-      <Text style={styles.skipButtonText}>Skip</Text>
-    </Pressable>
-  );
 
   useEffect(() => {
     dispatch(
@@ -80,7 +76,11 @@ const Landing: React.FC = () => {
         source={landingImg}
         style={{ width: '100%', height: '100%' }}>
         <SafeAreaView />
-        <View style={styles.headerContainer}>{SkipButton()}</View>
+        <View style={styles.headerContainer}>
+          <Pressable style={styles.skipButton} onPress={skipLanding}>
+            <Text style={styles.skipButtonText}>Skip</Text>
+          </Pressable>
+        </View>
         <View style={styles.contentContainer}>
           <AppHeaderLogo />
           <Text style={styles.logoText}>Creation starts here</Text>
