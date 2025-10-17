@@ -1,15 +1,22 @@
 {
-  "name": "ReactNativeUnsplashApp",
-  "displayName": "ReactNativeUnsplashApp",
   "expo": {
-    "name": "reactnativeunsplashapp",
-    "slug": "reactnativeunsplashapp",
+    "name": "unsplashapp",
+    "slug": "unsplashapp",
     "version": "1.0.0",
+    "icon": "./assets/image/appIcon.png",
+    "splash": {
+      "image": "./assets/image/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#181818"
+    },
     "assetBundlePatterns": [
       "**/*"
     ],
     "android": {
       "package": "com.reactnativeunsplashapp"
+    },
+    "ios": {
+      "bundleIdentifier": "com.reactnativeunsplashapp"
     }
   }
 }

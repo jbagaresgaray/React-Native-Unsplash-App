@@ -1,9 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import Config from 'react-native-config';
-
 import Storage from '../../utils/storage';
 
-const baseURL = Config.REACT_API_URL || 'https://api.unsplash.com';
+const baseURL = process.env.REACT_API_URL || 'https://api.unsplash.com';
 const headers = {
   Accept: 'application/json',
   'Content-Type': 'application/json',
