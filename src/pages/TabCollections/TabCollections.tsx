@@ -1,12 +1,12 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   FlatList,
   StyleSheet,
-  SafeAreaView,
   StatusBar,
   KeyboardAvoidingView,
   RefreshControl,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 
@@ -17,18 +17,13 @@ import { AppCollectionItem } from '../../components';
 import { MAX_PER_PAGE } from '../../constants';
 import { fetchCollections } from '../../stores/slices/collections/thunk';
 import { useCollections } from '../../hooks';
+import type { AppNavigation } from '../../navigations/types';
 
 const TabCollections = () => {
   const [refreshing, setRefreshing] = useState(false);
-  const navigation: any = useNavigation();
+  const navigation = useNavigation<AppNavigation>();
   const dispatch = useDispatch<any>();
   const { Collections } = useCollections();
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerLeft: () => null,
-    });
-  }, [navigation]);
 
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
@@ -64,10 +59,14 @@ const TabCollections = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView style={styles.SafeAreaView}>
+      <SafeAreaView
+        edges={['left', 'right', 'bottom']}
+        style={styles.SafeAreaView}
+      >
         <KeyboardAvoidingView
           style={styles.keyboardAvoidingViewContainer}
-          behavior="height">
+          behavior="height"
+        >
           <FlatList
             contentContainerStyle={{ paddingBottom: 20 }}
             refreshControl={

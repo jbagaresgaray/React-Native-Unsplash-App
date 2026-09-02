@@ -12,12 +12,14 @@ import {
 // import MasonryList from '@react-native-seoul/masonry-list';
 import { Image } from 'expo-image';
 import isEmpty from 'lodash/isEmpty';
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation } from '@react-navigation/native';
 import { IPhoto } from '../../interfaces/photo';
+import type { AppNavigation } from '../../navigations/types';
 
 interface Props {
-  refreshing: boolean;
+  refreshing?: boolean;
   onRefresh?: () => void;
+  onPressImage?: (id: string) => void;
   PhotosArr?: IPhoto[];
 }
 
@@ -30,10 +32,12 @@ const ImageCard: React.FC<{ item: any; height: number; onPressImage: any }> = ({
     <Pressable
       key={item.id}
       style={styles.ImageCardContainer}
-      onPress={onPressImage}>
+      onPress={onPressImage}
+    >
       <Image
         source={{ uri: item.uri }}
         placeholder={item?.blur_hash}
+        transition={300}
         style={{
           height: 120,
           width: 120,
@@ -45,13 +49,14 @@ const ImageCard: React.FC<{ item: any; height: number; onPressImage: any }> = ({
 };
 
 const AppSearchPhotos: React.FC<Props> = ({
-  refreshing,
+  refreshing = false,
   onRefresh,
+  onPressImage,
   PhotosArr,
 }) => {
   const [photoList, setPhotoList] = useState([]);
   const [itemHeight, setItemHeight] = useState(0);
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<AppNavigation>();
 
   useEffect(() => {
     let previewsArr: any = [];
@@ -60,6 +65,7 @@ const AppSearchPhotos: React.FC<Props> = ({
         return {
           id: item?.id,
           uri: item?.urls.small,
+          blur_hash: item?.blur_hash,
         };
       });
       setPhotoList(previewsArr);
@@ -67,6 +73,11 @@ const AppSearchPhotos: React.FC<Props> = ({
   }, []);
 
   const onImagePress = (id: string) => {
+    if (onPressImage) {
+      onPressImage(id);
+      return;
+    }
+
     navigation.navigate('ImageDetails', {
       id,
     });
@@ -94,7 +105,8 @@ const AppSearchPhotos: React.FC<Props> = ({
   return (
     <KeyboardAvoidingView
       style={styles.keyboardAvoidingViewContainer}
-      behavior="height">
+      behavior="height"
+    >
       {/* <MasonryList
         data={photoList}
         contentContainerStyle={{

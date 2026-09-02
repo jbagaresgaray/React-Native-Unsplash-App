@@ -1,15 +1,16 @@
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import {
   FlatList,
+  View,
   StyleSheet,
-  SafeAreaView,
   StatusBar,
   KeyboardAvoidingView,
   RefreshControl,
 } from 'react-native';
 import AppUserItem from '../AppUserItem/AppUserItem';
 import { COLORS } from '../../constants/Colors';
+import type { AppNavigation } from '../../navigations/types';
 
 interface Props {
   refreshing: boolean;
@@ -19,7 +20,7 @@ interface Props {
 
 const AppSearchUsers: React.FC<Props> = ({ UsersArr }) => {
   const [refreshing, setRefreshing] = useState(false);
-  const navigation: any = useNavigation();
+  const navigation = useNavigation<AppNavigation>();
 
   const wait = (timeout: number) => {
     return new Promise(resolve => setTimeout(resolve, timeout));
@@ -49,10 +50,11 @@ const AppSearchUsers: React.FC<Props> = ({ UsersArr }) => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView style={styles.SafeAreaView}>
+      <View style={styles.container}>
         <KeyboardAvoidingView
           style={styles.keyboardAvoidingViewContainer}
-          behavior="height">
+          behavior="height"
+        >
           <FlatList
             contentContainerStyle={{ paddingBottom: 20 }}
             refreshControl={
@@ -63,13 +65,13 @@ const AppSearchUsers: React.FC<Props> = ({ UsersArr }) => {
             keyExtractor={item => item.id}
           />
         </KeyboardAvoidingView>
-      </SafeAreaView>
+      </View>
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  SafeAreaView: {
+  container: {
     flex: 1,
     backgroundColor: COLORS.white,
   },

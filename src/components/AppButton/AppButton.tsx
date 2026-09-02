@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {Button, ButtonProps, Icon} from 'react-native-elements';
-import {COLORS} from '../../constants/Colors';
+import { View, Text, StyleSheet } from 'react-native';
+import { Button, ButtonProps } from 'react-native-elements';
+import { COLORS } from '../../constants/Colors';
 
 interface Props extends ButtonProps {
   title?: string;

@@ -4,12 +4,13 @@ import {
   Text,
   StatusBar,
   ImageBackground,
-  SafeAreaView,
   Pressable,
   StyleSheet,
   ScrollView,
   KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Input } from 'react-native-elements';
 
 import landingImg from '../../assets/img/landing-unsplash1.jpg';
@@ -19,19 +20,29 @@ import AppHeaderLogo from '../../components/AppHeaderLogo/AppHeaderLogo';
 import { COLORS } from '../../constants/Colors';
 
 const Register = () => {
+  const insets = useSafeAreaInsets();
+
   return (
     <>
       <StatusBar barStyle="light-content" />
-      <ImageBackground
-        source={landingImg}
-        style={{ width: '100%', height: '100%' }}>
-        <SafeAreaView />
-        <ScrollView contentContainerStyle={styles.scrollView}>
-          <View style={styles.contentContainer}>
-            <AppHeaderLogo />
-          </View>
-          <View style={styles.footerContainer}>
-            <KeyboardAvoidingView behavior="padding">
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}>
+        <ImageBackground
+          source={landingImg}
+          style={{ width: '100%', height: '100%' }}>
+          <View style={{ height: insets.top }} />
+          <ScrollView
+            contentContainerStyle={[
+              styles.scrollView,
+              { paddingBottom: 32 + insets.bottom },
+            ]}
+            keyboardShouldPersistTaps="handled">
+            <View style={styles.contentContainer}>
+              <AppHeaderLogo />
+            </View>
+            <View style={styles.footerContainer}>
               <Input
                 label="First name"
                 placeholder="First name"
@@ -63,38 +74,36 @@ const Register = () => {
                 labelStyle={styles.labelText}
                 inputStyle={styles.labelText}
               />
-            </KeyboardAvoidingView>
-            <View style={styles.buttonViews}>
-              <AppFacebookButton />
-              <AppButton title="Join" />
+              <View style={styles.buttonViews}>
+                {/* <AppFacebookButton /> */}
+                <AppButton title="Join" />
+              </View>
+              <View style={styles.haveAccountContainer}>
+                <Text style={styles.haveAccountText}>
+                  By joining, you agree to the
+                </Text>
+                <Pressable>
+                  <Text style={styles.loginButtonText}>Terms</Text>
+                </Pressable>
+                <Text style={styles.haveAccountText}>and</Text>
+                <Pressable>
+                  <Text style={styles.loginButtonText}>Privacy Policy</Text>
+                </Pressable>
+              </View>
             </View>
-            <View style={styles.haveAccountContainer}>
-              <Text style={styles.haveAccountText}>
-                By joining, you agree to the
-              </Text>
-              <Pressable>
-                <Text style={styles.loginButtonText}>Terms</Text>
-              </Pressable>
-              <Text style={styles.haveAccountText}>and</Text>
-              <Pressable>
-                <Text style={styles.loginButtonText}>Privacy Policy</Text>
-              </Pressable>
-            </View>
-          </View>
-        </ScrollView>
-      </ImageBackground>
+          </ScrollView>
+        </ImageBackground>
+      </KeyboardAvoidingView>
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  safeAreaView: {
-    backgroundColor: COLORS.white,
+  container: {
     flex: 1,
   },
   scrollView: {
     flex: 1,
-    paddingBottom: 32,
   },
   contentContainer: {
     flex: 1,

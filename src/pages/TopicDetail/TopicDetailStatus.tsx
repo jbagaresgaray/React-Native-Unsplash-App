@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { ListItem, Icon, Avatar } from 'react-native-elements';
+import { ListItem, Avatar } from 'react-native-elements';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import AppStatus from '../../components/AppStatus/AppStatus';
 import { ITopic } from '../../interfaces/topic';
+import AppIcon from '../../components/AppIcon/AppIcon';
 
 interface Props {
   topic?: ITopic | null;
@@ -21,7 +22,8 @@ const TopicDetailStatus: React.FC<Props> = ({
       <SkeletonPlaceholder>
         <SkeletonPlaceholder.Item
           flexDirection="row"
-          justifyContent="space-between">
+          justifyContent="space-between"
+        >
           <SkeletonPlaceholder.Item flexDirection="row">
             <SkeletonPlaceholder.Item
               width={18}
@@ -44,7 +46,8 @@ const TopicDetailStatus: React.FC<Props> = ({
       <SkeletonPlaceholder>
         <SkeletonPlaceholder.Item
           flexDirection="row"
-          justifyContent="space-between">
+          justifyContent="space-between"
+        >
           <SkeletonPlaceholder.Item flexDirection="row">
             <SkeletonPlaceholder.Item
               width={18}
@@ -67,7 +70,8 @@ const TopicDetailStatus: React.FC<Props> = ({
       <SkeletonPlaceholder>
         <SkeletonPlaceholder.Item
           flexDirection="row"
-          justifyContent="space-between">
+          justifyContent="space-between"
+        >
           <SkeletonPlaceholder.Item flexDirection="row">
             <SkeletonPlaceholder.Item
               width={18}
@@ -90,7 +94,8 @@ const TopicDetailStatus: React.FC<Props> = ({
       <SkeletonPlaceholder>
         <SkeletonPlaceholder.Item
           flexDirection="row"
-          justifyContent="space-between">
+          justifyContent="space-between"
+        >
           <SkeletonPlaceholder.Item flexDirection="row">
             <SkeletonPlaceholder.Item
               width={18}
@@ -137,9 +142,9 @@ const TopicDetailStatus: React.FC<Props> = ({
   const renderTopicStatusItems = () => (
     <View style={styles.listView}>
       <ListItem bottomDivider>
-        <Icon
+        <AppIcon
+          family="material"
           name="offline-bolt"
-          type="materialicons"
           color="#d1d1d1"
           size={18}
         />
@@ -152,9 +157,9 @@ const TopicDetailStatus: React.FC<Props> = ({
       </ListItem>
       {topic && topic?.owners && (
         <ListItem bottomDivider>
-          <Icon
+          <AppIcon
+            family="material-design"
             name="account-circle"
-            type="material-community"
             color="#d1d1d1"
             size={18}
           />
@@ -176,9 +181,9 @@ const TopicDetailStatus: React.FC<Props> = ({
       )}
 
       <ListItem bottomDivider>
-        <Icon
+        <AppIcon
+          family="material-design"
           name="image"
-          type="material-community"
           color="#d1d1d1"
           size={18}
         />
@@ -192,9 +197,9 @@ const TopicDetailStatus: React.FC<Props> = ({
         </ListItem.Content>
       </ListItem>
       <ListItem bottomDivider>
-        <Icon
+        <AppIcon
+          family="material-design"
           name="account-group"
-          type="material-community"
           color="#d1d1d1"
           size={18}
         />

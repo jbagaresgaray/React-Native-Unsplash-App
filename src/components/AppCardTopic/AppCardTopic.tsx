@@ -6,13 +6,14 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import { View, Text } from 'react-native';
-import { Avatar, Icon } from 'react-native-elements';
+import { Avatar } from 'react-native-elements';
 import { Image } from 'expo-image';
 import { COLORS } from '../../constants/Colors';
 import { IPreviewPhotos } from '../../interfaces/generic';
 import { IPhoto } from '../../interfaces/photo';
 import { IUser } from '../../interfaces/user';
 import AppStatus from '../AppStatus/AppStatus';
+import AppIcon from '../AppIcon/AppIcon';
 
 interface Props {
   title?: string;
@@ -41,7 +42,8 @@ const AppCardTopic: React.FC<Props> = ({
   return (
     <TouchableWithoutFeedback
       style={styles.topicCardContainer}
-      onPress={onPress}>
+      onPress={onPress}
+    >
       <View>
         <View style={styles.cardImageContainer}>
           {status && status === 'open' && (
@@ -54,6 +56,7 @@ const AppCardTopic: React.FC<Props> = ({
               uri: cover_photo?.urls?.small,
             }}
             placeholder={cover_photo?.blur_hash}
+            transition={300}
             style={styles.cardImage}
           />
         </View>
@@ -82,7 +85,7 @@ const AppCardTopic: React.FC<Props> = ({
             </Text>
           </View>
           <View style={styles.topicContribution}>
-            <Icon name="image" size={18} color="#767676" />
+            <AppIcon family="material" name="image" size={18} color="#767676" />
             <Text style={styles.topicContributionText} numberOfLines={2}>
               {total_photos} contributions
             </Text>

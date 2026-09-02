@@ -1,15 +1,16 @@
 import { useNavigation } from '@react-navigation/native';
+import type { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 import { useEffect } from 'react';
 import {
   ImageBackground,
-  SafeAreaView,
   StatusBar,
   StyleSheet,
   Text,
   Pressable,
   View,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import landingImg from '../../assets/img/landing-unsplash.jpg';
 
@@ -26,9 +27,12 @@ import { fetchListTopics } from '../../stores/slices/topics/thunk';
 import { PhotosState } from '../../stores/slices/photos';
 import { TopicsState } from '../../stores/slices/topics';
 import { useDispatch } from 'react-redux';
+import type { RootStackParamList } from '../../navigations/types';
 
 const Landing: React.FC = () => {
-  const navigation = useNavigation<any>();
+  const navigation =
+    useNavigation<StackNavigationProp<RootStackParamList, 'Landing'>>();
+  const insets = useSafeAreaInsets();
   const dispatch = useDispatch<any>();
 
   const skipLanding = () => {
@@ -74,8 +78,9 @@ const Landing: React.FC = () => {
       <StatusBar barStyle="light-content" />
       <ImageBackground
         source={landingImg}
-        style={{ width: '100%', height: '100%' }}>
-        <SafeAreaView />
+        style={{ width: '100%', height: '100%' }}
+      >
+        <View style={{ height: insets.top }} />
         <View style={styles.headerContainer}>
           <Pressable style={styles.skipButton} onPress={skipLanding}>
             <Text style={styles.skipButtonText}>Skip</Text>
@@ -85,7 +90,12 @@ const Landing: React.FC = () => {
           <AppHeaderLogo />
           <Text style={styles.logoText}>Creation starts here</Text>
         </View>
-        <View style={styles.footerContainer}>
+        <View
+          style={[
+            styles.footerContainer,
+            { height: 200 + insets.bottom, paddingBottom: insets.bottom },
+          ]}
+        >
           <View style={styles.buttonViews}>
             <AppFacebookButton />
             <AppButton title="Sign up with email" onPress={onSignUp} />
@@ -103,10 +113,6 @@ const Landing: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  safeAreaView: {
-    backgroundColor: COLORS.white,
-    flex: 1,
-  },
   contentContainer: {
     flex: 1,
     paddingTop: 32,

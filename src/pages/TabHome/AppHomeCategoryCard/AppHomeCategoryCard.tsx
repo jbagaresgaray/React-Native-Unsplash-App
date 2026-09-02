@@ -22,6 +22,7 @@ const AppHomeCategoryCard: React.FC<Props> = ({ topic, onPress }) => {
             source={{
               uri: topic?.cover_photo?.urls.small,
             }}
+            transition={300}
           />
         </Pressable>
         <View style={styles.title}>

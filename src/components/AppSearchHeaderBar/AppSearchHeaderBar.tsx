@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  StatusBar,
-  Platform,
-  Dimensions,
-  View,
-} from 'react-native';
+import { StyleSheet, Platform, Dimensions, View } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import { COLORS } from '../../constants/Colors';
 
@@ -68,7 +62,6 @@ const styles = StyleSheet.create({
   },
   searchBar: {
     flex: 1,
-    paddingTop: StatusBar.currentHeight,
   },
 });
 

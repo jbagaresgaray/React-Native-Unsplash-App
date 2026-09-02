@@ -1,7 +1,8 @@
 import React, { useState, useLayoutEffect, useEffect } from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { Button, Icon } from 'react-native-elements';
+import { StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+import { Button } from 'react-native-elements';
 
 import { COLORS } from '../../constants/Colors';
 
@@ -20,10 +21,16 @@ import {
   getUserPublicProfile,
 } from '../../stores/slices/users/thunk';
 import { useUsers } from '../../hooks';
+import type {
+  AppNavigation,
+  UserProfileScreenProps,
+} from '../../navigations/types';
+import AppIcon from '../../components/AppIcon/AppIcon';
 
-const UserProfile = () => {
-  const navigation: any = useNavigation();
-  const { params }: any = useRoute();
+const UserProfile: React.FC<UserProfileScreenProps> = ({
+  route: { params },
+}) => {
+  const navigation = useNavigation<AppNavigation>();
   const [activeTab, setActiveTab] = useState(0);
   const [currentPhotoPage, setCurrentPhotoPage] = useState(1);
   const [currentLikedPhotoPage, setCurrentLikedPhotoPage] = useState(1);
@@ -41,7 +48,12 @@ const UserProfile = () => {
         <Button
           type="clear"
           icon={
-            <Icon name="plus-circle" size={26} color="#111" type="feather" />
+            <AppIcon
+              family="feather"
+              name="plus-circle"
+              size={26}
+              color="#111"
+            />
           }
         />
       ),
@@ -103,14 +115,16 @@ const UserProfile = () => {
     initProfile(userId, true);
   }, []);
 
-  const onPressImage = () => {};
-
-  const onCollectionPressImage = () => {
-    navigation.navigate('CollectionDetails');
+  const onPressImage = (id: string) => {
+    navigation.navigate('ImageDetails', { id });
   };
 
-  const onCollectionPressTitle = () => {
-    navigation.navigate('CollectionDetails');
+  const onCollectionPressImage = (id: string) => {
+    navigation.navigate('CollectionDetails', { id });
+  };
+
+  const onCollectionPressTitle = (id: string) => {
+    navigation.navigate('CollectionDetails', { id });
   };
 
   const getProfileProps = () => {
@@ -127,7 +141,10 @@ const UserProfile = () => {
   };
 
   return (
-    <SafeAreaView style={styles.SafeAreaView}>
+    <SafeAreaView
+      edges={['left', 'right', 'bottom']}
+      style={styles.SafeAreaView}
+    >
       <AppUserProfileDetail {...getProfileProps()} />
       <AppUserProfileSegment
         total_collections={userProfile?.total_collections}

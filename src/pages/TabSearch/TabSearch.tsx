@@ -1,11 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
-import React, {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useState,
-} from 'react';
-import { StyleSheet, SafeAreaView } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 import debounce from 'lodash/debounce';
 import isEmpty from 'lodash/isEmpty';
@@ -28,9 +24,10 @@ import {
   searchPhotosQry,
   searchUsersQry,
 } from '../../stores/slices/search/thunk';
+import type { AppNavigation } from '../../navigations/types';
 
 const TabSearch = () => {
-  const navigation: any = useNavigation();
+  const navigation = useNavigation<AppNavigation>();
   const dispatch = useDispatch<any>();
   const [searchText, setSearchText] = useState('');
   const [activeTab, setActiveTab] = useState(0);
@@ -100,16 +97,12 @@ const TabSearch = () => {
     setRefreshing(false);
   }, []);
 
-  const onPressImage = () => {
-    navigation.navigate('ImageDetails');
+  const onPressCollectionImage = (id: string) => {
+    navigation.navigate('CollectionDetails', { id });
   };
 
-  const onPressCollectionImage = () => {
-    navigation.navigate('CollectionDetails');
-  };
-
-  const onPressCollectionTitle = () => {
-    navigation.navigate('CollectionDetails');
+  const onPressCollectionTitle = (id: string) => {
+    navigation.navigate('CollectionDetails', { id });
   };
 
   useEffect(() => {
@@ -121,12 +114,6 @@ const TabSearch = () => {
       }),
     );
   }, []);
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-    });
-  }, [navigation, searchText]);
 
   const renderUsersSearch = () => {
     if (UsersArr?.results && UsersArr.results.length) {

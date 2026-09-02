@@ -1,7 +1,8 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
-import {Button, Icon} from 'react-native-elements';
-import {COLORS} from '../../../constants/Colors';
+import { View, StyleSheet } from 'react-native';
+import { Button } from 'react-native-elements';
+import { COLORS } from '../../../constants/Colors';
+import AppIcon from '../../../components/AppIcon/AppIcon';
 
 const AppUserProfileFollowMessage = () => {
   return (
@@ -10,13 +11,22 @@ const AppUserProfileFollowMessage = () => {
         containerStyle={styles.followButton}
         buttonStyle={styles.followButtonStyle}
         titleStyle={styles.followButtonTitleStyle}
-        icon={<Icon name="person-add" size={18} color="#767676" />}
+        icon={
+          <AppIcon
+            family="material"
+            name="person-add"
+            size={18}
+            color="#767676"
+          />
+        }
       />
       <Button
         containerStyle={styles.followButton}
         buttonStyle={styles.followButtonStyle}
         titleStyle={styles.followButtonTitleStyle}
-        icon={<Icon name="mail" size={18} color="#767676" />}
+        icon={
+          <AppIcon family="material" name="mail" size={18} color="#767676" />
+        }
       />
     </View>
   );

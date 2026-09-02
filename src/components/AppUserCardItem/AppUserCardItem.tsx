@@ -3,8 +3,8 @@ import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { Image } from 'expo-image';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
-import { default as Icons } from 'react-native-vector-icons/MaterialCommunityIcons';
 import { IUser } from '../../interfaces/user';
+import AppIcon from '../AppIcon/AppIcon';
 
 interface Props {
   user?: IUser;
@@ -21,12 +21,14 @@ const AppUserCardItem: React.FC<Props> = ({
     <View style={styles.postHeader}>
       <TouchableWithoutFeedback
         style={styles.infoWrapper}
-        onPress={onUserPress}>
+        onPress={onUserPress}
+      >
         <Image
           style={styles.avatar}
           source={{
             uri: user?.profile_image?.small,
           }}
+          transition={300}
         />
         <View>
           <Text style={styles.name}>{user?.name}</Text>
@@ -34,7 +36,7 @@ const AppUserCardItem: React.FC<Props> = ({
         </View>
       </TouchableWithoutFeedback>
       <Pressable onPress={onMorePress}>
-        <Icons name="dots-vertical" size={24} />
+        <AppIcon family="material-design" name="dots-vertical" size={24} />
       </Pressable>
     </View>
   );

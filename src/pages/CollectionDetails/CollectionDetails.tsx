@@ -1,13 +1,13 @@
-import { useNavigation, useRoute } from '@react-navigation/core';
+import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import {
   StatusBar,
   StyleSheet,
-  SafeAreaView,
   KeyboardAvoidingView,
   FlatList,
   RefreshControl,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import AppCardItem from '../../components/AppCardItem/AppCardItem';
 import AppCollectionDetailsHeader from './AppCollectionDetailsHeader/AppCollectionDetailsHeader';
 
@@ -19,12 +19,17 @@ import {
 import { useDispatch } from 'react-redux';
 import { MAX_PER_PAGE } from '../../constants';
 import { useCollections } from '../../hooks';
+import type {
+  AppNavigation,
+  CollectionDetailsScreenProps,
+} from '../../navigations/types';
 
-const CollectionDetails: React.FC = () => {
+const CollectionDetails: React.FC<CollectionDetailsScreenProps> = ({
+  route: { params },
+}) => {
   const [refreshing, setRefreshing] = useState(false);
   const [collectionId, setCollectionId] = useState('');
-  const navigation: any = useNavigation();
-  const { params }: any = useRoute();
+  const navigation = useNavigation<AppNavigation>();
   const dispatch = useDispatch<any>();
 
   const { Collection, CollectionPhotos } = useCollections();
@@ -74,10 +79,14 @@ const CollectionDetails: React.FC = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView style={styles.SafeAreaView}>
+      <SafeAreaView
+        edges={['left', 'right', 'bottom']}
+        style={styles.SafeAreaView}
+      >
         <KeyboardAvoidingView
           style={styles.keyboardAvoidingViewContainer}
-          behavior="height">
+          behavior="height"
+        >
           <FlatList
             contentContainerStyle={{ paddingBottom: 20 }}
             refreshControl={
@@ -90,7 +99,11 @@ const CollectionDetails: React.FC = () => {
                   name={Collection?.user?.name}
                   username={Collection?.user?.username}
                   profile_image={Collection?.user?.profile_image}
-                  onProfilePress={onUserPress}
+                  onProfilePress={() => {
+                    if (Collection?.user?.username) {
+                      onUserPress(Collection.user.username);
+                    }
+                  }}
                 />
               </>
             )}

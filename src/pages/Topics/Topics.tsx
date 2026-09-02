@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import {
   StyleSheet,
   StatusBar,
-  SafeAreaView,
   KeyboardAvoidingView,
   FlatList,
   RefreshControl,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
 import AppCardTopic from '../../components/AppCardTopic/AppCardTopic';
 import { MAX_PER_PAGE } from '../../constants';
@@ -15,9 +15,10 @@ import { COLORS } from '../../constants/Colors';
 
 import { fetchListTopics } from '../../stores/slices/topics/thunk';
 import { useTopics } from '../../hooks';
+import type { AppNavigation } from '../../navigations/types';
 
 const Topics = () => {
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation<AppNavigation>();
   const dispatch = useDispatch<any>();
   const [refreshing, setRefreshing] = useState(false);
   const { Topics } = useTopics();
@@ -63,10 +64,14 @@ const Topics = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView style={styles.SafeAreaView}>
+      <SafeAreaView
+        edges={['left', 'right', 'bottom']}
+        style={styles.SafeAreaView}
+      >
         <KeyboardAvoidingView
           style={styles.keyboardAvoidingViewContainer}
-          behavior="height">
+          behavior="height"
+        >
           <FlatList
             contentContainerStyle={{ paddingBottom: 20 }}
             refreshControl={

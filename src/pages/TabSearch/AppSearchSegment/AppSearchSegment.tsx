@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
-import { Tab, Icon } from 'react-native-elements';
+import { Tab } from 'react-native-elements';
 import { COLORS } from '../../../constants/Colors';
+import AppIcon from '../../../components/AppIcon/AppIcon';
 
 interface Props {
   activeIndex?: number;
@@ -17,24 +18,25 @@ const AppSearchSegment: React.FC<Props> = ({ activeIndex, onChange }) => {
         }}
         indicatorStyle={styles.TabIndicatorStyle}
         value={activeIndex}
-        onChange={onChange}>
+        onChange={onChange}
+      >
         <Tab.Item
           containerStyle={styles.TabStyle}
           buttonStyle={styles.TabItemStyle}
           titleStyle={styles.TabItemTitleStyle}
-          icon={<Icon name="photo" type="material" />}
+          icon={<AppIcon family="material" name="photo" />}
         />
         <Tab.Item
           containerStyle={styles.TabStyle}
           buttonStyle={styles.TabItemStyle}
           titleStyle={styles.TabItemTitleStyle}
-          icon={<Icon name="layers" type="ionicons" />}
+          icon={<AppIcon family="ionicons" name="layers" />}
         />
         <Tab.Item
           containerStyle={styles.TabStyle}
           buttonStyle={styles.TabItemStyle}
           titleStyle={styles.TabItemTitleStyle}
-          icon={<Icon name="people" type="ionicons" />}
+          icon={<AppIcon family="ionicons" name="people" />}
         />
       </Tab>
     </View>

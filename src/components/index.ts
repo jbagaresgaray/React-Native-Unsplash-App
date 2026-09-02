@@ -4,6 +4,8 @@ export { default as AppCardTopic } from './AppCardTopic/AppCardTopic';
 export { default as AppCollectionItem } from './AppCollectionItem/AppCollectionItem';
 export { default as AppFacebookButton } from './AppFacebookButton/AppFacebookButton';
 export { default as AppHeaderLogo } from './AppHeaderLogo/AppHeaderLogo';
+export { default as AppIcon } from './AppIcon/AppIcon';
+export type { AppIconProps } from './AppIcon/AppIcon';
 export { default as AppNoFiles } from './AppNoFiles/AppNoFiles';
 export { default as AppRelatedCollections } from './AppRelatedCollections/AppRelatedCollections';
 export { default as AppRelatedPhotos } from './AppRelatedPhotos/AppRelatedPhotos';

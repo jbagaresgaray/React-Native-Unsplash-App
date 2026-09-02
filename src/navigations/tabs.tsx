@@ -3,7 +3,6 @@ import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import { Icon } from 'react-native-elements';
 
 import {
   AccountsStackNavigator,
@@ -14,15 +13,14 @@ import {
 import Main from '../pages/Main';
 import { COLORS } from '../constants/Colors';
 import AppTabBar from '../components/AppTabBar/AppTabBar';
-
-const Tab = createBottomTabNavigator<any>();
+import AppIcon from '../components/AppIcon/AppIcon';
 
 const TabHomeBottomTabOptions: BottomTabNavigationOptions = {
   tabBarIcon: ({ focused }) => (
-    <Icon
+    <AppIcon
+      family="ionicons"
       name="home"
       size={28}
-      type="ionicon"
       color={focused ? COLORS.black : '#999999'}
     />
   ),
@@ -30,10 +28,10 @@ const TabHomeBottomTabOptions: BottomTabNavigationOptions = {
 
 const TabCollectionsBottomTabOptions: BottomTabNavigationOptions = {
   tabBarIcon: ({ focused }) => (
-    <Icon
+    <AppIcon
+      family="ionicons"
       name="file-tray-full"
       size={28}
-      type="ionicon"
       color={focused ? COLORS.black : '#999999'}
     />
   ),
@@ -41,10 +39,10 @@ const TabCollectionsBottomTabOptions: BottomTabNavigationOptions = {
 
 const TabSearchBottomTabOptions: BottomTabNavigationOptions = {
   tabBarIcon: ({ focused }) => (
-    <Icon
+    <AppIcon
+      family="ionicons"
       name="search"
       size={28}
-      type="ionicon"
       color={focused ? COLORS.black : '#999999'}
     />
   ),
@@ -52,10 +50,10 @@ const TabSearchBottomTabOptions: BottomTabNavigationOptions = {
 
 const TabAccountBottomTabOptions: BottomTabNavigationOptions = {
   tabBarIcon: ({ focused }) => (
-    <Icon
+    <AppIcon
+      family="ionicons"
       name="person"
       size={28}
-      type="ionicon"
       color={focused ? COLORS.black : '#999999'}
     />
   ),
@@ -63,61 +61,54 @@ const TabAccountBottomTabOptions: BottomTabNavigationOptions = {
 
 const TabUploadBottomTabOptions: BottomTabNavigationOptions = {
   tabBarIcon: ({ focused }) => (
-    <Icon
+    <AppIcon
+      family="fontawesome"
       name="plus-square"
       size={28}
-      type="font-awesome"
       color={focused ? COLORS.black : '#999999'}
     />
   ),
 };
 
-const BottomTabNavigator = () => {
-  return (
-    <Tab.Navigator
-      initialRouteName="Home"
-      screenOptions={{
-        tabBarActiveTintColor: COLORS.black,
-        tabBarInactiveTintColor: '#999999',
-        tabBarLabelStyle: {
-          fontWeight: '500',
+const BottomTabNavigator = createBottomTabNavigator({
+  initialRouteName: 'HomeStack',
+  screenOptions: {
+    tabBarActiveTintColor: COLORS.black,
+    tabBarInactiveTintColor: '#999999',
+    tabBarLabelStyle: {
+      fontWeight: '500',
+    },
+    tabBarShowLabel: false,
+    headerShown: false,
+  },
+  tabBar: AppTabBar,
+  screens: {
+    HomeStack: {
+      screen: HomeStackNavigator,
+      options: TabHomeBottomTabOptions,
+    },
+    CollectionsStack: {
+      screen: CollectionStackNavigator,
+      options: TabCollectionsBottomTabOptions,
+    },
+    Upload: {
+      screen: Main,
+      options: TabUploadBottomTabOptions,
+      listeners: {
+        tabPress: e => {
+          e.preventDefault();
         },
-        tabBarShowLabel: false,
-        headerShown: false,
-      }}
-      tabBar={AppTabBar}>
-      <Tab.Screen
-        name="HomeStack"
-        component={HomeStackNavigator}
-        options={TabHomeBottomTabOptions}
-      />
-      <Tab.Screen
-        name="CollectionsStack"
-        component={CollectionStackNavigator}
-        options={TabCollectionsBottomTabOptions}
-      />
-      <Tab.Screen
-        name="Upload"
-        component={Main}
-        options={TabUploadBottomTabOptions}
-        listeners={{
-          tabPress: e => {
-            e.preventDefault();
-          },
-        }}
-      />
-      <Tab.Screen
-        name="SearchStack"
-        component={SearchStackNavigator}
-        options={TabSearchBottomTabOptions}
-      />
-      <Tab.Screen
-        component={AccountsStackNavigator}
-        name="AccountStack"
-        options={TabAccountBottomTabOptions}
-      />
-    </Tab.Navigator>
-  );
-};
+      },
+    },
+    SearchStack: {
+      screen: SearchStackNavigator,
+      options: TabSearchBottomTabOptions,
+    },
+    AccountStack: {
+      screen: AccountsStackNavigator,
+      options: TabAccountBottomTabOptions,
+    },
+  },
+});
 
 export default BottomTabNavigator;

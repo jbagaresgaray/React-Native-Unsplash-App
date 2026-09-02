@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
-import { Avatar, Button, ListItem, Icon } from 'react-native-elements';
+import { Avatar, Button, ListItem } from 'react-native-elements';
 import { COLORS } from '../../../constants/Colors';
 import { IProfileImage } from '../../../interfaces/generic';
+import AppIcon from '../../../components/AppIcon/AppIcon';
 
 interface Props {
   title?: string;
@@ -47,11 +48,11 @@ const AppCollectionDetailsHeader: React.FC<Props> = ({
             buttonStyle={styles.followButtonStyle}
             titleStyle={styles.followButtonTitleStyle}
             icon={
-              <Icon
+              <AppIcon
+                family="material-design"
                 name="share"
                 size={21}
                 color="#767676"
-                type="material-community"
               />
             }
           />

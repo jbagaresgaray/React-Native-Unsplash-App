@@ -1,14 +1,14 @@
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import React, { useState, useCallback, useEffect } from 'react';
 import {
   View,
-  SafeAreaView,
   StyleSheet,
   StatusBar,
   KeyboardAvoidingView,
   FlatList,
   RefreshControl,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useDispatch } from 'react-redux';
 import { AppCardItem } from '../../components';
@@ -20,13 +20,18 @@ import { getTopic, getTopicPhotos } from '../../stores/slices/topics/thunk';
 import TopicDetailInformation from './TopicDetailInformation';
 import TopicDetailStatus from './TopicDetailStatus';
 import { useTopics } from '../../hooks';
+import type {
+  AppNavigation,
+  TopicDetailScreenProps,
+} from '../../navigations/types';
 
-const TopicDetail = () => {
+const TopicDetail: React.FC<TopicDetailScreenProps> = ({
+  route: { params },
+}) => {
   const [refreshing, setRefreshing] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [idSlug, setIdSlug] = useState('');
-  const navigation: any = useNavigation();
-  const { params }: any = useRoute();
+  const navigation = useNavigation<AppNavigation>();
   const dispatch = useDispatch<any>();
 
   const { Topic, TopicPhotos, isLoadingTopic, isLoadingTopicPhotos } =
@@ -103,10 +108,14 @@ const TopicDetail = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView style={styles.SafeAreaView}>
+      <SafeAreaView
+        edges={['left', 'right', 'bottom']}
+        style={styles.SafeAreaView}
+      >
         <KeyboardAvoidingView
           style={styles.keyboardAvoidingViewContainer}
-          behavior="height">
+          behavior="height"
+        >
           <FlatList
             contentContainerStyle={{ paddingBottom: 20 }}
             refreshControl={

@@ -3,14 +3,11 @@ import { View, StyleSheet, Pressable, Dimensions } from 'react-native';
 import { Button } from 'react-native-elements';
 import { Image } from 'expo-image';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
-import {
-  default as Icon,
-  default as Icons,
-} from 'react-native-vector-icons/MaterialCommunityIcons';
 import { COLORS } from '../../constants/Colors';
 import { IPhoto } from '../../interfaces/photo';
 import { getWindowHeight } from '../../utils';
 import AppUserCardItem from '../AppUserCardItem/AppUserCardItem';
+import AppIcon from '../AppIcon/AppIcon';
 
 interface Props {
   item?: IPhoto;
@@ -36,7 +33,8 @@ const AppCardItem: React.FC<Props> = ({
           marginStart={16}
           marginEnd={16}
           flexDirection="row"
-          alignItems="center">
+          alignItems="center"
+        >
           <SkeletonPlaceholder.Item width={36} height={36} borderRadius={999} />
           <SkeletonPlaceholder.Item marginLeft={10}>
             <SkeletonPlaceholder.Item
@@ -69,13 +67,12 @@ const AppCardItem: React.FC<Props> = ({
         onMorePress={onMorePress}
         onUserPress={onUserPress}
       />
-      <Pressable
-        onPress={onImagePress}
-        style={styles.imageContainer}>
+      <Pressable onPress={onImagePress} style={styles.imageContainer}>
         <Image
           style={styles.image}
           placeholder={item?.blur_hash}
           source={{ uri: item?.urls?.small }}
+          transition={300}
         />
       </Pressable>
       <View style={styles.reactionsWrapper}>
@@ -85,13 +82,27 @@ const AppCardItem: React.FC<Props> = ({
               containerStyle={styles.reactionButton}
               buttonStyle={styles.reactionButtonStyle}
               type="clear"
-              icon={<Icons name="heart" size={24} color="#767676" />}
+              icon={
+                <AppIcon
+                  family="material-design"
+                  name="heart"
+                  size={24}
+                  color="#767676"
+                />
+              }
             />
             <Button
               containerStyle={styles.reactionButton}
               buttonStyle={styles.reactionButtonStyle}
               type="clear"
-              icon={<Icon name="plus" size={24} color="#767676" />}
+              icon={
+                <AppIcon
+                  family="material-design"
+                  name="plus"
+                  size={24}
+                  color="#767676"
+                />
+              }
             />
           </View>
           <View style={styles.rReactions}>
@@ -99,7 +110,14 @@ const AppCardItem: React.FC<Props> = ({
               containerStyle={styles.reactionButton}
               buttonStyle={styles.reactionButtonStyle}
               type="clear"
-              icon={<Icon name="download" size={24} color="#767676" />}
+              icon={
+                <AppIcon
+                  family="material-design"
+                  name="download"
+                  size={24}
+                  color="#767676"
+                />
+              }
             />
           </View>
         </View>

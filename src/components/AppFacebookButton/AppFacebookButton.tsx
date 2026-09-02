@@ -1,7 +1,8 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {Button, Icon} from 'react-native-elements';
-import {COLORS} from '../../constants/Colors';
+import { View, Text, StyleSheet } from 'react-native';
+import { Button } from 'react-native-elements';
+import { COLORS } from '../../constants/Colors';
+import AppIcon from '../AppIcon/AppIcon';
 
 const AppFacebookButton: React.FC = () => {
   return (
@@ -10,11 +11,11 @@ const AppFacebookButton: React.FC = () => {
       buttonStyle={styles.buttonStyle}
       titleStyle={styles.titleStyle}
       icon={
-        <Icon
+        <AppIcon
+          family="fontawesome"
           name="facebook"
           size={18}
           color={COLORS.facebook}
-          type="font-awesome"
         />
       }
       title="Continue with Facebook"

@@ -10,6 +10,7 @@ import { ICollection } from '../../interfaces/collection';
 import { IProfileImage, ITag } from '../../interfaces/generic';
 import { IPhoto } from '../../interfaces/photo';
 import AppUserProfileItem from '../UserProfile/AppUserProfileItem/AppUserProfileItem';
+import type { AppNavigation } from '../../navigations/types';
 
 interface Props {
   actionSheetRef: any;
@@ -30,7 +31,7 @@ const ImageUserModal: React.FC<Props> = ({
   related_collections,
   tags,
 }) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<AppNavigation>();
 
   const onImagePress = () => {};
 
@@ -58,9 +59,9 @@ const ImageUserModal: React.FC<Props> = ({
     dismiss();
 
     setTimeout(() => {
-      navigation.navigate('UserProfile', {
-        username,
-      });
+      if (username) {
+        navigation.navigate('UserProfile', { username });
+      }
     }, 100);
   };
 
@@ -75,7 +76,8 @@ const ImageUserModal: React.FC<Props> = ({
       drawUnderStatusBar={false}
       defaultOverlayOpacity={0.4}
       containerStyle={styles.innerContainer}
-      ref={actionSheetRef}>
+      ref={actionSheetRef}
+    >
       <AppUserProfileItem
         name={name}
         username={username}

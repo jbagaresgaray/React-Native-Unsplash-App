@@ -9,65 +9,65 @@ import TabCollections from '../pages/TabCollections/TabCollections';
 import TabSearch from '../pages/TabSearch/TabSearch';
 import TabAccount from '../pages/TabAccount/TabAccount';
 import AppHeaderLogo from '../components/AppHeaderLogo/AppHeaderLogo';
-import UserProfile from '../pages/UserProfile/UserProfile';
-import ImageDetails from '../pages/ImageDetails/ImageDetails';
-import CollectionDetails from '../pages/CollectionDetails/CollectionDetails';
 import Topics from '../pages/Topics/Topics';
 import TopicDetail from '../pages/TopicDetail/TopicDetail';
-import { Platform } from 'react-native';
-
-const Stack = createStackNavigator<any>();
 
 const navigationOptions: StackNavigationOptions = {
   gestureEnabled: false,
   headerStyle: {
     backgroundColor: COLORS.white,
   },
-  headerBackTitleVisible: false,
+  headerBackButtonDisplayMode: 'minimal',
   headerTintColor: COLORS.black,
   headerTitle: () => <AppHeaderLogo color="dark" height={30} width={115} />,
 };
 
-export const HomeStackNavigator = () => {
-  return (
-    <Stack.Navigator screenOptions={navigationOptions} initialRouteName="Home">
-      <Stack.Screen name="Home" component={TabHome} />
-      <Stack.Screen name="UserProfile" component={UserProfile} />
-      <Stack.Screen name="ImageDetails" component={ImageDetails} />
-      <Stack.Screen name="CollectionDetails" component={CollectionDetails} />
-      <Stack.Screen name="Topics" component={Topics} />
-      <Stack.Screen name="TopicDetail" component={TopicDetail} />
-    </Stack.Navigator>
-  );
-};
+export const HomeStackNavigator = createStackNavigator({
+  initialRouteName: 'Home',
+  screenOptions: navigationOptions,
+  screens: {
+    Home: {
+      screen: TabHome,
+      options: { headerLeft: () => null },
+    },
+    Topics,
+    TopicDetail: {
+      screen: TopicDetail,
+      linking: 'topics/:id_or_slug',
+    },
+  },
+});
 
-export const CollectionStackNavigator = () => {
-  return (
-    <Stack.Navigator screenOptions={navigationOptions}>
-      <Stack.Screen name="Collections" component={TabCollections} />
-      <Stack.Screen name="CollectionDetails" component={CollectionDetails} />
-      <Stack.Screen name="UserProfile" component={UserProfile} />
-      <Stack.Screen name="ImageDetails" component={ImageDetails} />
-    </Stack.Navigator>
-  );
-};
+export const CollectionStackNavigator = createStackNavigator({
+  screenOptions: navigationOptions,
+  screens: {
+    Collections: {
+      screen: TabCollections,
+      options: { headerLeft: () => null },
+    },
+  },
+});
 
-export const SearchStackNavigator = () => {
-  return (
-    <Stack.Navigator screenOptions={navigationOptions}>
-      <Stack.Screen name="Search" component={TabSearch} />
-      <Stack.Screen name="UserProfile" component={UserProfile} />
-      <Stack.Screen name="ImageDetails" component={ImageDetails} />
-      <Stack.Screen name="CollectionDetails" component={CollectionDetails} />
-    </Stack.Navigator>
-  );
-};
+export const SearchStackNavigator = createStackNavigator({
+  screenOptions: navigationOptions,
+  screens: {
+    Search: {
+      screen: TabSearch,
+      options: { headerShown: false },
+    },
+  },
+});
 
-export const AccountsStackNavigator = () => {
-  return (
-    <Stack.Navigator screenOptions={navigationOptions}>
-      <Stack.Screen name="Accounts" component={TabAccount} />
-      <Stack.Screen name="ImageDetails" component={ImageDetails} />
-    </Stack.Navigator>
-  );
-};
+export const AccountsStackNavigator = createStackNavigator({
+  screenOptions: navigationOptions,
+  screens: {
+    Accounts: {
+      screen: TabAccount,
+      options: {
+        headerTransparent: true,
+        headerLeft: () => null,
+        headerTitle: () => null,
+      },
+    },
+  },
+});

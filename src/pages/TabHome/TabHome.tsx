@@ -1,15 +1,15 @@
-import { useNavigation } from '@react-navigation/core';
-import React, { useLayoutEffect, useState, useCallback } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { useState, useCallback } from 'react';
 import {
   FlatList,
   StyleSheet,
-  SafeAreaView,
   StatusBar,
   KeyboardAvoidingView,
   RefreshControl,
   View,
   ActivityIndicator,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
 
 import AppHomeCategories from './AppHomeCategories/AppHomeCategories';
@@ -23,6 +23,7 @@ import { fetchListTopics } from '../../stores/slices/topics/thunk';
 import { fetchListPhotos } from '../../stores/slices/photos/thunk';
 import { loadFakeData } from '../../utils';
 import { usePhotos, useTopics } from '../../hooks';
+import type { AppNavigation } from '../../navigations/types';
 
 const TabHome = () => {
   const fakePhotosArr = loadFakeData();
@@ -36,7 +37,7 @@ const TabHome = () => {
   const { isLoadingTopics, Topics } = useTopics();
   const { isLoadingPhotos, Photos } = usePhotos();
 
-  const navigation: any = useNavigation();
+  const navigation = useNavigation<AppNavigation>();
   const dispatch = useDispatch<any>();
 
   const onRefresh = useCallback(async () => {
@@ -93,12 +94,6 @@ const TabHome = () => {
     );
     setLoadingTopicMore(false);
   }, []);
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerLeft: () => null,
-    });
-  }, [navigation]);
 
   const onUserPress = (username: string) => {
     navigation.navigate('UserProfile', {
@@ -158,7 +153,8 @@ const TabHome = () => {
           marginTop: 10,
           marginBottom: 10,
           justifyContent: 'center',
-        }}>
+        }}
+      >
         <ActivityIndicator animating size="large" color="#bbb" />
       </View>
     );
@@ -184,10 +180,14 @@ const TabHome = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView style={styles.SafeAreaView}>
+      <SafeAreaView
+        edges={['left', 'right', 'bottom']}
+        style={styles.SafeAreaView}
+      >
         <KeyboardAvoidingView
           style={styles.keyboardAvoidingViewContainer}
-          behavior="height">
+          behavior="height"
+        >
           <AppHomeSegment activeIndex={activeTab} onChange={setActiveTab} />
           {activeTab === 0 && renderEditorial()}
         </KeyboardAvoidingView>

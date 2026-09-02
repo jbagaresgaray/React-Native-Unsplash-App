@@ -1,12 +1,10 @@
-import { useNavigation, useRoute } from '@react-navigation/native';
-import React, {
-  useState,
-  useLayoutEffect,
-  createRef,
-  useCallback,
-} from 'react';
+import React, { useState, createRef, useCallback } from 'react';
 import { useEffect } from 'react';
-import { View, Text, SafeAreaView, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
 import { useDispatch, useSelector } from 'react-redux';
 import { COLORS } from '../../constants/Colors';
@@ -15,14 +13,16 @@ import { getPhoto } from '../../stores/slices/photos/thunk';
 import { photosSelectors } from '../../stores/slices/photos';
 import ImageUserModal from '../ImageUserModal/ImageUserModal';
 import AppUserProfileItem from '../UserProfile/AppUserProfileItem/AppUserProfileItem';
+import type { ImageDetailsScreenProps } from '../../navigations/types';
 
-const ImageDetails: React.FC = () => {
+const ImageDetails: React.FC<ImageDetailsScreenProps> = ({
+  route: { params },
+}) => {
   const userDetailModalRef: any = createRef();
   const [refreshing, setRefreshing] = useState(false);
   const [photoId, setPhotoId] = useState('');
-  const navigation: any = useNavigation();
-  const { params }: any = useRoute();
   const dispatch = useDispatch<any>();
+  const insets = useSafeAreaInsets();
 
   const image = useSelector(photosSelectors.photo);
 
@@ -39,12 +39,6 @@ const ImageDetails: React.FC = () => {
     }
   }, [params]);
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerTransparent: true,
-    });
-  }, [navigation]);
-
   const onProfileView = () => {
     userDetailModalRef.current?.setModalVisible();
   };
@@ -57,8 +51,15 @@ const ImageDetails: React.FC = () => {
         source={{
           uri: image?.urls?.regular,
         }}
+        transition={500}
       />
-      <View style={styles.footerView}>
+      <View
+        style={[
+          styles.footerView,
+          {
+            bottom: insets.bottom,
+          },
+        ]}>
         <AppUserProfileItem
           name={image?.user?.name}
           username={image?.user?.username}
@@ -94,7 +95,7 @@ const styles = StyleSheet.create({
   },
   footerView: {
     position: 'absolute',
-    bottom: 0,
+    // bottom: 0,
     left: 0,
     right: 0,
   },

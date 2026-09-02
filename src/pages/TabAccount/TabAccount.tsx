@@ -1,29 +1,23 @@
-import { useNavigation } from '@react-navigation/core';
-import React, { useLayoutEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React from 'react';
 import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   Pressable,
   ImageBackground,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import AppButton from '../../components/AppButton/AppButton';
 import AppFacebookButton from '../../components/AppFacebookButton/AppFacebookButton';
 import { COLORS } from '../../constants/Colors';
 
 import landingImg from '../../assets/img/landing-unsplash.jpg';
+import type { AppNavigation } from '../../navigations/types';
 
 const TabAccount = () => {
-  const navigation: any = useNavigation();
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerTransparent: true,
-      headerLeft: () => null,
-      headerTitle: () => null,
-    });
-  }, [navigation]);
+  const navigation = useNavigation<AppNavigation>();
+  const insets = useSafeAreaInsets();
 
   const onSignUp = () => {
     navigation.navigate('Register');
@@ -36,10 +30,16 @@ const TabAccount = () => {
   return (
     <ImageBackground
       source={landingImg}
-      style={{ width: '100%', height: '100%' }}>
-      <SafeAreaView />
+      style={{ width: '100%', height: '100%' }}
+    >
+      <View style={{ height: insets.top }} />
       <View style={styles.emptyView}></View>
-      <View style={styles.footerContainer}>
+      <View
+        style={[
+          styles.footerContainer,
+          { height: 200 + insets.bottom, paddingBottom: insets.bottom },
+        ]}
+      >
         <View style={styles.buttonViews}>
           <AppFacebookButton />
           <AppButton title="Sign up with email" onPress={onSignUp} />
@@ -56,10 +56,6 @@ const TabAccount = () => {
 };
 
 const styles = StyleSheet.create({
-  SafeAreaView: {
-    flex: 1,
-    backgroundColor: COLORS.white,
-  },
   emptyView: { flex: 1, justifyContent: 'flex-start', alignItems: 'center' },
   footerContainer: {
     height: 200,
