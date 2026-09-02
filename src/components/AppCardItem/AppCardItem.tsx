@@ -1,5 +1,13 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { View, Text, StyleSheet, Pressable, Dimensions } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  Dimensions,
+  Alert,
+  ActivityIndicator,
+} from 'react-native';
 import { Button } from 'react-native-elements';
 import { Image } from 'expo-image';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
@@ -10,6 +18,7 @@ import { getWindowHeight } from '../../utils';
 import AppUserCardItem from '../AppUserCardItem/AppUserCardItem';
 import AppIcon from '../AppIcon/AppIcon';
 import { likePhoto, unLikePhoto } from '../../stores/slices/photos/thunk';
+import { downloadPhoto } from '../../services/downloads';
 import type { IPhotoExtended } from '../../interfaces/photo';
 
 interface Props {
@@ -61,6 +70,25 @@ const AppCardItem: React.FC<Props> = ({
       })
       .finally(() => setLiking(false));
   }, [dispatch, item?.id, isLiked, liking]);
+
+  const [downloading, setDownloading] = useState(false);
+
+  const handleDownloadPress = useCallback(async () => {
+    if (!item?.id || downloading) return;
+
+    setDownloading(true);
+    try {
+      await downloadPhoto(item);
+      Alert.alert('Download complete', 'Photo saved to your library.');
+    } catch (error) {
+      const message =
+        (error as Error)?.message ||
+        'Unable to download this photo. Please try again.';
+      Alert.alert('Download failed', message);
+    } finally {
+      setDownloading(false);
+    }
+  }, [item, downloading]);
 
   const renderLoadingSkeleton = () => (
     <>
@@ -148,13 +176,19 @@ const AppCardItem: React.FC<Props> = ({
               containerStyle={styles.reactionButton}
               buttonStyle={styles.reactionButtonStyle}
               type="clear"
+              onPress={handleDownloadPress}
+              disabled={downloading}
               icon={
-                <AppIcon
-                  family="material-design"
-                  name="download"
-                  size={24}
-                  color="#767676"
-                />
+                downloading ? (
+                  <ActivityIndicator size="small" color="#767676" />
+                ) : (
+                  <AppIcon
+                    family="material-design"
+                    name="download"
+                    size={24}
+                    color="#767676"
+                  />
+                )
               }
             />
           </View>

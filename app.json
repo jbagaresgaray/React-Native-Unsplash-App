@@ -29,7 +29,15 @@
       "@react-native-vector-icons/fontawesome",
       "@react-native-vector-icons/feather",
       "react-native-app-auth",
-      "expo-secure-store"
+      "expo-secure-store",
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow $(PRODUCT_NAME) to save photos to your library.",
+          "savePhotosPermission": "Allow $(PRODUCT_NAME) to save photos to your library.",
+          "isAccessMediaLocationEnabled": false
+        }
+      ]
     ]
   }
 }

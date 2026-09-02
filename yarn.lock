@@ -3085,6 +3085,11 @@ expo-manifests@~57.0.1:
   dependencies:
     expo-json-utils "~57.0.1"
 
+expo-media-library@~57.0.4:
+  version "57.0.4"
+  resolved "https://registry.yarnpkg.com/expo-media-library/-/expo-media-library-57.0.4.tgz#816464ebcab7f31bb389a25d4f16962fb78f8a63"
+  integrity sha512-mg/KyGftxNa+fl7qBnFzqPrIjWB8K4NgYwvcAio4ZjyA+tIETTIN/NwYCBgnzIpNtAiOxbK7x9GSrT7Cwcwp1w==
+
 expo-modules-autolinking@~57.0.12:
   version "57.0.12"
   resolved "https://registry.yarnpkg.com/expo-modules-autolinking/-/expo-modules-autolinking-57.0.12.tgz#8564ac27c2fb7187e94e9b1a2557037187bbfefd"
