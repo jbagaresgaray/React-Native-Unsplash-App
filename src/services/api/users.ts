@@ -1,5 +1,7 @@
 import API from '.';
 import {ORIENTATION_TYPES} from '../../constants';
+import { getAccessToken } from '../auth';
+import { IUser } from '../../interfaces/user';
 
 export interface UserPhotosParams {
   page?: number;
@@ -26,6 +28,14 @@ export interface UserCollectionsParams {
   }
 
 const UsersService = {
+  async getCurrentUser(token?: string) {
+    const accessToken = token || (await getAccessToken());
+    return API.get<IUser>('/me', {
+      headers: accessToken
+        ? { Authorization: `Bearer ${accessToken}` }
+        : undefined,
+    });
+  },
   getUserPublicProfile(username: string) {
     return API.get(`/users/${username}`);
   },

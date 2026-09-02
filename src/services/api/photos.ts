@@ -1,5 +1,6 @@
 import API from '.';
 import {ORIENTATION_TYPES} from '../../constants';
+import { getAccessToken } from '../auth';
 
 export interface ListPhotosParams {
   page?: number;
@@ -25,11 +26,17 @@ const PhotosService = {
   trackDownloadPhoto(id: string) {
     return API.get(`/photos/${id}/download`);
   },
-  likePhoto(id: string) {
-    return API.post(`/photos/${id}/like`);
+  async likePhoto(id: string) {
+    const token = await getAccessToken();
+    return API.post(`/photos/${id}/like`, null, {
+      headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+    });
   },
-  unLikePhoto(id: string) {
-    return API.delete(`/photos/${id}/like`);
+  async unLikePhoto(id: string) {
+    const token = await getAccessToken();
+    return API.delete(`/photos/${id}/like`, {
+      headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+    });
   },
 };
 

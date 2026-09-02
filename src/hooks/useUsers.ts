@@ -6,12 +6,16 @@ const useUsers = () => {
   const Photos = useSelector(usersSelectors.publicUserPhotos);
   const Likes = useSelector(usersSelectors.publicUserLikedPhotos);
   const Collections = useSelector(usersSelectors.publicUserCollectionPhotos);
+  const CurrentUser = useSelector(usersSelectors.currentUser);
+  const ListUsers = useSelector(usersSelectors.listUsers);
 
   return {
     userProfile,
     Photos,
     Likes,
     Collections,
+    CurrentUser,
+    ListUsers,
   };
 };
 

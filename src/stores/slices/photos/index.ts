@@ -1,7 +1,12 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../..';
 import { MAX_PER_PAGE, ORDER_BY_TYPES } from '../../../constants';
-import { fetchListPhotos, getPhoto } from './thunk';
+import {
+  fetchListPhotos,
+  getPhoto,
+  likePhoto,
+  unLikePhoto,
+} from './thunk';
 import { IPhotoExtended } from '../../../interfaces/photo';
 
 export type PhotosState = {
@@ -70,6 +75,45 @@ const { actions, reducer } = createSlice({
       state.isLoadingPhoto = false;
       state.error = action.error;
     });
+
+    // ===================================================
+    // ===================================================
+    // ===================================================
+    builder.addCase(likePhoto.fulfilled, (state, { payload }) => {
+      const id = payload?.id;
+      if (id) {
+        state.photos = state.photos.map(p =>
+          p.id === id
+            ? { ...p, liked_by_user: true, likes: payload.likes }
+            : p,
+        );
+        if (state.photo?.id === id) {
+          state.photo = {
+            ...state.photo,
+            liked_by_user: true,
+            likes: payload.likes,
+          };
+        }
+      }
+    });
+
+    builder.addCase(unLikePhoto.fulfilled, (state, { payload }) => {
+      const id = payload?.id;
+      if (id) {
+        state.photos = state.photos.map(p =>
+          p.id === id
+            ? { ...p, liked_by_user: false, likes: payload.likes }
+            : p,
+        );
+        if (state.photo?.id === id) {
+          state.photo = {
+            ...state.photo,
+            liked_by_user: false,
+            likes: payload.likes,
+          };
+        }
+      }
+    });
   },
 });
 
@@ -85,5 +129,7 @@ export const photosActions = {
   ...actions,
   fetchListPhotos,
   getPhoto,
+  likePhoto,
+  unLikePhoto,
 };
 export const photosReducer = reducer;

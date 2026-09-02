@@ -32,7 +32,10 @@ const API = axios.create({
 
 API.interceptors.request.use(
   async (config: AxiosRequestConfig) => {
-    config.headers = headers;
+    config.headers = {
+      ...headers,
+      ...config.headers,
+    };
     return config;
   },
   (error: any) => {

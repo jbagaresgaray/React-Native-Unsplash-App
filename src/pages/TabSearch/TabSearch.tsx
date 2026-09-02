@@ -17,8 +17,11 @@ import AppSearchHeaderBar from '../../components/AppSearchHeaderBar/AppSearchHea
 import { photosSelectors } from '../../stores/slices/photos';
 import { collectionsSelectors } from '../../stores/slices/collections';
 import { searchSelectors } from '../../stores/slices/search';
+import { usersSelectors } from '../../stores/slices/users';
 import { MAX_PER_PAGE } from '../../constants';
 import { fetchListPhotos } from '../../stores/slices/photos/thunk';
+import { fetchCollections } from '../../stores/slices/collections/thunk';
+import { fetchListUsers } from '../../stores/slices/users/thunk';
 import {
   searchCollectionsQry,
   searchPhotosQry,
@@ -36,6 +39,10 @@ const TabSearch = () => {
   const PhotosArr = useSelector(searchSelectors.searchPhotos);
   const CollectionsArr = useSelector(searchSelectors.searchCollections);
   const UsersArr = useSelector(searchSelectors.searchUsers);
+
+  const randomPhotos = useSelector(photosSelectors.photos);
+  const randomCollections = useSelector(collectionsSelectors.collections);
+  const randomUsers = useSelector(usersSelectors.listUsers);
 
   const isLoadingSearchUsers = useSelector(
     searchSelectors.isLoadingSearchUsers,
@@ -87,13 +94,28 @@ const TabSearch = () => {
 
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
-    await dispatch(
-      fetchListPhotos({
-        page: 1,
-        per_page: MAX_PER_PAGE,
-        order_by: 'popular',
-      }),
-    );
+    await Promise.all([
+      dispatch(
+        fetchListPhotos({
+          page: 1,
+          per_page: MAX_PER_PAGE,
+          order_by: 'popular',
+        }),
+      ),
+      dispatch(
+        fetchCollections({
+          page: 1,
+          per_page: MAX_PER_PAGE,
+        }),
+      ),
+      dispatch(
+        fetchListUsers({
+          page: 1,
+          per_page: MAX_PER_PAGE,
+          order_by: 'popular',
+        }),
+      ),
+    ]);
     setRefreshing(false);
   }, []);
 
@@ -113,9 +135,33 @@ const TabSearch = () => {
         order_by: 'popular',
       }),
     );
+    dispatch(
+      fetchCollections({
+        page: 1,
+        per_page: MAX_PER_PAGE,
+      }),
+    );
+    dispatch(
+      fetchListUsers({
+        page: 1,
+        per_page: MAX_PER_PAGE,
+        order_by: 'popular',
+      }),
+    );
   }, []);
 
+  const isSearching = !isEmpty(searchText);
+
   const renderUsersSearch = () => {
+    if (!isSearching) {
+      return (
+        <AppSearchUsers
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+          UsersArr={randomUsers}
+        />
+      );
+    }
     if (UsersArr?.results && UsersArr.results.length) {
       return (
         <AppSearchUsers
@@ -138,22 +184,44 @@ const TabSearch = () => {
     <SafeAreaView style={styles.SafeAreaView}>
       <AppSearchHeaderBar onSearching={onSearching} value={searchText} />
       <AppSearchSegment activeIndex={activeTab} onChange={setActiveTab} />
-      {activeTab === 0 && PhotosArr && PhotosArr.results && (
-        <AppSearchPhotos
-          refreshing={refreshing}
-          onRefresh={onRefresh}
-          PhotosArr={PhotosArr.results}
-        />
-      )}
-      {activeTab === 1 && CollectionsArr && CollectionsArr.results && (
-        <AppSearchCollections
-          refreshing={refreshing}
-          onRefresh={onRefresh}
-          onPressImage={onPressCollectionImage}
-          onPressTitle={onPressCollectionTitle}
-          CollectionsArr={CollectionsArr.results}
-        />
-      )}
+      {activeTab === 0 &&
+        (isSearching ? (
+          PhotosArr &&
+          PhotosArr.results && (
+            <AppSearchPhotos
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+              PhotosArr={PhotosArr.results}
+            />
+          )
+        ) : (
+          <AppSearchPhotos
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            PhotosArr={randomPhotos}
+          />
+        ))}
+      {activeTab === 1 &&
+        (isSearching ? (
+          CollectionsArr &&
+          CollectionsArr.results && (
+            <AppSearchCollections
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+              onPressImage={onPressCollectionImage}
+              onPressTitle={onPressCollectionTitle}
+              CollectionsArr={CollectionsArr.results}
+            />
+          )
+        ) : (
+          <AppSearchCollections
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            onPressImage={onPressCollectionImage}
+            onPressTitle={onPressCollectionTitle}
+            CollectionsArr={randomCollections}
+          />
+        ))}
       {activeTab === 2 && renderUsersSearch()}
     </SafeAreaView>
   );

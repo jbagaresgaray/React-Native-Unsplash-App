@@ -153,8 +153,7 @@ const TabHome = () => {
           marginTop: 10,
           marginBottom: 10,
           justifyContent: 'center',
-        }}
-      >
+        }}>
         <ActivityIndicator animating size="large" color="#bbb" />
       </View>
     );
@@ -180,14 +179,10 @@ const TabHome = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView
-        edges={['left', 'right', 'bottom']}
-        style={styles.SafeAreaView}
-      >
+      <SafeAreaView edges={['left', 'right']} style={styles.SafeAreaView}>
         <KeyboardAvoidingView
           style={styles.keyboardAvoidingViewContainer}
-          behavior="height"
-        >
+          behavior="height">
           <AppHomeSegment activeIndex={activeTab} onChange={setActiveTab} />
           {activeTab === 0 && renderEditorial()}
         </KeyboardAvoidingView>

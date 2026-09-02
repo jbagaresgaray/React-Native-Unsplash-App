@@ -1,13 +1,16 @@
-import React from 'react';
-import { View, StyleSheet, Pressable, Dimensions } from 'react-native';
+import React, { useState, useCallback, useEffect } from 'react';
+import { View, Text, StyleSheet, Pressable, Dimensions } from 'react-native';
 import { Button } from 'react-native-elements';
 import { Image } from 'expo-image';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
+import { useDispatch } from 'react-redux';
 import { COLORS } from '../../constants/Colors';
 import { IPhoto } from '../../interfaces/photo';
 import { getWindowHeight } from '../../utils';
 import AppUserCardItem from '../AppUserCardItem/AppUserCardItem';
 import AppIcon from '../AppIcon/AppIcon';
+import { likePhoto, unLikePhoto } from '../../stores/slices/photos/thunk';
+import type { IPhotoExtended } from '../../interfaces/photo';
 
 interface Props {
   item?: IPhoto;
@@ -24,6 +27,41 @@ const AppCardItem: React.FC<Props> = ({
   onMorePress,
   onImagePress,
 }) => {
+  const dispatch = useDispatch<any>();
+
+  const [isLiked, setIsLiked] = useState(!!item?.liked_by_user);
+  const [likesCount, setLikesCount] = useState(item?.likes ?? 0);
+  const [liking, setLiking] = useState(false);
+
+  useEffect(() => {
+    setIsLiked(!!item?.liked_by_user);
+    setLikesCount(item?.likes ?? 0);
+  }, [item?.id, item?.liked_by_user, item?.likes]);
+
+  const handleLikePress = useCallback(() => {
+    if (!item?.id || liking) return;
+
+    setLiking(true);
+    const wasLiked = isLiked;
+
+    setIsLiked(!wasLiked);
+    setLikesCount(count => (wasLiked ? count - 1 : count + 1));
+
+    const action = wasLiked ? unLikePhoto(item.id) : likePhoto(item.id);
+    dispatch(action)
+      .then((result: { payload?: IPhotoExtended }) => {
+        if (result?.payload) {
+          setLikesCount(result.payload.likes);
+          setIsLiked(!!result.payload.liked_by_user);
+        }
+      })
+      .catch(() => {
+        setIsLiked(wasLiked);
+        setLikesCount(count => (wasLiked ? count + 1 : count - 1));
+      })
+      .finally(() => setLiking(false));
+  }, [dispatch, item?.id, isLiked, liking]);
+
   const renderLoadingSkeleton = () => (
     <>
       <SkeletonPlaceholder>
@@ -33,8 +71,7 @@ const AppCardItem: React.FC<Props> = ({
           marginStart={16}
           marginEnd={16}
           flexDirection="row"
-          alignItems="center"
-        >
+          alignItems="center">
           <SkeletonPlaceholder.Item width={36} height={36} borderRadius={999} />
           <SkeletonPlaceholder.Item marginLeft={10}>
             <SkeletonPlaceholder.Item
@@ -82,12 +119,13 @@ const AppCardItem: React.FC<Props> = ({
               containerStyle={styles.reactionButton}
               buttonStyle={styles.reactionButtonStyle}
               type="clear"
+              onPress={handleLikePress}
               icon={
                 <AppIcon
                   family="material-design"
-                  name="heart"
+                  name={isLiked ? 'heart' : 'heart-outline'}
                   size={24}
-                  color="#767676"
+                  color={isLiked ? '#e0245e' : '#767676'}
                 />
               }
             />
@@ -168,6 +206,13 @@ const styles = StyleSheet.create({
     width: 24.3 * 3 + 15,
     // justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  likeCount: {
+    fontSize: 13,
+    color: '#767676',
+    paddingLeft: 4,
+    paddingRight: 8,
+    fontWeight: '500',
   },
   reactionButton: {
     padding: 2,

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosResponse } from 'axios';
-import { IPhotoExtended } from '../../../interfaces/photo';
+import { IPhoto, IPhotoExtended } from '../../../interfaces/photo';
 import PhotosService, { ListPhotosParams } from '../../../services/api/photos';
 
 export const fetchListPhotos = createAsyncThunk<
@@ -19,6 +19,22 @@ export const getPhoto = createAsyncThunk<IPhotoExtended, string>(
   'photos/getPhoto',
   async id => {
     const response: AxiosResponse = await PhotosService.getPhoto(id);
+    return response.data;
+  },
+);
+
+export const likePhoto = createAsyncThunk<IPhoto, string>(
+  'photos/likePhoto',
+  async id => {
+    const response: AxiosResponse = await PhotosService.likePhoto(id);
+    return response.data;
+  },
+);
+
+export const unLikePhoto = createAsyncThunk<IPhoto, string>(
+  'photos/unLikePhoto',
+  async id => {
+    const response: AxiosResponse = await PhotosService.unLikePhoto(id);
     return response.data;
   },
 );

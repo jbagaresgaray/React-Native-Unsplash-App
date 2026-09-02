@@ -6,8 +6,8 @@ import {
 import { RootState } from '../..';
 import { MAX_PER_PAGE } from '../../../constants';
 import { IPhoto } from '../../../interfaces/photo';
-import { IUserProfile } from '../../../interfaces/user';
-import { getUserCollections, getUserLikedPhotos, getUserPhotos, getUserPublicProfile } from './thunk';
+import { IUser, IUserProfile } from '../../../interfaces/user';
+import { fetchListUsers, getCurrentUser, getUserCollections, getUserLikedPhotos, getUserPhotos, getUserPublicProfile } from './thunk';
 
 
 export type UsersState = {
@@ -17,6 +17,8 @@ export type UsersState = {
   publicUserPhotos: IPhoto[] | null;
   publicUserLikedPhotos: IPhoto[] | null;
   publicUserCollectionPhotos: IPhoto[] | null;
+  currentUser: IUser | null;
+  listUsers: IUser[];
   page: number;
   per_page: number;
   error: any | null;
@@ -29,6 +31,8 @@ const initialState: UsersState = {
   publicUserPhotos: null,
   publicUserLikedPhotos: null,
   publicUserCollectionPhotos: null,
+  currentUser: null,
+  listUsers: [],
   page: 1,
   per_page: MAX_PER_PAGE,
   error: null,
@@ -48,6 +52,30 @@ const { actions, reducer } = createSlice({
     },
   },
   extraReducers(builder) {
+    // ==========================================================================
+    builder.addCase(getCurrentUser.pending, state => {
+      state.isLoadingUser = true;
+    });
+    builder.addCase(getCurrentUser.fulfilled, (state, { payload }) => {
+      state.isLoadingUser = false;
+      state.currentUser = payload;
+    });
+    builder.addCase(getCurrentUser.rejected, (state, action) => {
+      state.isLoadingUser = false;
+      state.error = action.error;
+    });
+    // ==========================================================================
+    builder.addCase(fetchListUsers.pending, state => {
+      state.isLoadingUser = true;
+    });
+    builder.addCase(fetchListUsers.fulfilled, (state, { payload }) => {
+      state.isLoadingUser = false;
+      state.listUsers = payload;
+    });
+    builder.addCase(fetchListUsers.rejected, (state, action) => {
+      state.isLoadingUser = false;
+      state.error = action.error;
+    });
     // ==========================================================================
     // ==========================================================================
     // ==========================================================================
@@ -119,6 +147,8 @@ export const usersSelectors = {
     selectRoot,
     state => state.publicUserCollectionPhotos,
   ),
+  currentUser: createSelector(selectRoot, state => state.currentUser),
+  listUsers: createSelector(selectRoot, state => state.listUsers),
   isLoadingUser: createSelector(selectRoot, state => state.isLoadingUser),
   isLoadingUserPhotos: createSelector(
     selectRoot,
@@ -128,6 +158,8 @@ export const usersSelectors = {
 
 export const usersActions = {
   ...actions,
+  getCurrentUser,
+  fetchListUsers,
   getUserPublicProfile,
   getUserPhotos,
   getUserLikedPhotos,
