@@ -30,18 +30,21 @@ const API = axios.create({
   },
 });
 
+import type { InternalAxiosRequestConfig } from 'axios';
+
 API.interceptors.request.use(
-  async (config: AxiosRequestConfig) => {
+  async (config: InternalAxiosRequestConfig) => {
+    // Ensure headers object exists and merge with default headers
     config.headers = {
       ...headers,
-      ...config.headers,
+      ...(config.headers ?? {}),
     };
     return config;
   },
   (error: any) => {
     console.log('request error: ', error);
-    Promise.reject(error);
-  },
+    return Promise.reject(error);
+  }
 );
 
 API.interceptors.response.use(
