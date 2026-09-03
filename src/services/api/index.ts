@@ -44,7 +44,7 @@ API.interceptors.request.use(
   (error: any) => {
     console.log('request error: ', error);
     return Promise.reject(error);
-  }
+  },
 );
 
 API.interceptors.response.use(
